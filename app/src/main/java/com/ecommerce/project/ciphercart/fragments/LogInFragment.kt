@@ -26,8 +26,31 @@ class LogInFragment : Fragment() {
     }
 
     private fun clickListeners() {
-        binding.signUp.setOnClickListener{
-            findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
+
+        binding.apply {
+            signUp.setOnClickListener {
+                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
+            }
+            emailEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    emailTextInputLayout.hint = "" // Set an empty string to remove the label
+                } else {
+                    emailTextInputLayout.hint = "Email" // Restore the label when not focused
+                }
+            }
+            passwordEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    passwordTextInputLayout.hint = "" // Set an empty string to remove the label
+                } else {
+                    passwordTextInputLayout.hint = "Password" // Restore the label when not focused
+                }
+            }
+            layout1.setOnClickListener {
+                if(it != emailTextInputLayout || it!=passwordTextInputLayout){
+                    emailTextInputLayout.clearFocus()
+                    passwordTextInputLayout.clearFocus()
+                }
+            }
         }
     }
 

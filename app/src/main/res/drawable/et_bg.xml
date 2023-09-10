@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <solid android:color="#F4F3F3"/>
-    <corners android:radius="10dp"/>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!--     Focused state-->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/grey_100" />
+            <corners android:radius="10dp"/>
+            <stroke
+                android:width="1dp"
+                android:color="@color/black" /> <!-- Set the border color to black -->
+        </shape>
+    </item>
+<!--     Default state-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp"/>
+            <solid android:color="@color/grey_100" />
+        </shape>
+    </item>
+</selector>

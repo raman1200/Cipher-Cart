@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NoAnimationTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Disable animation for the hint -->
+        <item name="hintAnimationEnabled">false</item>
+        <!-- Set the hint text color to transparent when not focused -->
+        <item name="android:textColorHint">@color/grey_500</item>
+    </style>
+</resources>
