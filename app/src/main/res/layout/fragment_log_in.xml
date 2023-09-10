@@ -75,7 +75,7 @@
                 android:drawableTint="@drawable/icon_tint"
                 android:drawablePadding="10dp"
                 android:padding="16dp"
-                android:inputType="textPassword" />
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
