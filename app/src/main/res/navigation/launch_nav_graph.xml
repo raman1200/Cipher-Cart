@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_pinVerifyFragment"
+            app:destination="@id/pinVerifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/pinVerifyFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.PinVerifyFragment"
+        android:label="fragment_pin_verify"
+        tools:layout="@layout/fragment_pin_verify" />
 </navigation>

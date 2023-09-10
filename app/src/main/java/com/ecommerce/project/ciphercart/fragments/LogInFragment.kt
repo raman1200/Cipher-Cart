@@ -31,6 +31,10 @@ class LogInFragment : Fragment() {
             signUp.setOnClickListener {
                 findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
+            signIn.setOnClickListener {
+                findNavController().navigate(R.id.action_logInFragment_to_pinVerifyFragment)
+            }
+
             emailEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     emailTextInputLayout.hint = "" // Set an empty string to remove the label

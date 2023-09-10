@@ -37,8 +37,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
 
+}
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -57,4 +57,6 @@ dependencies {
     val nav_version = "2.7.2"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    implementation ("com.github.poovamraj:PinEditTextField:1.2.6")
 }
