@@ -67,6 +67,7 @@
                 style="@style/PinWidget.PinView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:cursorVisible="false"
@@ -75,7 +76,6 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_gravity="center"
                 app:cursorColor="@color/white"
                 app:cursorWidth="1dp"
                 app:hideLineWhenFilled="false"
@@ -86,7 +86,8 @@
                 app:itemWidth="78dp"
                 app:lineColor="@drawable/pin_view_line"
                 app:lineWidth="2dp"
-                app:viewType="rectangle" />
+                app:viewType="rectangle"
+                tools:ignore="MissingClass" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
