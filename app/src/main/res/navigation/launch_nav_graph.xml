@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_logInFragment_to_pinVerifyFragment"
             app:destination="@id/pinVerifyFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_fingerPrintFragment"
+            app:destination="@id/fingerPrintFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -27,4 +30,9 @@
         android:name="com.ecommerce.project.ciphercart.fragments.PinVerifyFragment"
         android:label="fragment_pin_verify"
         tools:layout="@layout/fragment_pin_verify" />
+    <fragment
+        android:id="@+id/fingerPrintFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.FingerPrintFragment"
+        android:label="fragment_finger_print"
+        tools:layout="@layout/fragment_finger_print" />
 </navigation>

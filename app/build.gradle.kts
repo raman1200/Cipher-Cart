@@ -58,5 +58,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
-    implementation ("com.github.poovamraj:PinEditTextField:1.2.6")
+    //otp view
+    implementation ("io.github.chaosleung:pinview:1.4.4")
 }

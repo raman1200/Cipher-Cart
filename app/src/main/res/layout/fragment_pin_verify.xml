@@ -36,38 +36,81 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            
-            <TextView
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/grey_800"
-                android:textSize="18sp"
-                android:text="Code has been send to +91 98****9194"/>
+                android:orientation="horizontal">
 
-            <com.poovam.pinedittextfield.SquarePinField
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/grey_800"
+                    android:textSize="18sp"
+                    android:text="Code has been send to "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_800"
+                    android:textSize="18sp"
+                    android:text="+91 98****9194"/>
+
+            </LinearLayout>
+
+
+            <com.chaos.view.PinView
+                android:id="@+id/firstPinView"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:cursorVisible="false"
                 android:inputType="number"
-                android:textSize="16sp"
-                app:cornerRadius="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:fieldBgColor="@color/grey_200"
-                app:noOfFields="4"
-                android:textSelectHandle="@drawable/text_handle"
-                android:id="@+id/squareField"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
-
-            <TextView
+                android:itemBackground="@color/grey_100"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                app:cursorColor="@color/white"
+                app:cursorWidth="1dp"
+                app:hideLineWhenFilled="false"
+                app:itemCount="4"
+                app:itemHeight="58dp"
+                app:itemRadius="8dp"
+                app:itemSpacing="20dp"
+                app:itemWidth="78dp"
+                app:lineColor="@drawable/pin_view_line"
+                app:lineWidth="2dp"
+                app:viewType="rectangle" />
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/grey_800"
-                android:textSize="18sp"
-                android:text="Resend code in 55 s"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/grey_800"
+                    android:textSize="18sp"
+                    android:text="Resend code in "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/grey_800"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="55 s"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
             

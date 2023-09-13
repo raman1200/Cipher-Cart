@@ -32,7 +32,7 @@ class LogInFragment : Fragment() {
                 findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_pinVerifyFragment)
+                findNavController().navigate(R.id.action_logInFragment_to_fingerPrintFragment)
             }
 
             emailEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->

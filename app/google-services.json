@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883917211860",
+    "project_id": "cipher-cart",
+    "storage_bucket": "cipher-cart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883917211860:android:944dfc74f7d8cac6435341",
+        "android_client_info": {
+          "package_name": "com.ecommerce.project.ciphercart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr-4gaDbkv4Exx3f6hNbaw7ewYXJ_73Iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
