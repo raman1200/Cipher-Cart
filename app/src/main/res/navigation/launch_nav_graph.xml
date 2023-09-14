@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.LogInFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -22,17 +22,17 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.SignUpFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/pinVerifyFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.PinVerifyFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.PinVerifyFragment"
         android:label="fragment_pin_verify"
         tools:layout="@layout/fragment_pin_verify" />
     <fragment
         android:id="@+id/fingerPrintFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.FingerPrintFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.FingerPrintFragment"
         android:label="fragment_finger_print"
         tools:layout="@layout/fragment_finger_print" />
 </navigation>

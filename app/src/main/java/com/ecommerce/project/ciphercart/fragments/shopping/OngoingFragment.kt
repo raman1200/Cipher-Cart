@@ -1,4 +1,4 @@
-package com.ecommerce.project.ciphercart.fragments
+package com.ecommerce.project.ciphercart.fragments.shopping
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

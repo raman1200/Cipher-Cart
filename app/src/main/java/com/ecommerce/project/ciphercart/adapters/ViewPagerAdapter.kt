@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.ecommerce.project.ciphercart.fragments.CompletedFragment
-import com.ecommerce.project.ciphercart.fragments.OngoingFragment
+import com.ecommerce.project.ciphercart.fragments.shopping.CompletedFragment
+import com.ecommerce.project.ciphercart.fragments.shopping.OngoingFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
