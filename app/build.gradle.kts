@@ -60,4 +60,9 @@ dependencies {
 
     //otp view
     implementation ("io.github.chaosleung:pinview:1.4.4")
+
+    //slider
+    implementation ("me.relex:circleindicator:2.1.6")
+    implementation ("org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0")
+
 }
