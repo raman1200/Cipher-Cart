@@ -110,7 +110,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/grey_900"
                 android:textColorHint="@color/grey_500"
-                android:drawableStart="@drawable/password"
+                android:drawableStart="@drawable/forget"
                 android:drawableTint="@drawable/icon_tint"
                 android:drawablePadding="10dp"
                 android:padding="16dp"
