@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.EditProfileFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/back_arrow"
+            android:layout_gravity="start"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Your Profile"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="serif"
+            android:layout_marginStart="25dp"
+            android:layout_gravity="start"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,6 +46,20 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="210dp"
+                android:layout_height="210dp"
+                android:layout_gravity="center"
+                android:src="@drawable/person_profile" />
+
+        </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -75,6 +116,32 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/DateofbirthTextInputLayout"
+            style="@style/NoAnimationTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Date Of Birth">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/DOBEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:drawableStart="@drawable/calendar"
+                android:drawablePadding="10dp"
+                android:drawableTint="@drawable/icon_tint"
+                android:inputType="date"
+                android:padding="16dp"
+                android:textColor="@color/grey_900"
+                android:textColorHint="@color/grey_500"
+                android:textSize="18sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/numberTextInputLayout"
             style="@style/NoAnimationTextInputLayout"
             android:layout_width="match_parent"
@@ -102,44 +169,25 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordTextInputLayout"
-            style="@style/NoAnimationTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Password"
-            app:passwordToggleContentDescription="Show/Hide Password"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@drawable/icon_tint">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEditText"
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/et_bg"
-                android:drawableStart="@drawable/password"
-                android:drawablePadding="10dp"
-                android:drawableTint="@drawable/icon_tint"
-                android:inputType="textPassword"
-                android:padding="16dp"
-                android:textColor="@color/grey_900"
-                android:textColorHint="@color/grey_500"
-                android:textSize="18sp" />
+                android:text="Continue"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#323131"
+                android:textSize="19sp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <Button
-            android:id="@+id/sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/black"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="Sign up"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

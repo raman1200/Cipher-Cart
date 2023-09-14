@@ -52,7 +52,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             android:padding="80dp"
             android:src="@drawable/fingerprint"
             app:layout_constraintBottom_toTopOf="@+id/textView3"
