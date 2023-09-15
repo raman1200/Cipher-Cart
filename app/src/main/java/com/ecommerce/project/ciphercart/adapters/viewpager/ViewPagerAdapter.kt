@@ -1,4 +1,4 @@
-package com.ecommerce.project.ciphercart.adapters
+package com.ecommerce.project.ciphercart.adapters.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

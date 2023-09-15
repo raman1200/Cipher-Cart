@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/launch_nav_graph.xml"
-    app:startDestination="@id/logInFragment">
+    app:startDestination="@id/chooseSignInFragment">
 
     <fragment
         android:id="@+id/logInFragment"
@@ -14,25 +14,59 @@
             android:id="@+id/action_logInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_logInFragment_to_pinVerifyFragment"
-            app:destination="@id/pinVerifyFragment" />
+            android:id="@+id/action_logInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
         <action
-            android:id="@+id/action_logInFragment_to_fingerPrintFragment"
-            app:destination="@id/fingerPrintFragment" />
+            android:id="@+id/action_logInFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.start.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_pinVerifyFragment"
+            app:destination="@id/pinVerifyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pinVerifyFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.start.PinVerifyFragment"
         android:label="fragment_pin_verify"
-        tools:layout="@layout/fragment_pin_verify" />
+        tools:layout="@layout/fragment_pin_verify" >
+        <action
+            android:id="@+id/action_pinVerifyFragment_to_fingerPrintFragment"
+            app:destination="@id/fingerPrintFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fingerPrintFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.start.FingerPrintFragment"
         android:label="fragment_finger_print"
         tools:layout="@layout/fragment_finger_print" />
+    <fragment
+        android:id="@+id/chooseSignInFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.ChooseSignInFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_chooseSignInFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_chooseSignInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_pinVerifyFragment"
+            app:destination="@id/pinVerifyFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.ecommerce.project.ciphercart.activities.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>

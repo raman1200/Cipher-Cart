@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
-import com.ecommerce.project.ciphercart.R
-import com.ecommerce.project.ciphercart.adapters.ViewPagerAdapter
+import com.ecommerce.project.ciphercart.adapters.viewpager.ViewPagerAdapter
 import com.ecommerce.project.ciphercart.databinding.FragmentMyOrdersBinding
 import com.google.android.material.tabs.TabLayout
 
