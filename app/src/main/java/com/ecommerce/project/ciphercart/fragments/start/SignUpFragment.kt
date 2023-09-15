@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
@@ -14,12 +16,14 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
+
         clickListeners()
+        focusListeners()
 
         return binding.root
     }
 
-    private fun clickListeners() {
+    private fun focusListeners() {
         binding.apply {
             nameEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
@@ -49,8 +53,18 @@ class SignUpFragment : Fragment() {
                     passwordTextInputLayout.hint = "Password" // Restore the label when not focused
                 }
             }
-            constraint.setOnClickListener {
+        }
+    }
 
+    private fun clickListeners() {
+        binding.apply {
+
+            signUp.setOnClickListener {
+                findNavController().navigate(R.id.action_signUpFragment_to_forgotPasswordFragment)
+            }
+
+
+            constraint.setOnClickListener {
                 emailTextInputLayout.clearFocus()
                 numberTextInputLayout.clearFocus()
                 passwordTextInputLayout.clearFocus()

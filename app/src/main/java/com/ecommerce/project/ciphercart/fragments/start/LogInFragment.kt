@@ -21,20 +21,13 @@ class LogInFragment : Fragment() {
 
 
         clickListeners()
+        focusListeners()
 
         return binding.root
     }
 
-    private fun clickListeners() {
-
+    private fun focusListeners() {
         binding.apply {
-            signUp.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
-            }
-            signIn.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_fingerPrintFragment)
-            }
-
             emailEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     emailTextInputLayout.hint = "" // Set an empty string to remove the label
@@ -49,6 +42,23 @@ class LogInFragment : Fragment() {
                     passwordTextInputLayout.hint = "Password" // Restore the label when not focused
                 }
             }
+        }
+    }
+
+    private fun clickListeners() {
+
+        binding.apply {
+            signUp.setOnClickListener {
+                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
+            }
+            signIn.setOnClickListener {
+                findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
+            }
+            forgetPassword.setOnClickListener {
+                findNavController().navigate(R.id.action_logInFragment_to_forgotPasswordFragment)
+            }
+
+
             layout1.setOnClickListener {
                 if(it != emailTextInputLayout || it!=passwordTextInputLayout){
                     emailTextInputLayout.clearFocus()

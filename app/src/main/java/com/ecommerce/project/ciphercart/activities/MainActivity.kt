@@ -2,6 +2,7 @@ package com.ecommerce.project.ciphercart.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -11,6 +12,9 @@ import com.ecommerce.project.ciphercart.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navHostFragment:NavHostFragment
+    private lateinit var navController:NavController
+
     private val binding by lazy {
        ActivityMainBinding.inflate(layoutInflater)
     }
@@ -19,12 +23,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
-//        val navController = navHostFragment.navController
-//
-//        binding.bottomNav.setupWithNavController(navController)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
     }
+
+
+    override fun onBackPressed() {
+
+        // Get the current destination fragment
+        val currentDestination = navController.currentDestination
+
+        // Check if the current fragment is the home fragment
+        if (currentDestination?.id == R.id.homeFragment) {
+            // If it's the home fragment, finish the activity
+            finishAffinity()
+        } else {
+            // If it's not the home fragment, navigate up
+            super.onBackPressed()
+        }
+    }
+
 }

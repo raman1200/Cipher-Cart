@@ -6,25 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.start.ChooseSignInFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar1"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,13 +26,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="280dp"
                 android:layout_gravity="center"
-                android:src="@drawable/preview"/>
+                android:src="@drawable/preview" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -50,17 +41,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
                 android:fontFamily="@font/app_font"
-                android:text="Let's you in"
                 android:gravity="center_horizontal"
+                android:text="Let's you in"
                 android:textColor="@color/black"
-                android:textSize="60sp" />
+                android:textSize="40sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/facebook1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:backgroundTint="@color/white"
                 app:cardCornerRadius="12dp"
                 app:strokeColor="@color/grey_600"
@@ -69,16 +60,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:gravity="center_horizontal">
+                    android:padding="5dp">
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageView"
                         android:layout_width="24dp"
-                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:src="@drawable/facebook" />
 
                     <TextView
@@ -86,11 +77,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="Continue with Facebook"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:gravity="center"
-                        android:text="Continue with Facebook"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
 
@@ -103,9 +94,9 @@
                 android:id="@+id/google1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
                 android:backgroundTint="@color/white"
                 app:cardCornerRadius="12dp"
                 app:strokeColor="@color/grey_600"
@@ -114,16 +105,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:gravity="center_horizontal">
+                    android:padding="5dp">
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageView2"
                         android:layout_width="24dp"
-                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:src="@drawable/google" />
 
                     <TextView
@@ -131,11 +122,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="Continue with Google"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:gravity="center"
-                        android:text="Continue with Google"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
 
@@ -148,9 +139,9 @@
                 android:id="@+id/Apple1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
                 android:backgroundTint="@color/white"
                 app:cardCornerRadius="12dp"
                 app:strokeColor="@color/grey_600"
@@ -159,16 +150,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:gravity="center_horizontal">
+                    android:padding="5dp">
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageView3"
                         android:layout_width="24dp"
-                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:src="@drawable/logo_apple" />
 
                     <TextView
@@ -176,11 +167,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="Continue with Apple"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:gravity="center"
-                        android:text="Continue with Apple"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
 
@@ -216,12 +207,12 @@
             </RelativeLayout>
 
             <Button
-                android:id="@+id/sign_in_with_password"
+                android:id="@+id/sign_in_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:backgroundTint="@color/black"
                 android:foreground="?android:attr/actionBarItemBackground"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
@@ -233,7 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -259,24 +250,7 @@
             </LinearLayout>
 
 
-
-
-
-
-
-
         </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
 
     </LinearLayout>
 

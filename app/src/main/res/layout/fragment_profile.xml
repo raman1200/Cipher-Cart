@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/grey_50"
     tools:context=".fragments.shopping.ProfileFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -28,18 +28,18 @@
             android:layout_gravity="start"/>
 
     </androidx.appcompat.widget.Toolbar>
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/toolbar" >-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
 
         <LinearLayout
             android:id="@+id/linearLayout5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -126,7 +126,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Address"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -172,7 +172,7 @@
                         android:layout_marginEnd="8dp"
                         android:textColor="@color/black"
                         android:drawableEnd="@drawable/forward"
-                        android:text="Notifiaction"
+                        android:text="Notification"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -381,6 +381,6 @@
             </LinearLayout>
 
         </LinearLayout>
-<!--    </ScrollView>-->
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,17 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.databinding.FragmentFingerPrintBinding
 
 class FingerPrintFragment : Fragment() {
 
-
+    lateinit var binding:FragmentFingerPrintBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_finger_print, container, false)
+        binding = FragmentFingerPrintBinding.inflate(layoutInflater, container, false)
+
+        clickListeners()
+
+
+
+        return binding.root
+    }
+
+    private fun clickListeners() {
+        binding.apply {
+
+            continueBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_fingerPrintFragment_to_mainActivity)
+            }
+            skipBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_fingerPrintFragment_to_mainActivity)
+            }
+        }
     }
 
 }
