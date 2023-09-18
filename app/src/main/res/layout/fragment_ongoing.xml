@@ -40,7 +40,7 @@
             android:layout_marginTop="10dp"
             android:textSize="18dp"
             android:textColor="@color/grey_600"
-            android:text="You don't have completed orders at the time" />
+            android:text="You don't have ongoing orders at the time" />
 
     </LinearLayout>
 

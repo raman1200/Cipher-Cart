@@ -50,7 +50,7 @@
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textColor="@color/grey_600"
-            android:text="You don't have an ongoing orders at this time" />
+            android:text="You don't have an completed order at this time" />
 
     </LinearLayout>
 
