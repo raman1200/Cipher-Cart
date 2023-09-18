@@ -30,7 +30,6 @@ class ForgotPasswordFragment : Fragment() {
     private fun clickListeners() {
         binding.apply {
             continueBtn.setOnClickListener {
-
                 findNavController().navigate(R.id.action_forgotPasswordFragment_to_pinVerifyFragment)
             }
         }

@@ -174,8 +174,8 @@
                 android:layout_height="70dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/black"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="Sign up"
+                android:foreground="@drawable/ripple_bg_grey"
+                android:text="Continue"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>

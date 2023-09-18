@@ -2,6 +2,8 @@ package com.ecommerce.project.ciphercart.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -26,6 +28,33 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
+
+
+        listeners()
+    }
+
+    private fun listeners() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                // Hide the BottomNavigationView when navigating to a specific fragment
+                R.id.allNotificationFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                R.id.editProfileFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                R.id.addressViewFragment-> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                R.id.savedFragment-> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    // Show the BottomNavigationView for other fragments
+                    binding.bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
 

@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/black"
-            android:foreground="?android:attr/actionBarItemBackground"
+            android:foreground="@drawable/ripple_bg_grey"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Sign in"

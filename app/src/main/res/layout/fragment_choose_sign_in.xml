@@ -213,7 +213,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:backgroundTint="@color/black"
-                android:foreground="?android:attr/actionBarItemBackground"
+                android:foreground="@drawable/ripple_bg_grey"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="Sign in with password"
@@ -221,12 +221,16 @@
                 android:textSize="20sp" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:gravity="bottom|center_horizontal"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
 
                 <TextView
@@ -234,6 +238,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginEnd="5dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
                     android:text="Dont Have an account ?"
                     android:textColor="#707070"
                     android:textSize="16sp" />
@@ -243,6 +251,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:foreground="@drawable/ripple_bg_grey"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:clickable="true"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
                     android:text="Sign up"
                     android:textColor="@color/black"
                     android:textSize="16sp"

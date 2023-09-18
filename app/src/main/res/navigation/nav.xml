@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_homeFragment_to_searchActivity"
             app:destination="@id/searchActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_allNotificationFragment"
+            app:destination="@id/allNotificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
     </fragment>
     <fragment
         android:id="@+id/myCartFragment"
@@ -48,7 +54,17 @@
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/addressViewFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.shopping.AddressViewFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.settings.AddressViewFragment"
         android:label="fragment_address_view"
         tools:layout="@layout/fragment_address_view" />
+    <fragment
+        android:id="@+id/allNotificationFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.AllNotificationFragment"
+        android:label="fragment_all_notification"
+        tools:layout="@layout/fragment_all_notification" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" />
 </navigation>

@@ -32,6 +32,14 @@ class HomeFragment : Fragment() {
             searchView.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_searchActivity)
             }
+            notification.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_allNotificationFragment)
+            }
+            saved.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_savedFragment)
+            }
+
+
         }
     }
 
