@@ -46,84 +46,197 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
-
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/GeneralNotification"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="true"
-                android:text="General Notification" />
+                android:text="General Notification"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
-
-
+        <LinearLayout
+            android:id="@+id/linear_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sound"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="true"
-                android:text="Sound"/>
+                android:text="Sound"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
-
+        <LinearLayout
+            android:id="@+id/linear_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/Vibrate"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="false"
-                android:text="Vibrate" />
+                android:text="Vibrate"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
-
-
+        <LinearLayout
+            android:id="@+id/linear_layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/SpecialOffer"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="true"
-                android:text="Special Offer's" />
+                android:text="Special Offer's"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
-
-
+        <LinearLayout
+            android:id="@+id/linear_layout9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/promo"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="false"
-                android:text="Promo &amp; Discount"/>
+                android:text="Promo & Discount"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linear_layout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/payment"
-               style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="true"
-                android:text="Payments" />
+                android:text="Payments"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linear_layout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/cashback"
-               style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="false"
-                android:text="Cashback" />
+                android:text="Cashback"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linear_layout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/updates"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="true"
-                android:text="App Updates" />
+                android:text="App Updates"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linear_layout8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/newservice"
-                style="@style/SwitchbButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:checked="false"
-                android:text="New Service Available"/>
+                android:text="New Service Available"
+                android:textColor="@color/grey_800"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
 
 
 
