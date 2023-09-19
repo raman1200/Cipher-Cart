@@ -63,7 +63,7 @@
             android:textColor="@color/grey_900"
             android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
             android:padding="16dp"
-            android:text="Hindi"
+            android:text="हिंदी"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
