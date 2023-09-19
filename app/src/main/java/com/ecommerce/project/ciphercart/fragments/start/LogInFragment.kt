@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
+import com.ecommerce.project.ciphercart.utils.etHintTextChange
 
 class LogInFragment : Fragment() {
     private lateinit var binding:FragmentLogInBinding
@@ -28,20 +29,8 @@ class LogInFragment : Fragment() {
 
     private fun focusListeners() {
         binding.apply {
-            emailEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    emailTextInputLayout.hint = "" // Set an empty string to remove the label
-                } else {
-                    emailTextInputLayout.hint = "Email" // Restore the label when not focused
-                }
-            }
-            passwordEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    passwordTextInputLayout.hint = "" // Set an empty string to remove the label
-                } else {
-                    passwordTextInputLayout.hint = "Password" // Restore the label when not focused
-                }
-            }
+            etHintTextChange(emailEditText, emailTextInputLayout, "Email")
+            etHintTextChange(passwordEditText, passwordTextInputLayout, "Password")
         }
     }
 

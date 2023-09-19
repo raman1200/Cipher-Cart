@@ -28,8 +28,11 @@ class ProfileFragment : Fragment() {
             editProfile.setOnClickListener{
                 findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
             }
-            address.setOnClickListener{
+            address.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_addressViewFragment)
+            }
+            language.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_languageFragment)
             }
         }
     }

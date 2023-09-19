@@ -62,111 +62,56 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInputLayout"
-            style="@style/NoAnimationTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            style="@style/TextInputLayout"
             android:hint="Name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/et_bg"
+                style="@style/TextInputEditText"
                 android:drawableStart="@drawable/person"
-                android:drawablePadding="10dp"
-                android:drawableTint="@drawable/icon_tint"
                 android:inputType="text"
-                android:padding="16dp"
-                android:textColor="@color/grey_900"
-                android:textColorHint="@color/grey_500"
-                android:textSize="18sp" />
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTextInputLayout"
-            style="@style/NoAnimationTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            style="@style/TextInputLayout"
             android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/et_bg"
+                style="@style/TextInputEditText"
                 android:drawableStart="@drawable/email"
-                android:drawablePadding="10dp"
-                android:drawableTint="@drawable/icon_tint"
-                android:inputType="textEmailAddress"
-                android:padding="16dp"
-                android:textColor="@color/grey_900"
-                android:textColorHint="@color/grey_500"
-                android:textSize="18sp" />
-
+                android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/DateofbirthTextInputLayout"
-            style="@style/NoAnimationTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            style="@style/TextInputLayout"
             android:hint="Date Of Birth">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/DOBEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/et_bg"
+                style="@style/TextInputEditText"
                 android:drawableStart="@drawable/calendar"
-                android:drawablePadding="10dp"
-                android:drawableTint="@drawable/icon_tint"
-                android:inputType="date"
-                android:padding="16dp"
-                android:textColor="@color/grey_900"
-                android:textColorHint="@color/grey_500"
-                android:textSize="18sp" />
+                android:inputType="date" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/numberTextInputLayout"
-            style="@style/NoAnimationTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            style="@style/TextInputLayout"
             android:hint="Mobile"
             app:counterEnabled="true"
             app:counterMaxLength="10">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/numberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/et_bg"
-                android:drawableStart="@drawable/phone"
-                android:drawablePadding="10dp"
-                android:drawableTint="@drawable/icon_tint"
-                android:inputType="number"
-                android:padding="16dp"
-                android:textColor="@color/grey_900"
-                android:textColorHint="@color/grey_500"
-                android:textSize="18sp" />
-
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/numberEditText"
+            style="@style/TextInputEditText"
+            android:drawableStart="@drawable/phone"
+            />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <LinearLayout

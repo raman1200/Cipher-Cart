@@ -43,12 +43,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.editProfileFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
-                R.id.addressViewFragment-> {
+                R.id.addressViewFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
-                R.id.savedFragment-> {
+                R.id.savedFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
+                R.id.languageFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+
                 else -> {
                     // Show the BottomNavigationView for other fragments
                     binding.bottomNav.visibility = View.VISIBLE

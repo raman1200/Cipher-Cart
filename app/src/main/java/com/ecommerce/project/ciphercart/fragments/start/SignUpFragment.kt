@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
+import com.ecommerce.project.ciphercart.utils.etHintTextChange
 
 class SignUpFragment : Fragment() {
     lateinit var binding:FragmentSignUpBinding
@@ -24,41 +25,18 @@ class SignUpFragment : Fragment() {
     }
 
     private fun focusListeners() {
+
         binding.apply {
-            nameEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    nameTextInputLayout.hint = "" // Set an empty string to remove the label
-                } else {
-                    nameTextInputLayout.hint = "Name" // Restore the label when not focused
-                }
-            }
-            numberEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    numberTextInputLayout.hint = "" // Set an empty string to remove the label
-                } else {
-                    numberTextInputLayout.hint = "Mobile" // Restore the label when not focused
-                }
-            }
-            emailEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    emailTextInputLayout.hint = "" // Set an empty string to remove the label
-                } else {
-                    emailTextInputLayout.hint = "Email" // Restore the label when not focused
-                }
-            }
-            passwordEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    passwordTextInputLayout.hint = "" // Set an empty string to remove the label
-                } else {
-                    passwordTextInputLayout.hint = "Password" // Restore the label when not focused
-                }
-            }
+            etHintTextChange(nameEditText, nameTextInputLayout, "Name")
+            etHintTextChange(emailEditText, emailTextInputLayout, "Email")
+            etHintTextChange(numberEditText, numberTextInputLayout, "Number")
+            etHintTextChange(passwordEditText, passwordTextInputLayout, "Password")
+
         }
     }
 
     private fun clickListeners() {
         binding.apply {
-
             signUp.setOnClickListener {
                 findNavController().navigate(R.id.action_signUpFragment_to_forgotPasswordFragment)
             }
