@@ -34,6 +34,13 @@ class ProfileFragment : Fragment() {
             language.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_languageFragment)
             }
+            notification.setOnClickListener{
+                findNavController().navigate(R.id.action_profileFragment_to_notificationSettingFragment)
+            }
+            security.setOnClickListener{
+                findNavController().navigate(R.id.action_profileFragment_to_securityFragment)
+            }
+            
         }
     }
 

@@ -14,11 +14,11 @@
             android:id="@+id/action_homeFragment_to_searchActivity"
             app:destination="@id/searchActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_allNotificationFragment"
-            app:destination="@id/allNotificationFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_savedFragment"
             app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productsViewFragment3"
+            app:destination="@id/productsViewFragment3" />
     </fragment>
     <fragment
         android:id="@+id/myCartFragment"
@@ -44,6 +44,12 @@
         <action
             android:id="@+id/action_profileFragment_to_languageFragment"
             app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_securityFragment"
+            app:destination="@id/securityFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationSettingFragment"
+            app:destination="@id/notificationSettingFragment" />
     </fragment>
     <activity
         android:id="@+id/searchActivity"
@@ -61,11 +67,6 @@
         android:label="fragment_address_view"
         tools:layout="@layout/fragment_address_view" />
     <fragment
-        android:id="@+id/allNotificationFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.shopping.AllNotificationFragment"
-        android:label="fragment_all_notification"
-        tools:layout="@layout/fragment_all_notification" />
-    <fragment
         android:id="@+id/savedFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.SavedFragment"
         android:label="fragment_saved"
@@ -75,4 +76,45 @@
         android:name="com.ecommerce.project.ciphercart.fragments.settings.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/productDetailFragment2"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/productsViewFragment3"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.ProductsViewFragment"
+        android:label="fragment_products_view"
+        tools:layout="@layout/fragment_products_view" >
+        <action
+            android:id="@+id/action_productsViewFragment3_to_productDetailFragment2"
+            app:destination="@id/productDetailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.settings.SecurityFragment"
+        android:label="fragment_security"
+        tools:layout="@layout/fragment_security" >
+        <action
+            android:id="@+id/action_securityFragment_to_createNewPasswordFragment"
+            app:destination="@id/createNewPasswordFragment" />
+        <action
+            android:id="@+id/action_securityFragment_to_pinVerifyFragment2"
+            app:destination="@id/pinVerifyFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationSettingFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.settings.NotificationSettingFragment"
+        android:label="fragment_notification_setting"
+        tools:layout="@layout/fragment_notification_setting" />
+    <fragment
+        android:id="@+id/createNewPasswordFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.CreateNewPasswordFragment"
+        android:label="fragment_create_new_password"
+        tools:layout="@layout/fragment_create_new_password" />
+    <fragment
+        android:id="@+id/pinVerifyFragment2"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.PinVerifyFragment"
+        android:label="fragment_pin_verify"
+        tools:layout="@layout/fragment_pin_verify" />
 </navigation>

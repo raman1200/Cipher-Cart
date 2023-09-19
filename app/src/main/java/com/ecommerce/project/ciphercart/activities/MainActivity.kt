@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 // Hide the BottomNavigationView when navigating to a specific fragment
-                R.id.allNotificationFragment -> {
+                R.id.notificationSettingFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
                 R.id.editProfileFragment -> {
@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNav.visibility = View.GONE
                 }
                 R.id.languageFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                R.id.securityFragment  -> {
                     binding.bottomNav.visibility = View.GONE
                 }
 

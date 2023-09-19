@@ -1,14 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.settings.NotificationSettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:drawableStart="@drawable/back_arrow" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:fontFamily="serif"
+            android:text="Notification"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/GeneralNotification"
+            style="@style/SwitchbButton"
+            android:checked="true"
+            android:text="General Notification" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/sound"
+            style="@style/SwitchbButton"
+            android:checked="true"
+            android:text="Sound" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/Vibrate"
+            style="@style/SwitchbButton"
+            android:checked="false"
+            android:text="Vibrate" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/SpecialOffer"
+            style="@style/SwitchbButton"
+            android:checked="true"
+            android:text="Special Offer's" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/promo"
+            style="@style/SwitchbButton"
+            android:checked="false"
+            android:text="Promo &amp; Discount" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/payment"
+            style="@style/SwitchbButton"
+            android:checked="true"
+            android:text="Payments" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/cashback"
+            style="@style/SwitchbButton"
+            android:checked="false"
+            android:text="Cashback" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/updates"
+            style="@style/SwitchbButton"
+            android:checked="true"
+            android:text="App Updates" />
+
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/newservice"
+            style="@style/SwitchbButton"
+            android:checked="false"
+            android:text="New Service Available" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
