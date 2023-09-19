@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_savedFragment"
             app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/myCartFragment"
@@ -75,4 +78,14 @@
         android:name="com.ecommerce.project.ciphercart.fragments.settings.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/productsViewFragment2"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.ProductsViewFragment"
+        android:label="fragment_products_view"
+        tools:layout="@layout/fragment_products_view" />
 </navigation>
