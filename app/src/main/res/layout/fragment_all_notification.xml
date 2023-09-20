@@ -6,6 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.settings.AddressAddFragment">
 
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="serif"
+            android:layout_marginStart="25dp"
+            android:layout_gravity="start"/>
+
+    </Toolbar>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

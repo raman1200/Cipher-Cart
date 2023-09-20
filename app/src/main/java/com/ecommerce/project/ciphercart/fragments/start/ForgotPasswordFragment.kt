@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentForgotPasswordBinding
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
 class ForgotPasswordFragment : Fragment() {
 
@@ -20,7 +21,7 @@ class ForgotPasswordFragment : Fragment() {
 
         binding = FragmentForgotPasswordBinding.inflate(layoutInflater, container, false)
 
-
+        setUpActionBar(binding.toolbar, requireActivity())
         clickListeners()
 
         // Inflate the layout for this fragment

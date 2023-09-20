@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentPinVerifyBinding
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
 class PinVerifyFragment : Fragment() {
 
@@ -19,6 +20,7 @@ class PinVerifyFragment : Fragment() {
     ): View? {
         binding = FragmentPinVerifyBinding.inflate(layoutInflater, container, false)
 
+        setUpActionBar(binding.toolbar, requireActivity())
         clickListeners()
 
         // Inflate the layout for this fragment

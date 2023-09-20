@@ -38,6 +38,9 @@ class HomeFragment : Fragment() {
             saved.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_savedFragment)
             }
+            notification.setOnClickListener{
+                findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+            }
 
         }
     }

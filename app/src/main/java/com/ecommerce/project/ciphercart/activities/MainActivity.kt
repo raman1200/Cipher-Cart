@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.securityFragment  -> {
                     binding.bottomNav.visibility = View.GONE
                 }
+                R.id.notificationFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
 
                 else -> {
                     // Show the BottomNavigationView for other fragments
