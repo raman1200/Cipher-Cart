@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
 class LogInFragment : Fragment() {
     private lateinit var binding:FragmentLogInBinding
@@ -20,7 +21,7 @@ class LogInFragment : Fragment() {
         binding = FragmentLogInBinding.inflate(layoutInflater, container, false)
 
 
-
+        setUpActionBar(binding.toolbar, requireActivity())
         clickListeners()
         focusListeners()
 

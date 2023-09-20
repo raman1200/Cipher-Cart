@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
 class SignUpFragment : Fragment() {
     lateinit var binding:FragmentSignUpBinding
@@ -18,11 +21,14 @@ class SignUpFragment : Fragment() {
     ): View? {
         binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
 
+        setUpActionBar(binding.toolbar, requireActivity())
         clickListeners()
         focusListeners()
 
         return binding.root
     }
+
+
 
     private fun focusListeners() {
 
@@ -31,7 +37,6 @@ class SignUpFragment : Fragment() {
             etHintTextChange(emailEditText, emailTextInputLayout, "Email")
             etHintTextChange(numberEditText, numberTextInputLayout, "Number")
             etHintTextChange(passwordEditText, passwordTextInputLayout, "Password")
-
         }
     }
 

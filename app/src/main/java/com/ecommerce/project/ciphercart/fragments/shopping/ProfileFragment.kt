@@ -20,6 +20,7 @@ class ProfileFragment : Fragment() {
 
         clickListeners()
 
+
         return binding.root
     }
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentFingerPrintBinding
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
 class FingerPrintFragment : Fragment() {
 
@@ -18,6 +19,7 @@ class FingerPrintFragment : Fragment() {
     ): View? {
         binding = FragmentFingerPrintBinding.inflate(layoutInflater, container, false)
 
+        setUpActionBar(binding.toolbar, requireActivity())
         clickListeners()
 
 

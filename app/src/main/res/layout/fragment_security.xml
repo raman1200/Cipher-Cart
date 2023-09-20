@@ -6,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.settings.SecurityFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/Toolbar1"
+    <Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,11 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/back_arrow"
-            android:layout_gravity="start"/>
 
 
         <TextView
@@ -33,7 +28,7 @@
             android:layout_marginStart="25dp"
             android:layout_gravity="start"/>
 
-    </androidx.appcompat.widget.Toolbar>
+    </Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +36,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Toolbar1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent">
 
 

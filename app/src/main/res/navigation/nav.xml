@@ -14,11 +14,17 @@
             android:id="@+id/action_homeFragment_to_searchActivity"
             app:destination="@id/searchActivity" />
         <action
+            android:id="@+id/action_homeFragment_to_productsViewFragment3"
+            app:destination="@id/productsViewFragment3" />
+        <action
+            android:id="@+id/action_homeFragment_to_saved"
+            app:destination="@id/saved" />
+        <action
             android:id="@+id/action_homeFragment_to_savedFragment"
             app:destination="@id/savedFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_productsViewFragment3"
-            app:destination="@id/productsViewFragment3" />
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/myCartFragment"
@@ -67,11 +73,6 @@
         android:label="fragment_address_view"
         tools:layout="@layout/fragment_address_view" />
     <fragment
-        android:id="@+id/savedFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.shopping.SavedFragment"
-        android:label="fragment_saved"
-        tools:layout="@layout/fragment_saved" />
-    <fragment
         android:id="@+id/languageFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.settings.LanguageFragment"
         android:label="fragment_language"
@@ -117,4 +118,13 @@
         android:name="com.ecommerce.project.ciphercart.fragments.start.PinVerifyFragment"
         android:label="fragment_pin_verify"
         tools:layout="@layout/fragment_pin_verify" />
+    <fragment android:id="@+id/notificationFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.AllNotificationFragment"
+        android:label="fragment_all_notification"
+        tools:layout="@layout/fragment_all_notification"/>
+    <fragment android:id="@+id/savedFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved"/>
+
 </navigation>
