@@ -5,14 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
+import com.ecommerce.project.ciphercart.databinding.FragmentAddressAddBinding
+import com.ecommerce.project.ciphercart.utils.setUpActionBar
+
 import com.ecommerce.project.ciphercart.databinding.FragmentProfileBinding
 import com.ecommerce.project.ciphercart.databinding.FragmentSecurityBinding
 
+
+
 class SecurityFragment : Fragment() {
 
-    private lateinit var binding: FragmentSecurityBinding
+    lateinit var binding: FragmentSecurityBinding
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,6 +31,7 @@ class SecurityFragment : Fragment() {
         binding = FragmentSecurityBinding.inflate(layoutInflater, container, false)
 
         clickListeners()
+        setUpActionBar(binding.toolbar, requireActivity())
 
         return binding.root
     }
@@ -37,4 +47,5 @@ class SecurityFragment : Fragment() {
 
         }
     }
-}
+ }
+
