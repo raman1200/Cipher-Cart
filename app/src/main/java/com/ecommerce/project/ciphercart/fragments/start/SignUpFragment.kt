@@ -55,7 +55,7 @@ class SignUpFragment : Fragment() {
 
                 val name = nameEditText.text.toString()
                 val email = emailEditText.text.toString()
-                val mobile = numberEditText.text.toString().toInt()
+                val mobile = numberEditText.text.toString()
                 val password = passwordEditText.text.toString()
                 if (name.isEmpty()){
                     nameTextInputLayout.error= "Please Enter Your Name"
@@ -63,7 +63,7 @@ class SignUpFragment : Fragment() {
                 else if (email.isEmpty()){
                     emailTextInputLayout.error = "Please enter your email"
                 }
-                else if (mobile.toString().length != 10){
+                else if (mobile.length != 10){
                     numberTextInputLayout.error = "Please Enter Correct Number"
                 }
                 else if (password.isEmpty()){
@@ -71,7 +71,7 @@ class SignUpFragment : Fragment() {
                 }
                 else {
 
-                    val user = UserData(name=name, email=email, mobile, password)
+                    val user = UserData(name =name, email =email, number = mobile, password =password)
 
                     editor.putInt("value", 1)
                     editor.apply()
