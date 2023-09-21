@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
-import com.ecommerce.project.ciphercart.dataclasses.User
+import com.ecommerce.project.ciphercart.dataclasses.UserData
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
@@ -67,7 +67,7 @@ class LogInFragment : Fragment() {
             forgetPassword.setOnClickListener {
                 editor.putInt("value", 2)
                 editor.apply()
-                val action = LogInFragmentDirections.actionLogInFragmentToForgotPasswordFragment(User())
+                val action = LogInFragmentDirections.actionLogInFragmentToForgotPasswordFragment(UserData())
                 findNavController().navigate(action)
 
             }

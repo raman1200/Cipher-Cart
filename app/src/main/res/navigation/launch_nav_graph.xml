@@ -69,7 +69,7 @@
             app:destination="@id/pinVerifyFragment" />
         <argument
             android:name="user"
-            app:argType="com.ecommerce.project.ciphercart.dataclasses.User" />
+            app:argType="com.ecommerce.project.ciphercart.dataclasses.UserData" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"

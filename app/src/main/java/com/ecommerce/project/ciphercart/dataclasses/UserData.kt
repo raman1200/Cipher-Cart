@@ -1,12 +1,11 @@
 package com.ecommerce.project.ciphercart.dataclasses
 
-import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class User(
+data class UserData(
     var name:String="",
     var email:String="",
     var number:Int=0,

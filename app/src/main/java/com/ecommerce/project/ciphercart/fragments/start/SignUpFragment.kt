@@ -8,13 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
-import com.ecommerce.project.ciphercart.dataclasses.User
-import com.ecommerce.project.ciphercart.fragments.start.ForgotPasswordFragmentDirections.Companion.actionForgotPasswordFragmentToPinVerifyFragment
+import com.ecommerce.project.ciphercart.dataclasses.UserData
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
@@ -56,17 +52,35 @@ class SignUpFragment : Fragment() {
     private fun clickListeners() {
         binding.apply {
             signUp.setOnClickListener {
+
                 val name = nameEditText.text.toString()
                 val email = emailEditText.text.toString()
-                val mobile = numberEditText.text.toString()
+                val mobile = numberEditText.text.toString().toInt()
                 val password = passwordEditText.text.toString()
-                val user = User(name, email, mobile, password)
+                if (name.isEmpty()){
+                    nameTextInputLayout.error= "Please Enter Your Name"
+                }
+                else if (email.isEmpty()){
+                    emailTextInputLayout.error = "Please enter your email"
+                }
+                else if (mobile.toString().length != 10){
+                    numberTextInputLayout.error = "Please Enter Correct Number"
+                }
+                else if (password.isEmpty()){
+                    passwordTextInputLayout.error = "Please Enter Password"
+                }
+                else {
+
+                    val user = UserData(name=name, email=email, mobile, password)
+
+                    editor.putInt("value", 1)
+                    editor.apply()
+                    val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(user)
+                    findNavController().navigate(action)
+
+                }
 
 
-                editor.putInt("value", 1)
-                editor.apply()
-                val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(user)
-                findNavController().navigate(action)
             }
 
 
