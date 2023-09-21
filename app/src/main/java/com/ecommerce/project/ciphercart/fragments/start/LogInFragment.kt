@@ -51,8 +51,19 @@ class LogInFragment : Fragment() {
                 findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
+                val email = emailEditText.text.toString()
+                val password = passwordEditText.text.toString()
+                if(email.isEmpty()){
+                    emailTextInputLayout.error = "Please enter your email"
+                }
+                else if(password.isEmpty()){
+                    passwordTextInputLayout.error = "Please enter your password"
+                }
+                else{
+                    findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
+                }
             }
+
             forgetPassword.setOnClickListener {
                 editor.putInt("value", 2)
                 editor.apply()
