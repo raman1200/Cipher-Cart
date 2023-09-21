@@ -50,52 +50,51 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prod_title" >
+        app:layout_constraintTop_toBottomOf="@+id/prod_title">
 
 
         <ImageView
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/half_star"
             android:layout_gravity="center_vertical"
-            />
+            android:src="@drawable/half_star" />
 
         <TextView
             android:id="@+id/rating_txt"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
             android:text="2.5"
             android:textColor="@color/grey_700"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            android:background="@color/grey_400"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginStart="10dp"/>
+            android:background="@color/grey_400" />
 
         <TextView
             android:id="@+id/sold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey_800"
-            android:padding="5dp"
-            android:textSize="12sp"
-            android:backgroundTint="@color/grey_400"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:background="@drawable/round_bg"
-            android:text="7325 sold"/>
+            android:backgroundTint="@color/grey_400"
+            android:padding="5dp"
+            android:text="7325 sold"
+            android:textColor="@color/grey_800"
+            android:textSize="12sp" />
     </LinearLayout>
 
 

@@ -55,10 +55,14 @@ class ForgotPasswordFragment : Fragment() {
         binding.apply {
             if(value==1){
                 title.text = "Verify"
+                NumberVerification.visibility = View.VISIBLE
+                EmailVerification.visibility = View.VISIBLE
                 desc.text = "Select which contact details should you use to verify your account"
             }
             else if(value==2){
                 title.text = "Forgot Password"
+                NumberVerification.visibility = View.GONE
+                EmailVerification.visibility = View.GONE
                 desc.text = "Select which contact details should you use to reset your password"
             }
 
@@ -73,10 +77,10 @@ class ForgotPasswordFragment : Fragment() {
                 findNavController().navigate(R.id.action_forgotPasswordFragment_to_pinVerifyFragment)
             }
             SMS.setOnClickListener {
-                setSMSOption(binding.SMS, binding.Email)
+                setSMSOption(SMS, Email)
             }
             Email.setOnClickListener {
-                setEmailOption(binding.SMS, binding.Email)
+                setEmailOption(SMS,Email)
             }
         }
     }

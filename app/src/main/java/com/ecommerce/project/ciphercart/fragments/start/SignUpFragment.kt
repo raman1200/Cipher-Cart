@@ -65,7 +65,7 @@ class SignUpFragment : Fragment() {
 
                 editor.putInt("value", 1)
                 editor.apply()
-                val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(user)
+                val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(User())
                 findNavController().navigate(action)
             }
 
