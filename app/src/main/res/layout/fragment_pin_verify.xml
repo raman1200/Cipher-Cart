@@ -15,12 +15,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="26sp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="Forget Password" />
+            android:text="Verify" />
     </Toolbar>
 
     <ScrollView
@@ -37,7 +38,21 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/pin_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/grey_800"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="Add a pin number to make your account more secure."/>
+
             <LinearLayout
+                android:id="@+id/code_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -87,8 +102,10 @@
                 app:lineColor="@drawable/pin_view_line"
                 app:lineWidth="2dp"
                 app:viewType="rectangle"
-                tools:ignore="MissingClass" />
+                tools:ignore="MissingClass" >
+            </com.chaos.view.PinView>
             <LinearLayout
+                android:id="@+id/reset_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -120,13 +137,9 @@
 
     <Button
         android:id="@+id/verify_btn"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/black"
         android:text="Verify"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        style="@style/ElevatedButton"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

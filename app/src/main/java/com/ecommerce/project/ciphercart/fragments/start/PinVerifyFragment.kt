@@ -1,5 +1,7 @@
 package com.ecommerce.project.ciphercart.fragments.start
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import com.ecommerce.project.ciphercart.utils.setUpActionBar
 class PinVerifyFragment : Fragment() {
 
     private lateinit var binding:FragmentPinVerifyBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,10 +24,38 @@ class PinVerifyFragment : Fragment() {
         binding = FragmentPinVerifyBinding.inflate(layoutInflater, container, false)
 
         setUpActionBar(binding.toolbar, requireActivity())
+        initialize()
+        getData()
         clickListeners()
 
-        // Inflate the layout for this fragment
+
         return binding.root
+    }
+    private fun initialize() {
+        sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+
+    }
+    private fun getData() {
+        val value = sharedPreferences.getInt("verify_value", -1)
+        setLayout(value)
+    }
+
+    fun setLayout(value:Int){
+        binding.apply {
+            if(value==1){
+                title.text = "Verify"
+                codeLayout.visibility = View.VISIBLE
+                resetLayout.visibility = View.VISIBLE
+                pinTv.visibility = View.GONE
+
+            }
+            else if(value==2){
+                title.text = "Create New Pin"
+                codeLayout.visibility = View.GONE
+                resetLayout.visibility = View.GONE
+                pinTv.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun clickListeners() {

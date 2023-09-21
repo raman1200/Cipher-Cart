@@ -1,5 +1,7 @@
 package com.ecommerce.project.ciphercart.fragments.start
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +10,14 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
+import com.ecommerce.project.ciphercart.dataclasses.User
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 
 class LogInFragment : Fragment() {
     private lateinit var binding:FragmentLogInBinding
-
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,12 +26,17 @@ class LogInFragment : Fragment() {
 
 
         setUpActionBar(binding.toolbar, requireActivity())
+        initialize()
         clickListeners()
         focusListeners()
 
         return binding.root
     }
+    private fun initialize() {
+        sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
 
+    }
     private fun focusListeners() {
         binding.apply {
             etHintTextChange(emailEditText, emailTextInputLayout, "Email")
@@ -45,7 +54,11 @@ class LogInFragment : Fragment() {
                 findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
             }
             forgetPassword.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_forgotPasswordFragment)
+                editor.putInt("value", 2)
+                editor.apply()
+                val action = LogInFragmentDirections.actionLogInFragmentToForgotPasswordFragment(User())
+                findNavController().navigate(action)
+
             }
 
 

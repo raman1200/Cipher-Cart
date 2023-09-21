@@ -101,7 +101,7 @@
             app:destination="@id/createNewPasswordFragment" />
         <action
             android:id="@+id/action_securityFragment_to_pinVerifyFragment2"
-            app:destination="@id/pinVerifyFragment2" />
+            app:destination="@id/pinVerifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationSettingFragment"
@@ -114,7 +114,7 @@
         android:label="fragment_create_new_password"
         tools:layout="@layout/fragment_create_new_password" />
     <fragment
-        android:id="@+id/pinVerifyFragment2"
+        android:id="@+id/pinVerifyFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.start.PinVerifyFragment"
         android:label="fragment_pin_verify"
         tools:layout="@layout/fragment_pin_verify" />

@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_forgotPasswordFragment_to_pinVerifyFragment"
             app:destination="@id/pinVerifyFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.ecommerce.project.ciphercart.dataclasses.User" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
