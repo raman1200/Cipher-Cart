@@ -40,7 +40,7 @@ class PinVerifyFragment : Fragment() {
         setLayout(value)
     }
 
-    fun setLayout(value:Int){
+    private fun setLayout(value:Int){
         binding.apply {
             if(value==1){
                 title.text = "Verify"

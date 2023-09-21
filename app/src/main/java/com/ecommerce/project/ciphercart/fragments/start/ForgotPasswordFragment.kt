@@ -97,6 +97,7 @@ class ForgotPasswordFragment : Fragment() {
         Email.strokeWidth = resources.getDimension(R.dimen.selected_stroke_width).toInt()
         SMS.strokeColor = resources.getColor(R.color.grey_600, resources.newTheme())
         Email.strokeColor = resources.getColor(R.color.black, resources.newTheme())
+
         option = "Email"
     }
 
