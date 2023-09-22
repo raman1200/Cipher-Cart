@@ -30,12 +30,12 @@ class FingerPrintFragment : Fragment() {
     private fun clickListeners() {
         binding.apply {
 
-            continueBtn.setOnClickListener {
-                findNavController().navigate(R.id.action_fingerPrintFragment_to_mainActivity)
-            }
-            skipBtn.setOnClickListener {
-                findNavController().navigate(R.id.action_fingerPrintFragment_to_mainActivity)
-            }
+//            continueBtn.setOnClickListener {
+//                findNavController().navigate(R.id.)
+//            }
+//            skipBtn.setOnClickListener {
+//                findNavController().navigate(R.id.action_fingerPrintFragment_to_mainActivity)
+//            }
         }
     }
 

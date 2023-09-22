@@ -71,7 +71,7 @@ class SignUpFragment : Fragment() {
                 }
                 else {
 
-                    val user = UserData(name =name, email =email, number = mobile, password =password)
+                    val user = UserData(name = name, email = email, number = mobile, password = password)
 
                     editor.putInt("value", 1)
                     editor.apply()

@@ -106,21 +106,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        style="@style/profileImage"
                         android:src="@drawable/calendar" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Edit Profile"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Edit Profile"/>
 
 
                 </LinearLayout>
@@ -133,21 +124,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                       style="@style/profileImage"
                         android:src="@drawable/location" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Address"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Address" />
 
 
                 </LinearLayout>
@@ -160,21 +142,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        style="@style/profileImage"
                         android:src="@drawable/notification" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Notification"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Notification"/>
 
 
                 </LinearLayout>
@@ -187,21 +160,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        style="@style/profileImage"
                         android:src="@drawable/payment" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Payment"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Payment" />
 
 
                 </LinearLayout>
@@ -214,21 +178,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        style="@style/profileImage"
                         android:src="@drawable/security" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Security"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Security" />
 
 
                 </LinearLayout>
@@ -241,9 +196,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        style="@style/profileImage"
                         android:src="@drawable/language" />
 
                     <TextView
@@ -279,21 +232,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                       style="@style/profileImage"
                         android:src="@drawable/protection" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Privacy Policy"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Privacy Policy"/>
 
 
                 </LinearLayout>
@@ -306,21 +250,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        style="@style/profileImage"
                         android:src="@drawable/online_calling" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16sp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="@color/black"
-                        android:drawableEnd="@drawable/forward"
-                        android:text="Help Center"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        style="@style/profileText"
+                        android:text="Help Center"/>
 
 
                 </LinearLayout>

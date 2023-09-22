@@ -12,7 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentForgotPasswordBinding
+import com.ecommerce.project.ciphercart.dataclasses.UserData
 import com.ecommerce.project.ciphercart.fragments.start.ForgotPasswordFragmentArgs.Companion.fromBundle
+import com.ecommerce.project.ciphercart.utils.disableButton
+import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.google.android.material.card.MaterialCardView
 
@@ -22,6 +25,7 @@ class ForgotPasswordFragment : Fragment() {
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     private var option=""
+    private lateinit var user: UserData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,22 +46,29 @@ class ForgotPasswordFragment : Fragment() {
     private fun initialize() {
         sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
+
+        disableButton(requireContext(),binding.continueBtn)
+
     }
 
     private fun getData() {
         val value = sharedPreferences.getInt("value",0)
-        setLayout(value)
         val args = ForgotPasswordFragmentArgs.fromBundle(requireArguments())
-        val user = args.user
+        user = args.user
+        setLayout(value)
     }
 
     private fun setLayout(value:Int) {
         binding.apply {
+
+
             if(value==1){
                 title.text = "Verify"
                 NumberVerification.visibility = View.VISIBLE
                 EmailVerification.visibility = View.VISIBLE
                 desc.text = "Select which contact details should you use to verify your account"
+                NumberVerification.text = "+91 ${user.number}"
+                EmailVerification.text = user.email
             }
             else if(value==2){
                 title.text = "Forgot Password"
@@ -65,6 +76,7 @@ class ForgotPasswordFragment : Fragment() {
                 EmailVerification.visibility = View.GONE
                 desc.text = "Select which contact details should you use to reset your password"
             }
+
 
         }
     }
@@ -89,6 +101,7 @@ class ForgotPasswordFragment : Fragment() {
         Email.strokeWidth = resources.getDimension(R.dimen.stroke_width).toInt()
         SMS.strokeColor = resources.getColor(R.color.black, resources.newTheme())
         Email.strokeColor = resources.getColor(R.color.grey_600, resources.newTheme())
+        enableButton(requireContext(),binding.continueBtn)
 
         option = "SMS"
     }
@@ -97,6 +110,7 @@ class ForgotPasswordFragment : Fragment() {
         Email.strokeWidth = resources.getDimension(R.dimen.selected_stroke_width).toInt()
         SMS.strokeColor = resources.getColor(R.color.grey_600, resources.newTheme())
         Email.strokeColor = resources.getColor(R.color.black, resources.newTheme())
+        enableButton(requireContext(),binding.continueBtn)
 
         option = "Email"
     }

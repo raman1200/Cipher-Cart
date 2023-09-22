@@ -60,9 +60,9 @@ class PinVerifyFragment : Fragment() {
 
     private fun clickListeners() {
         binding.apply {
-            verifyBtn.setOnClickListener {
-                findNavController().navigate(R.id.action_pinVerifyFragment_to_fingerPrintFragment)
-            }
+//            verifyBtn.setOnClickListener {
+//                findNavController().navigate(R.id.action_pinVerifyFragment_to_mainActivity)
+//            }
         }
     }
 

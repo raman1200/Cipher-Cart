@@ -66,4 +66,7 @@ dependencies {
     implementation ("me.relex:circleindicator:2.1.6")
     implementation ("org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0")
 
+    //Animation
+    implementation ("com.airbnb.android:lottie:3.4.0")
+
 }

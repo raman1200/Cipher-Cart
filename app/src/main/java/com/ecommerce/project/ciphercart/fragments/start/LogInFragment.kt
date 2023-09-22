@@ -59,9 +59,9 @@ class LogInFragment : Fragment() {
                 else if(password.isEmpty()){
                     passwordTextInputLayout.error = "Please enter your password"
                 }
-                else{
-                    findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
-                }
+//                else{
+//                    findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
+//                }
             }
 
             forgetPassword.setOnClickListener {
