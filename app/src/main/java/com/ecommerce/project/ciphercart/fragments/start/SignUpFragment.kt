@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
-import com.ecommerce.project.ciphercart.dataclasses.UserData
+import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 

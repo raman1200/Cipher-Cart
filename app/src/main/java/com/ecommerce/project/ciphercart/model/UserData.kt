@@ -1,4 +1,4 @@
-package com.ecommerce.project.ciphercart.dataclasses
+package com.ecommerce.project.ciphercart.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

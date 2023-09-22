@@ -7,13 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentForgotPasswordBinding
-import com.ecommerce.project.ciphercart.dataclasses.UserData
-import com.ecommerce.project.ciphercart.fragments.start.ForgotPasswordFragmentArgs.Companion.fromBundle
+import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.disableButton
 import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar

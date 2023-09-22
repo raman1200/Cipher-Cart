@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ProductItemViewBinding
-import com.ecommerce.project.ciphercart.dataclasses.ProductData
+import com.ecommerce.project.ciphercart.model.ProductData
 
 class ProductAdapter(val context: Context): ListAdapter<ProductData, ProductAdapter.ProductViewHolder>(DiffUtilCallBack()) {
 
