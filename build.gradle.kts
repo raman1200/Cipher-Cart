@@ -3,9 +3,11 @@ buildscript {
     repositories {
         google()
     }
+
     dependencies {
         val navVersion = "2.7.2"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
+        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.48")
     }
 }
 plugins {

@@ -2,9 +2,10 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="30dp"
-    app:cardCornerRadius="10dp">
+    android:layout_margin="50dp"
+    app:cardCornerRadius="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:src="@drawable/icon__1" />
@@ -34,22 +35,24 @@
             android:layout_height="wrap_content"
             android:textColor="@color/grey_800"
             android:textSize="18sp"
+            android:padding="10dp"
             android:layout_marginTop="12dp"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="13dp"
             android:gravity="center_horizontal"
-            android:text="Your account is ready to use. You will\nbe redirected to the Home page in a \nfew seconds   "/>
+            android:text="Your account is ready to use. You will be redirected to the Home page in a few seconds   "/>
 
         
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:id="@+id/animation_view"
             android:layout_marginTop="6dp"
             android:padding="5dp"
+
             android:layout_gravity="center_horizontal"
-            app:lottie_rawRes="@raw/animation"
+            app:lottie_rawRes="@raw/loading"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"/>
 

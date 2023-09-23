@@ -11,7 +11,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navHostFragment:NavHostFragment
@@ -25,12 +27,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        setUpNavHost()
+
+
+        listeners()
+    }
+
+    private fun setUpNavHost() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
 
-
-        listeners()
     }
 
     private fun listeners() {

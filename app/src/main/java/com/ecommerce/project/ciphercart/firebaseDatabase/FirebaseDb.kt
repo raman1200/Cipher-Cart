@@ -5,6 +5,7 @@ import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTI
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -14,13 +15,9 @@ class FirebaseDb {
     private val usersCollectionRef = Firebase.firestore.collection(USERS_COLLECTION)
 
 
-    fun createNewUser(
-        email: String, password: String
-    ) = firebaseAuth.createUserWithEmailAndPassword(email, password)
+    fun createNewUser(email: String, password: String) = firebaseAuth.createUserWithEmailAndPassword(email, password)
 
-    fun saveUserInformation(
-        user: UserData
-    ) = usersCollectionRef.document(user.uid).set(user)
+    fun saveUserInformation(user: UserData) = usersCollectionRef.document(user.uid).set(user)
 
     fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
         usersCollectionRef.whereEqualTo("email", email).get()
@@ -28,11 +25,11 @@ class FirebaseDb {
                 if (it.isSuccessful) {
                     val user = it.result.toObjects(User::class.java)
                     if (user.isEmpty())
-                        onResult(null, false)
+                        onResult(null, false)  // email not register
                     else
-                        onResult(null, true)
+                        onResult(null, true)  // email is already register
                 } else
-                    onResult(it.exception.toString(), null)
+                    onResult(it.exception.toString(), null)   // error occur
             }
     }
 
@@ -44,8 +41,7 @@ class FirebaseDb {
         password: String
     ) = firebaseAuth.signInWithEmailAndPassword(email, password)
 
-    fun signInWithGoogle(credential: AuthCredential) =
-        FirebaseAuth.getInstance().signInWithCredential(credential)
+    fun signInWithGoogle(credential: AuthCredential) = FirebaseAuth.getInstance().signInWithCredential(credential)
 
     fun logout() = Firebase.auth.signOut()
 }
