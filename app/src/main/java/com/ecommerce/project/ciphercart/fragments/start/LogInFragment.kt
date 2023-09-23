@@ -1,12 +1,17 @@
 package com.ecommerce.project.ciphercart.fragments.start
 
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
@@ -48,7 +53,9 @@ class LogInFragment : Fragment() {
 
         binding.apply {
             signUp.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
+
+                showCustomDialogBox()
+//                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
                 val email = emailEditText.text.toString()
@@ -81,5 +88,18 @@ class LogInFragment : Fragment() {
             }
         }
     }
+
+    private fun showCustomDialogBox() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.pop_up)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.show()
+
+    }
+
+
 
 }
