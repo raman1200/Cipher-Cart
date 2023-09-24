@@ -1,9 +1,14 @@
 package com.ecommerce.project.ciphercart.utils
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
+import android.view.Window
 import android.widget.Button
+import android.widget.Toast
 import android.widget.Toolbar
 import com.ecommerce.project.ciphercart.R
 import com.google.android.material.textfield.TextInputEditText
@@ -38,4 +43,16 @@ fun disableButton(context: Context, btn:Button){
 fun enableButton(context: Context, btn:Button){
     btn.isEnabled = true
     btn.backgroundTintList = context.resources.getColorStateList(R.color.black, null)
+}
+
+fun toast(context: Context, message:String){
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+fun showLoadingDialog(context: Context) {
+    val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setCancelable(true)
+    dialog.setContentView(R.layout.pop_up)
+    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog.show()
 }

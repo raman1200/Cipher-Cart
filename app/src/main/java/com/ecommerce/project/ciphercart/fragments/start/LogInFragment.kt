@@ -54,7 +54,6 @@ class LogInFragment : Fragment() {
         binding.apply {
             signUp.setOnClickListener {
 
-                showCustomDialogBox()
 //                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
@@ -89,16 +88,6 @@ class LogInFragment : Fragment() {
         }
     }
 
-    private fun showCustomDialogBox() {
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.pop_up)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        dialog.show()
-
-    }
 
 
 

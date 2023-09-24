@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ActivityLaunchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LaunchActivity : AppCompatActivity() {
 
     private val binding by lazy {

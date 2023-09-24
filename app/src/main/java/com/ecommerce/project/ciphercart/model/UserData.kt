@@ -13,5 +13,6 @@ data class UserData(
     var image:String="",
     var uid:String="",
     var token:String="",
-    var registerDate:String=""
+    var registerDate:String="",
+    var emailVerified:Boolean=false
     ) : Parcelable
