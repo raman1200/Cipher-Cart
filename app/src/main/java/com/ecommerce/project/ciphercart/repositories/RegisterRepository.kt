@@ -16,7 +16,6 @@ import java.util.Timer
 class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
 
     val register = MutableLiveData<Response<UserData>>()
-    val registrationResult = MutableLiveData<Boolean>()
     fun registerUserByEmail(userData: UserData){
         register.postValue(Response.Loading())
         firebaseDb.createNewUser(userData.email, userData.password).addOnCompleteListener {
@@ -31,7 +30,12 @@ class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
         }
 
     }
-    fun checkUserVerified(){
+    fun checkUserVerified() : Boolean?{
+        return firebaseDb.checkUserVerify()
+    }
+
+    fun checkUserByMobile(mobile:String, onResult: (String?, Boolean?) -> Unit){
+        firebaseDb.checkUserByMobile(mobile, onResult)
     }
 
     fun saveData(userData: UserData){

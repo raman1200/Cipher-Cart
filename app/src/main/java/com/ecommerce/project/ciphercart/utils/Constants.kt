@@ -7,5 +7,7 @@ class Constants {
         const val PRODUCTS_COLLECTION = "products"
         const val CATEGORIES_COLLECTION = "categories"
         const val CART_COLLECTION = "cart"
+        const val SHARED_PREFERENCES_NAME = "my_prefs"
+
     }
 }

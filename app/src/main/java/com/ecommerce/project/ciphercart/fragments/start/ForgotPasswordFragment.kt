@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentForgotPasswordBinding
 import com.ecommerce.project.ciphercart.model.UserData
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
 import com.ecommerce.project.ciphercart.utils.disableButton
 import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
@@ -41,7 +42,7 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private fun initialize() {
-        sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
         disableButton(requireContext(),binding.continueBtn)

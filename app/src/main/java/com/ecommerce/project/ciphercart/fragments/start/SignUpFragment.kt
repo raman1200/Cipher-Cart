@@ -1,5 +1,6 @@
 package com.ecommerce.project.ciphercart.fragments.start
 
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
@@ -11,23 +12,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
+import com.ecommerce.project.ciphercart.utils.showLoadingDialog
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.RegisterViewModel
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
 import java.util.Timer
 import java.util.TimerTask
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
@@ -36,7 +33,7 @@ class SignUpFragment : Fragment() {
     lateinit var editor:Editor
     lateinit var firebaseDb: FirebaseDb
     lateinit var userData: UserData
-
+    lateinit var dialog:Dialog
 
     private val registerViewModel: RegisterViewModel by viewModels()
 
@@ -51,29 +48,56 @@ class SignUpFragment : Fragment() {
         initialize()
         clickListeners()
         focusListeners()
+        observe()
+        timer()
 
-        registerViewModel.register.observe(requireActivity(), Observer {
-            when(it){
-                is Response.Loading -> { toast(requireContext(), "Loading")
-                }
-                is Response.Success -> { toast(requireContext(), "Success")
-                }
-                is Response.Error -> {toast(requireContext(), it.message!!)}
-            }
-        })
-        val timer = Timer()
-        timer.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-
-                Log.d("TAG", "Running")
-            }
-        }, 0, 5000)
 
         return binding.root
     }
 
+    // email verification checks in every 5 sec
+    private fun timer() {
+        val timer = Timer()
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                if(registerViewModel.checkEmailVerify() == true){
+                    userData.emailVerified = true
+                    // save user data in firebase
+                    if(userData.uid.isNotEmpty()){
+                        registerViewModel.saveUserData(userData)
+                    }
+                    Log.d("TAG", "Verified")
+                    timer.cancel()
+                }
+                else{
+                    Log.d("TAG", "Not Verified ${registerViewModel.checkEmailVerify()}")
+                }
+
+            }
+        }, 0, 5000)
+    }
+
+    private fun observe() {
+        registerViewModel.register.observe(requireActivity()) {
+            when (it) {
+                is Response.Loading -> {
+                    toast(requireContext(), "Loading")
+                }
+
+                is Response.Success -> {
+                    toast(requireContext(), "Success")
+                    dialog.dismiss()
+                }
+
+                is Response.Error -> {
+                    toast(requireContext(), it.message!!)
+                }
+            }
+        }
+    }
+
     private fun initialize() {
-        sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
         firebaseDb = FirebaseDb()
         userData = UserData()
@@ -112,13 +136,28 @@ class SignUpFragment : Fragment() {
                     passwordTextInputLayout.error = "Please Enter Password"
                 }
                 else {
-                    userData.name = name
-                    userData.email = email
-                    userData.password = password
-                    userData.number = mobile
-                    editor.putInt("value", 1)
-                    editor.apply()
-                    registerViewModel.registerUser(userData)
+                    registerViewModel.checkUserMobile(mobile){error, value ->
+                        if(error!=null){
+                            toast(requireContext(), error)     //  error message
+                        }
+                        else{
+                            // check mobile number is already registered or not
+                            if(value==true){
+                                numberTextInputLayout.helperText = "Mobile Number is already Register"
+                            }
+                            else{
+                                dialog = showLoadingDialog(requireContext())
+                                userData.name = name
+                                userData.email = email
+                                userData.password = password
+                                userData.number = mobile
+                                editor.putInt("value", 1)
+                                editor.apply()
+                                registerViewModel.registerUser(userData)
+                            }
+                        }
+                    }
+
 //                    val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(user)
 //                    findNavController().navigate(action)
 

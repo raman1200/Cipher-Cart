@@ -19,19 +19,39 @@ class FirebaseDb {
 
     fun saveUserInformation(user: UserData) = usersCollectionRef.document(user.uid).set(user)
 
-    fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
-        usersCollectionRef.whereEqualTo("email", email).get()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val user = it.result.toObjects(User::class.java)
-                    if (user.isEmpty())
-                        onResult(null, false)  // email not register
-                    else
-                        onResult(null, true)  // email is already register
-                } else
-                    onResult(it.exception.toString(), null)   // error occur
-            }
+    fun checkUserVerify():Boolean?{
+        val user = firebaseAuth.currentUser ?: return null
+        user.reload()
+        return user.isEmailVerified
     }
+    fun checkUserByMobile(mobile:String, onResult: (String?, Boolean?) -> Unit){
+        usersCollectionRef.whereEqualTo("number", mobile).get().addOnCompleteListener {
+            if(it.isSuccessful) {
+                val user = it.result.toObjects(UserData::class.java)
+                if (user.isEmpty()) {
+                    onResult(null, false)    // number is not register
+                } else {
+                    onResult(null, true)    // number is already register
+                }
+            }
+            else {
+                onResult(it.exception.toString(), null)   // error occur
+            }
+        }
+    }
+//    fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
+//        usersCollectionRef.whereEqualTo("email", email).get()
+//            .addOnCompleteListener {
+//                if (it.isSuccessful) {
+//                    val user = it.result.toObjects(User::class.java)
+//                    if (user.isEmpty())
+//                        onResult(null, false)  // email not register
+//                    else
+//                        onResult(null, true)  // email is already register
+//                } else
+//                    onResult(it.exception.toString(), null)   // error occur
+//            }
+//    }
 
     fun resetPassword(email: String) = firebaseAuth.sendPasswordResetEmail(email)
 
