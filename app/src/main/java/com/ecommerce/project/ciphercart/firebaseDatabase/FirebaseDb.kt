@@ -54,7 +54,7 @@ class FirebaseDb {
             }
     }
 
-    fun getUserData(user:FirebaseUser) = usersCollectionRef.document(user.uid).get()
+    fun getUserData(uid : String) = usersCollectionRef.document(uid).get()
 
     fun resetPassword(email: String) = firebaseAuth.sendPasswordResetEmail(email)
 
