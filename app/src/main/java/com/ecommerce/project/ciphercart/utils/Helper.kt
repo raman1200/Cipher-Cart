@@ -48,12 +48,11 @@ fun enableButton(context: Context, btn:Button){
 fun toast(context: Context, message:String){
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-fun showLoadingDialog(context: Context):Dialog {
+fun getDialog(context: Context):Dialog {
     val dialog = Dialog(context)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setCancelable(true)
     dialog.setContentView(R.layout.pop_up)
     dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    dialog.show()
     return dialog
 }

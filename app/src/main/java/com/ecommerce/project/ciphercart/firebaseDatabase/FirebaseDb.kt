@@ -39,19 +39,19 @@ class FirebaseDb {
             }
         }
     }
-//    fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
-//        usersCollectionRef.whereEqualTo("email", email).get()
-//            .addOnCompleteListener {
-//                if (it.isSuccessful) {
-//                    val user = it.result.toObjects(User::class.java)
-//                    if (user.isEmpty())
-//                        onResult(null, false)  // email not register
-//                    else
-//                        onResult(null, true)  // email is already register
-//                } else
-//                    onResult(it.exception.toString(), null)   // error occur
-//            }
-//    }
+    fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
+        usersCollectionRef.whereEqualTo("email", email).get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val user = it.result.toObjects(UserData::class.java)
+                    if (user.isEmpty())
+                        onResult(null, false)  // email not register
+                    else
+                        onResult(null, true)  // email is already register
+                } else
+                    onResult(it.exception.toString(), null)   // error occur
+            }
+    }
 
     fun resetPassword(email: String) = firebaseAuth.sendPasswordResetEmail(email)
 

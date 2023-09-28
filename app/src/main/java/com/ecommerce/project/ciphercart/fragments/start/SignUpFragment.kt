@@ -5,26 +5,35 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
+import com.ecommerce.project.ciphercart.utils.getDialog
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
-import com.ecommerce.project.ciphercart.utils.showLoadingDialog
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
@@ -34,6 +43,9 @@ class SignUpFragment : Fragment() {
     private lateinit var firebaseDb: FirebaseDb
     lateinit var userData: UserData
     private lateinit var dialog:Dialog
+    private lateinit var verifyLayout:LinearLayout
+    private lateinit var congratulationLayout:LinearLayout
+
 
     private val registerViewModel: RegisterViewModel by viewModels()
 
@@ -49,32 +61,9 @@ class SignUpFragment : Fragment() {
         clickListeners()
         focusListeners()
         observe()
-        timer()
 
 
         return binding.root
-    }
-
-    // email verification checks in every 5 sec
-    private fun timer() {
-        val timer = Timer()
-        timer.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                if(registerViewModel.checkEmailVerify() == true){
-                    userData.emailVerified = true
-                    // save user data in firebase
-                    if(userData.uid.isNotEmpty()){
-                        registerViewModel.saveUserData(userData)
-                    }
-                    Log.d("TAG", "Verified")
-                    timer.cancel()
-                }
-                else{
-                    Log.d("TAG", "Not Verified ${registerViewModel.checkEmailVerify()}")
-                }
-
-            }
-        }, 0, 5000)
     }
 
     private fun observe() {
@@ -94,6 +83,14 @@ class SignUpFragment : Fragment() {
                 }
             }
         }
+        registerViewModel.emailVerified.observe(requireActivity()){
+            it?.let {
+                if(it){
+                    verifyLayout.visibility = View.GONE
+                    congratulationLayout.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     private fun initialize() {
@@ -101,6 +98,9 @@ class SignUpFragment : Fragment() {
         editor = sharedPreferences.edit()
         firebaseDb = FirebaseDb()
         userData = UserData()
+        dialog = getDialog(requireContext())
+        verifyLayout = dialog.findViewById<LinearLayout>(R.id.verify)
+        congratulationLayout = dialog.findViewById<LinearLayout>(R.id.congratulations)
     }
 
 
@@ -136,27 +136,40 @@ class SignUpFragment : Fragment() {
                     passwordTextInputLayout.error = "Please Enter Password"
                 }
                 else {
-                    registerViewModel.checkUserMobile(mobile){error, value ->
+                    registerViewModel.checkUserEmail(email){ error, value ->
                         if(error!=null){
-                            toast(requireContext(), error)     //  error message
+                            toast(requireContext(),error)
                         }
                         else{
-                            // check mobile number is already registered or not
                             if(value==true){
-                                numberTextInputLayout.helperText = "Mobile Number is already Register"
+                                emailTextInputLayout.error = "Email is already Register"
                             }
                             else{
-                                dialog = showLoadingDialog(requireContext())
-                                userData.name = name
-                                userData.email = email
-                                userData.password = password
-                                userData.number = mobile
-                                editor.putInt("value", 1)
-                                editor.apply()
-                                registerViewModel.registerUser(userData)
+                                registerViewModel.checkUserMobile(mobile){error, value ->
+                                    if(error!=null){
+                                        toast(requireContext(), error)     //  error message
+                                    }
+                                    else{
+                                        // check mobile number is already registered or not
+                                        if(value==true){
+                                            numberTextInputLayout.helperText = "Mobile Number is already Register"
+                                        }
+                                        else{
+                                            dialog.show()
+                                            userData.name = name
+                                            userData.email = email
+                                            userData.password = password
+                                            userData.number = mobile
+                                            editor.putInt("value", 1)
+                                            editor.apply()
+                                            registerViewModel.registerUser(userData)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+
 
 //                    val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(user)
 //                    findNavController().navigate(action)

@@ -10,6 +10,7 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val registerRepository: RegisterRepository) : ViewModel() {
 
     val register = registerRepository.register
+    val emailVerified = registerRepository.emailVerified
 
     fun registerUser(userData: UserData) {
         registerRepository.registerUserByEmail(userData)
@@ -17,11 +18,12 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
     fun checkEmailVerify() : Boolean? {
         return registerRepository.checkUserVerified()
     }
-    fun saveUserData(userData: UserData) {
-        registerRepository.saveData(userData)
-    }
     fun checkUserMobile(number: String, onResult: (String?, Boolean?) -> Unit) {
         registerRepository.checkUserByMobile(number, onResult)
+    }
+
+    fun checkUserEmail(email: String,  onResult: (String?, Boolean?) -> Unit) {
+        registerRepository.checkUserByEmail(email, onResult)
     }
 
 }
