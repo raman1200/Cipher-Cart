@@ -3,12 +3,9 @@ package com.ecommerce.project.ciphercart.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +25,8 @@ class MainActivity : AppCompatActivity() {
 
 
         setUpNavHost()
-
-
         listeners()
+
     }
 
     private fun setUpNavHost() {

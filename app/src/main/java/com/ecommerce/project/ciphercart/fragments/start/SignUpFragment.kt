@@ -29,11 +29,11 @@ import java.util.TimerTask
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
     lateinit var binding:FragmentSignUpBinding
-    lateinit var sharedPreferences: SharedPreferences
-    lateinit var editor:Editor
-    lateinit var firebaseDb: FirebaseDb
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor:Editor
+    private lateinit var firebaseDb: FirebaseDb
     lateinit var userData: UserData
-    lateinit var dialog:Dialog
+    private lateinit var dialog:Dialog
 
     private val registerViewModel: RegisterViewModel by viewModels()
 
