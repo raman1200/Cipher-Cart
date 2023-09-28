@@ -25,24 +25,37 @@ class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
     val emailVerified = MutableLiveData<Boolean>()
     fun registerUserByEmail(userData: UserData){
         register.postValue(Response.Loading())
+        emailVerified.postValue(false)
         firebaseDb.createNewUser(userData.email, userData.password).addOnCompleteListener {
-            if(it.isSuccessful){
+            if(it.isSuccessful){   // account created
                 val user = it.result.user!!
-                userData.uid = it.result.user!!.uid
+                userData.uid = user.uid
                 sendVerificationEmail(user, userData)
             }
             else{
                 register.postValue(Response.Error(it.exception!!.localizedMessage))
             }
         }
-
     }
-    fun checkUserVerified() : Boolean?{
-        return firebaseDb.checkUserVerify()
+    private fun checkUserVerified(user:FirebaseUser) : Boolean{
+        user.reload()
+        return user.isEmailVerified
     }
 
     fun checkUserByMobile(mobile:String, onResult: (String?, Boolean?) -> Unit){
-        firebaseDb.checkUserByMobile(mobile, onResult)
+        firebaseDb.checkUserByMobile(mobile).addOnCompleteListener {
+            if(it.isSuccessful) {
+                val user = it.result.toObjects(UserData::class.java)
+                if (user.isEmpty()) {
+                    onResult(null, false)    // number is not register
+                } else {
+                    onResult(null, true)    // number is already register
+                }
+            }
+            else {
+                onResult(it.exception.toString(), null)   // error occur
+            }
+        }
     }
 
     private fun saveData(userData: UserData){
@@ -58,26 +71,20 @@ class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
     private fun sendVerificationEmail(user:FirebaseUser, userData: UserData) {
         user.sendEmailVerification().addOnCompleteListener {
             if(it.isSuccessful){
-                checkContinuouslyEmailIsVerified(userData)
+                checkContinuouslyEmailIsVerified(user, userData)
             }
             else{
                 register.postValue(Response.Error(it.exception!!.localizedMessage))
             }
         }
     }
-    private fun checkContinuouslyEmailIsVerified(userData: UserData) {
+    private fun checkContinuouslyEmailIsVerified(user:FirebaseUser, userData: UserData) {
         val timer = Timer()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                if(checkUserVerified() == true){
+                if(checkUserVerified(user)){
                     emailVerified.postValue(true)
                     userData.emailVerified = true
-
-
-//                    GlobalScope.launch(Dispatchers.Main){
-//                        verifyLayout.visibility = View.GONE
-//                        congratulationLayout.visibility = View.VISIBLE
-//                    }
 
                     // save user data in firebase
                     saveData(userData)
@@ -95,6 +102,15 @@ class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
     }
 
     fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
-        firebaseDb.checkUserByEmail(email, onResult)
+        firebaseDb.checkUserByEmail(email).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val user = it.result.toObjects(UserData::class.java)
+                    if (user.isEmpty())
+                        onResult(null, false)  // email not register
+                    else
+                        onResult(null, true)  // email is already register
+                } else
+                    onResult(it.exception.toString(), null)   // error occur
+            }
     }
 }

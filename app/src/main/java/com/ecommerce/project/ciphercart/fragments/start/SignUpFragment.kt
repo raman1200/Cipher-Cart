@@ -70,9 +70,10 @@ class SignUpFragment : Fragment() {
 
     private fun observe() {
         registerViewModel.register.observe(requireActivity()) {
+
             when (it) {
                 is Response.Loading -> {
-                    toast(requireContext(), "Loading")
+                    dialog.show()
                 }
 
                 is Response.Success -> {
@@ -86,11 +87,9 @@ class SignUpFragment : Fragment() {
             }
         }
         registerViewModel.emailVerified.observe(requireActivity()){
-            it?.let {
-                if(it){
-                    verifyLayout.visibility = View.GONE
-                    congratulationLayout.visibility = View.VISIBLE
-                }
+            if(it){
+                verifyLayout.visibility = View.GONE
+                congratulationLayout.visibility = View.VISIBLE
             }
         }
     }
@@ -156,7 +155,6 @@ class SignUpFragment : Fragment() {
                                             numberTextInputLayout.helperText = "Mobile Number is already Register"
                                         }
                                         else{
-                                            dialog.show()
                                             userData.name = name
                                             userData.email = email
                                             userData.password = password
