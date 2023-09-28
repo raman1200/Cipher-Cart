@@ -10,7 +10,7 @@ import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import org.checkerframework.checker.units.qual.s
 
-class LogInRepository(val context: Context, val firebaseDb: FirebaseDb) {
+class LogInRepository(val firebaseDb: FirebaseDb) {
 
     val logIn = MutableLiveData<Response<UserData>>()
 
