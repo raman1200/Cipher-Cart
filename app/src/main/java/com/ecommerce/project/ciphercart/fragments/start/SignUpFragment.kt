@@ -38,9 +38,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
     lateinit var binding:FragmentSignUpBinding
-    private lateinit var sharedPreferences: SharedPreferences
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     private lateinit var editor:Editor
-    private lateinit var firebaseDb: FirebaseDb
     lateinit var userData: UserData
     private lateinit var dialog:Dialog
     private lateinit var verifyLayout:LinearLayout
@@ -94,9 +96,8 @@ class SignUpFragment : Fragment() {
     }
 
     private fun initialize() {
-        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+//        sharedPreferences = requireContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
-        firebaseDb = FirebaseDb()
         userData = UserData()
         dialog = getDialog(requireContext())
         verifyLayout = dialog.findViewById<LinearLayout>(R.id.verify)
@@ -142,7 +143,7 @@ class SignUpFragment : Fragment() {
                         }
                         else{
                             if(value==true){
-                                emailTextInputLayout.error = "Email is already Register"
+                                emailTextInputLayout.helperText = "Email is already Register"
                             }
                             else{
                                 registerViewModel.checkUserMobile(mobile){error, value ->

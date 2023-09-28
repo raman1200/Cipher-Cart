@@ -16,10 +16,12 @@ import com.ecommerce.project.ciphercart.utils.disableButton
 import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.google.android.material.card.MaterialCardView
+import javax.inject.Inject
 
 class ForgotPasswordFragment : Fragment() {
 
     private lateinit var binding:FragmentForgotPasswordBinding
+    @Inject
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     private var option=""
@@ -42,7 +44,7 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private fun initialize() {
-        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+//        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
         disableButton(requireContext(),binding.continueBtn)

@@ -8,15 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
+import javax.inject.Inject
 
 class LogInFragment : Fragment() {
     private lateinit var binding:FragmentLogInBinding
-    private lateinit var sharedPreferences: SharedPreferences
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +52,7 @@ class LogInFragment : Fragment() {
         binding.apply {
             signUp.setOnClickListener {
 
-//                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
+                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
                 val email = emailEditText.text.toString()

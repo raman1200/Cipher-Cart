@@ -12,11 +12,13 @@ import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentPinVerifyBinding
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
+import javax.inject.Inject
 
 class PinVerifyFragment : Fragment() {
 
     private lateinit var binding:FragmentPinVerifyBinding
-    private lateinit var sharedPreferences: SharedPreferences
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
