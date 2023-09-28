@@ -4,6 +4,7 @@ import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTION
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
@@ -52,6 +53,8 @@ class FirebaseDb {
                     onResult(it.exception.toString(), null)   // error occur
             }
     }
+
+    fun getUserData(user:FirebaseUser) = usersCollectionRef.document(user.uid).get()
 
     fun resetPassword(email: String) = firebaseAuth.sendPasswordResetEmail(email)
 
