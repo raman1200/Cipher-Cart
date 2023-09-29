@@ -83,6 +83,7 @@ class SignUpFragment : Fragment() {
 
                 is Response.Error -> {
                     toast(requireContext(), it.message!!)
+                    dialog.dismiss()
                 }
             }
         }
@@ -157,11 +158,10 @@ class SignUpFragment : Fragment() {
                                         else{
                                             userData.name = name
                                             userData.email = email
-                                            userData.password = password
                                             userData.number = mobile
                                             editor.putInt("value", 1)
                                             editor.apply()
-                                            registerViewModel.registerUser(userData)
+                                            registerViewModel.registerUser(userData, password)
                                         }
                                     }
                                 }

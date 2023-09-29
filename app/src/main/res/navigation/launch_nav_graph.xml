@@ -14,18 +14,14 @@
             android:id="@+id/action_logInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_logInFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            android:id="@+id/action_logInFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.start.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_signUpFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/pinVerifyFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.start.PinVerifyFragment"
@@ -44,15 +40,8 @@
             app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
-        android:id="@+id/forgotPasswordFragment"
-        android:name="com.ecommerce.project.ciphercart.fragments.start.ForgotPasswordFragment"
-        android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" >
-        <action
-            android:id="@+id/action_forgotPasswordFragment_to_pinVerifyFragment"
-            app:destination="@id/pinVerifyFragment" />
-        <argument
-            android:name="user"
-            app:argType="com.ecommerce.project.ciphercart.model.UserData" />
-    </fragment>
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.start.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
 </navigation>

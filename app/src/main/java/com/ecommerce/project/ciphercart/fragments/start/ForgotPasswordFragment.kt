@@ -16,8 +16,10 @@ import com.ecommerce.project.ciphercart.utils.disableButton
 import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.google.android.material.card.MaterialCardView
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ForgotPasswordFragment : Fragment() {
 
     private lateinit var binding:FragmentForgotPasswordBinding
@@ -53,8 +55,8 @@ class ForgotPasswordFragment : Fragment() {
 
     private fun getData() {
         val value = sharedPreferences.getInt("value",0)
-        val args = ForgotPasswordFragmentArgs.fromBundle(requireArguments())
-        user = args.user
+//        val args = ForgotPasswordFragmentArgs.fromBundle(requireArguments())
+//        user = args.user
         setLayout(value)
     }
 
@@ -86,7 +88,7 @@ class ForgotPasswordFragment : Fragment() {
             continueBtn.setOnClickListener {
                 editor.putInt("verify_value", 1)
                 editor.apply()
-                findNavController().navigate(R.id.action_forgotPasswordFragment_to_pinVerifyFragment)
+//                findNavController().navigate(R.id.action_forgotPasswordFragment_to_pinVerifyFragment)
             }
             SMS.setOnClickListener {
                 setSMSOption(SMS, Email)

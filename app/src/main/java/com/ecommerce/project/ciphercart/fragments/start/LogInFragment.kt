@@ -123,8 +123,9 @@ class LogInFragment : Fragment() {
             forgetPassword.setOnClickListener {
                 editor.putInt("value", 2)
                 editor.apply()
-                val action = LogInFragmentDirections.actionLogInFragmentToForgotPasswordFragment(UserData())
-                findNavController().navigate(action)
+//                val action = LogInFragmentDirections.action_logInFragment_to_resetPasswordFragment(UserData())
+//                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_logInFragment_to_resetPasswordFragment)
 
             }
 

@@ -23,10 +23,10 @@ class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
 
     val register = MutableLiveData<Response<UserData>>()
     val emailVerified = MutableLiveData<Boolean>()
-    fun registerUserByEmail(userData: UserData){
+    fun registerUserByEmail(userData: UserData, password:String){
         register.postValue(Response.Loading())
         emailVerified.postValue(false)
-        firebaseDb.createNewUser(userData.email, userData.password).addOnCompleteListener {
+        firebaseDb.createNewUser(userData.email, password).addOnCompleteListener {
             if(it.isSuccessful){   // account created
                 val user = it.result.user!!
                 userData.uid = user.uid

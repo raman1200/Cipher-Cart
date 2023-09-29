@@ -9,7 +9,7 @@ data class UserData(
     var name:String="",
     var email:String="",
     var number: String ="",
-    var password:String="",
+
     var image:String="",
     var uid:String="",
     var token:String="",

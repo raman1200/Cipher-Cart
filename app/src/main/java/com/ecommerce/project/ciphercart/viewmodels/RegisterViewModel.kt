@@ -12,8 +12,8 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
     val register = registerRepository.register
     val emailVerified = registerRepository.emailVerified
 
-    fun registerUser(userData: UserData) {
-        registerRepository.registerUserByEmail(userData)
+    fun registerUser(userData: UserData , password:String) {
+        registerRepository.registerUserByEmail(userData, password)
     }
 
     fun checkUserMobile(number: String, onResult: (String?, Boolean?) -> Unit) {
