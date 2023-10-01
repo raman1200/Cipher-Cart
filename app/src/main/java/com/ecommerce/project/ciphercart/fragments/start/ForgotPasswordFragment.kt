@@ -1,6 +1,5 @@
 package com.ecommerce.project.ciphercart.fragments.start
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentForgotPasswordBinding
 import com.ecommerce.project.ciphercart.model.UserData
-import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
 import com.ecommerce.project.ciphercart.utils.disableButton
 import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
