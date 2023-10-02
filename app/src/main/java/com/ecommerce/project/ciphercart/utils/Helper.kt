@@ -13,6 +13,9 @@ import android.widget.Toolbar
 import com.ecommerce.project.ciphercart.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
 fun etHintTextChange(editText: TextInputEditText, textInputLayout:TextInputLayout, hint:String) {
     editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
@@ -55,4 +58,13 @@ fun getDialog(context: Context):Dialog {
     dialog.setContentView(R.layout.pop_up)
     dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     return dialog
+}
+
+fun getCurrentDateInLong():Long {
+    return Date().time
+}
+
+fun getLongToDate(date:Long) : String {
+    val sdf = SimpleDateFormat("dd/mm/yyyy hh:mm a")
+    return sdf.format(date)
 }

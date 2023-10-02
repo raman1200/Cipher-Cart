@@ -8,22 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentChooseSignInBinding
+import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.toast
+import com.ecommerce.project.ciphercart.viewmodels.LogInViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class ChooseSignInFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseSignInBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
+    private val loginInViewModel : LogInViewModel by viewModels()
 
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,10 +35,33 @@ class ChooseSignInFragment : Fragment() {
     ): View? {
         binding = FragmentChooseSignInBinding.inflate(layoutInflater, container, false)
 
+        initialize()
         clickListeners()
-
+        observer()
 
         return binding.root
+    }
+
+    private fun initialize() {
+        googleSignInClient = loginInViewModel.getGoogleSignInClient(requireActivity())
+    }
+
+    private fun observer() {
+        loginInViewModel.googleLogin.observe(requireActivity()){
+            when(it){
+                is Response.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Response.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    toast(requireContext(), "Success")
+                }
+                is Response.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    toast(requireContext(), it.message!!)
+                }
+            }
+        }
     }
 
     private fun clickListeners() {
@@ -46,6 +73,7 @@ class ChooseSignInFragment : Fragment() {
                 findNavController().navigate(R.id.action_chooseSignInFragment_to_logInFragment)
             }
             google1.setOnClickListener {
+                progressBar.visibility = View.VISIBLE
                 signInWithGoogle()
             }
         }
@@ -62,7 +90,7 @@ class ChooseSignInFragment : Fragment() {
             if(task.isSuccessful){
                 val account:GoogleSignInAccount? = task.result
                 if(account!=null){
-
+                    loginInViewModel.signInWithGoogle(account.idToken!!)
                 }
 
             }else{

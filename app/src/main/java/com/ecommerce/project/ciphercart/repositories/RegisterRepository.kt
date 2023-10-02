@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.getCurrentDateInLong
 import com.ecommerce.project.ciphercart.utils.toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,6 +31,7 @@ class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
             if(it.isSuccessful){   // account created
                 val user = it.result.user!!
                 userData.uid = user.uid
+                userData.registerDate = getCurrentDateInLong()
                 sendVerificationEmail(user, userData)
             }
             else{
