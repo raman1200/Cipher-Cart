@@ -4,5 +4,4 @@ data class ProductData(
     var prodName:String,
     var prodId:Int,
 
-
-)
+    )

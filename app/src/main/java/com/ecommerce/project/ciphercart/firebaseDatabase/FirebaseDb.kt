@@ -1,5 +1,6 @@
 package com.ecommerce.project.ciphercart.firebaseDatabase
 
+import android.provider.ContactsContract.CommonDataKinds.Phone
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
@@ -7,6 +8,8 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -31,6 +34,7 @@ class FirebaseDb {
 
     fun resetPassword(email: String) = auth.sendPasswordResetEmail(email)
 
+//    fun pinGet(credential: AuthCredential) = PhoneAuthProvider.verifyPhoneNumber()
 
     fun loginUser(
         email: String,
