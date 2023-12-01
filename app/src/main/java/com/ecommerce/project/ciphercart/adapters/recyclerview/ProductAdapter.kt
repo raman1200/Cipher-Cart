@@ -11,7 +11,7 @@ import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ProductItemViewBinding
 import com.ecommerce.project.ciphercart.model.ProductData
 
-class ProductAdapter(val context: Context): ListAdapter<ProductData, ProductAdapter.ProductViewHolder>(DiffUtilCallBack()) {
+class ProductAdapter(): ListAdapter<ProductData, ProductAdapter.ProductViewHolder>(DiffUtilCallBack()) {
 
     class ProductViewHolder(itemView: View):ViewHolder(itemView){
         val binding = ProductItemViewBinding.bind(itemView)
@@ -19,7 +19,7 @@ class ProductAdapter(val context: Context): ListAdapter<ProductData, ProductAdap
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.product_item_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item_view, parent, false)
         return ProductViewHolder(view)
     }
 

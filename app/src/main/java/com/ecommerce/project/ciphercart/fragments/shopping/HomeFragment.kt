@@ -6,13 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentHomeBinding
+import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.toast
+import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     lateinit var binding:FragmentHomeBinding
+    private val productViewModel:ProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

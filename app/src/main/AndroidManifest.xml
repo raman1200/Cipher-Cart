@@ -19,15 +19,14 @@
             android:name=".activities.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.LaunchActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LaunchActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

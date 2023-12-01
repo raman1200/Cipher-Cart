@@ -2,6 +2,7 @@ package com.ecommerce.project.ciphercart.firebaseDatabase
 
 import android.provider.ContactsContract.CommonDataKinds.Phone
 import com.ecommerce.project.ciphercart.model.UserData
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.CATEGORIES_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
@@ -19,12 +20,13 @@ class FirebaseDb {
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
     private val usersCollectionRef = firestore.collection(USERS_COLLECTION)
+    private val categoryCollectionRef = firestore.collection(CATEGORIES_COLLECTION)
+
 
 
     fun createNewUser(email: String, password: String) = auth.createUserWithEmailAndPassword(email, password)
 
     fun saveUserInformation(user: UserData) = usersCollectionRef.document(user.uid).set(user)
-
 
     fun checkUserByMobile(mobile:String) = usersCollectionRef.whereEqualTo("number", mobile).get()
 
@@ -36,12 +38,13 @@ class FirebaseDb {
 
 //    fun pinGet(credential: AuthCredential) = PhoneAuthProvider.verifyPhoneNumber()
 
-    fun loginUser(
-        email: String,
-        password: String
-    ) = auth.signInWithEmailAndPassword(email, password)
+    fun loginUser(email: String, password: String) = auth.signInWithEmailAndPassword(email, password)
 
     fun signInWithGoogle(idToken:String) = auth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null))
+
+
+    fun getAllCategory() = categoryCollectionRef.get()
+
 
 
     fun logout() = auth.signOut()

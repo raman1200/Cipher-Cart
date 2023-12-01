@@ -18,7 +18,7 @@
         <androidx.cardview.widget.CardView
             android:layout_weight="0"
             app:cardCornerRadius="24dp"
-            android:background="@color/grey_300"
+            android:background="@color/grey_700"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="Color"
-                android:textColor="@color/grey_600"
+                android:textColor="@color/grey_700"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/color"
                 app:layout_constraintStart_toEndOf="@+id/color"
@@ -92,21 +92,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="Size = M"
-                android:textColor="@color/grey_600"
+                android:textColor="@color/grey_700"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="@+id/view" />
 
-<!--            <View-->
-<!--                android:id="@+id/view2"-->
-<!--                android:layout_width="1dp"-->
-<!--                android:layout_height="16dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:background="@color/grey_700"-->
-<!--                android:orientation="vertical"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/size"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/size"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/size" />-->
+            <View
+                android:id="@+id/view2"
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/grey_700"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/size"
+                app:layout_constraintStart_toEndOf="@+id/size"
+                app:layout_constraintTop_toTopOf="@+id/size" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="QTY = 1"
+                android:visibility="visible"
+                android:textColor="@color/grey_700"
+               app:layout_constraintStart_toEndOf="@id/view2"
+                app:layout_constraintBottom_toBottomOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/view2" />
+
 
             <TextView
                 android:id="@+id/price"
@@ -118,17 +131,17 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/review"
+                app:layout_constraintEnd_toStartOf="@+id/track"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/color" />
 
 
             <Button
-                android:id="@+id/review"
+                android:id="@+id/track"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginEnd="10dp"
-                android:text="Leave Review"
+                android:text="Track Order"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/price"
