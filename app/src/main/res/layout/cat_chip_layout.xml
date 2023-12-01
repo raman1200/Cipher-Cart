@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:text="All"
+    android:checked="false"
+    android:textColor="@color/black"
+    style="@style/Widget.MaterialComponents.Chip.Choice"
+    app:chipBackgroundColor="@color/white"
+    app:chipStrokeColor="@color/black"
+    app:chipStrokeWidth="1dp"
+    app:chipStartPadding="8dp"
+    app:chipEndPadding="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"/>
