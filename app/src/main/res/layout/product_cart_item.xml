@@ -20,9 +20,16 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_weight="0"
         app:cardCornerRadius="24dp"
+<<<<<<< HEAD
         android:background="@color/grey_700"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
+=======
+        android:background="@color/grey_400"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="5dp"
+>>>>>>> origin/master
         android:layout_height="wrap_content" >
 
         <ImageView
@@ -36,7 +43,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_weight="2"
         android:layout_width="0dp"
+<<<<<<< HEAD
         android:layout_margin="10dp"
+=======
+        android:layout_margin="5dp"
+>>>>>>> origin/master
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -49,6 +60,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
+<<<<<<< HEAD
             app:layout_constraintEnd_toStartOf="@+id/delete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +72,18 @@
             android:src="@drawable/delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+=======
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/delete"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/delete"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+>>>>>>> origin/master
 
         <TextView
             android:id="@+id/color"
@@ -78,7 +102,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="Color"
+<<<<<<< HEAD
             android:textColor="@color/grey_800"
+=======
+            android:textColor="@color/grey_700"
+>>>>>>> origin/master
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/color"
             app:layout_constraintStart_toEndOf="@+id/color"
@@ -89,7 +117,11 @@
             android:layout_width="1dp"
             android:layout_height="16dp"
             android:layout_marginStart="5dp"
+<<<<<<< HEAD
             android:background="@color/grey_900"
+=======
+            android:background="@color/grey_500"
+>>>>>>> origin/master
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/textView"
@@ -101,7 +133,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="Size = M"
+<<<<<<< HEAD
             android:textColor="@color/grey_800"
+=======
+            android:textColor="@color/grey_700"
+>>>>>>> origin/master
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view" />
@@ -119,6 +155,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/color" />
 
+<<<<<<< HEAD
 <!--        <com.mcdev.quantitizerlibrary.HorizontalQuantitizer-->
 <!--            android:id="@+id/h_q"-->
 <!--            android:layout_width="wrap_content"-->
@@ -128,6 +165,17 @@
 <!--            android:backgroundTint="@color/grey_500"-->
 <!--            app:layout_constraintStart_toStartOf="parent"-->
 <!--            app:layout_constraintTop_toBottomOf="@+id/price" />-->
+=======
+        <com.mcdev.quantitizerlibrary.HorizontalQuantitizer
+            android:id="@+id/h_q"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/grey_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price" />
+>>>>>>> origin/master
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

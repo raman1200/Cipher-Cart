@@ -35,6 +35,7 @@
 
 
         <RadioButton
+            android:id="@+id/english"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@null"
@@ -54,6 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <RadioButton
+            android:id="@+id/hindi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@null"

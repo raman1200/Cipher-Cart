@@ -97,16 +97,16 @@
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="@+id/view" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="1dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="5dp"
-                android:background="@color/grey_700"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/size"
-                app:layout_constraintStart_toEndOf="@+id/size"
-                app:layout_constraintTop_toTopOf="@+id/size" />
+<!--            <View-->
+<!--                android:id="@+id/view2"-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="16dp"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:background="@color/grey_700"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/size"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/size"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/size" />-->
 
             <TextView
                 android:id="@+id/price"

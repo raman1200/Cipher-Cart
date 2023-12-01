@@ -184,5 +184,10 @@ class LogInFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.progressBar.visibility = View.GONE
+    }
+
 
 }

@@ -102,7 +102,9 @@
                     android:id="@+id/edit_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -120,7 +122,9 @@
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -138,7 +142,9 @@
                     android:id="@+id/notification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -156,7 +162,9 @@
                     android:id="@+id/payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -174,7 +182,9 @@
                     android:id="@+id/security"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -192,7 +202,9 @@
                     android:id="@+id/language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -228,7 +240,9 @@
                     android:id="@+id/Privacy_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -246,7 +260,9 @@
                     android:id="@+id/Help_center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/ripple_bg_grey"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -288,7 +304,7 @@
 <!--                </LinearLayout>-->
 
                 <LinearLayout
-                    android:id="@+id/logout"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -297,17 +313,21 @@
 
 
                     <TextView
+                        android:id="@+id/logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
                         android:layout_marginStart="10dp"
+                        android:background="@drawable/ripple_bg_grey"
+                        android:paddingEnd="10dp"
                         android:textColor="@color/red"
-                        android:drawableStart="@drawable/logout"
                         android:drawablePadding="10dp"
                         android:text="Logout"
-                        android:drawableTint="@color/red"
                         android:textSize="20sp"
-                        />
+                        app:drawableStartCompat="@drawable/logout"
+                        app:drawableTint="@color/red" />
 
 
                 </LinearLayout>

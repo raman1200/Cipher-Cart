@@ -88,6 +88,8 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:2.48")
     kapt ("com.google.dagger:hilt-compiler:2.48")
 
+    implementation ("com.github.kojofosu:Quantitizer:1.6.8")
+
 }
 kapt {
     correctErrorTypes = true

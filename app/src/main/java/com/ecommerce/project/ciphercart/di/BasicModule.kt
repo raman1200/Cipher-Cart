@@ -2,6 +2,8 @@ package com.ecommerce.project.ciphercart.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
+import com.ecommerce.project.ciphercart.repositories.ProductRepository
 import com.ecommerce.project.ciphercart.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -18,4 +20,8 @@ object BasicModule {
         return  context.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
     }
 
+    @Provides
+    fun provideProductRepository():ProductRepository{
+        return ProductRepository(FirebaseDb())
+    }
 }

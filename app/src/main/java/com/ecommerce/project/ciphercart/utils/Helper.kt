@@ -1,5 +1,6 @@
 package com.ecommerce.project.ciphercart.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -64,6 +65,7 @@ fun getCurrentDateInLong():Long {
     return Date().time
 }
 
+@SuppressLint("SimpleDateFormat")
 fun getLongToDate(date:Long) : String {
     val sdf = SimpleDateFormat("dd/mm/yyyy hh:mm a")
     return sdf.format(date)

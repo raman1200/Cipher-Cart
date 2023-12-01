@@ -2,20 +2,12 @@ package com.ecommerce.project.ciphercart.repositories
 
 import android.content.Context
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.getCurrentDateInLong
-import com.ecommerce.project.ciphercart.utils.toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import io.grpc.internal.SharedResourceHolder.Resource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
 
