@@ -47,6 +47,7 @@ class HomeFragment : Fragment() {
             }
             notification.setOnClickListener{
                 findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+
             }
 
         }
