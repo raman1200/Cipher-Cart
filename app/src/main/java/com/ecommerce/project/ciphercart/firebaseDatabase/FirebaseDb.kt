@@ -3,6 +3,8 @@ package com.ecommerce.project.ciphercart.firebaseDatabase
 import android.provider.ContactsContract.CommonDataKinds.Phone
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.CATEGORIES_COLLECTION
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.PRODUCTS_COLLECTION
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.SPL_OFFERS_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
@@ -21,6 +23,8 @@ class FirebaseDb {
     private val firestore = FirebaseFirestore.getInstance()
     private val usersCollectionRef = firestore.collection(USERS_COLLECTION)
     private val categoryCollectionRef = firestore.collection(CATEGORIES_COLLECTION)
+    private val productCollectionRef = firestore.collection(PRODUCTS_COLLECTION)
+    private val splOfferCollectionRef = firestore.collection(SPL_OFFERS_COLLECTION)
 
 
 
@@ -44,8 +48,10 @@ class FirebaseDb {
 
 
     fun getAllCategory() = categoryCollectionRef.get()
-
-
+    fun getAllProduct() = productCollectionRef.get()
+    fun getAllSplOffers() = splOfferCollectionRef.get()
 
     fun logout() = auth.signOut()
+
+
 }

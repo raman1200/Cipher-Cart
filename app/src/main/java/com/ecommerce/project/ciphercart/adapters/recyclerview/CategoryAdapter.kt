@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.CategoryItemViewBinding
 import com.ecommerce.project.ciphercart.model.CategoryData
 
-class CategoryAdapter(): ListAdapter<CategoryData, CategoryAdapter.CategoryViewHolder>(DiffUtilCallBack()) {
-
+class CategoryAdapter(val context: Context): ListAdapter<CategoryData, CategoryAdapter.CategoryViewHolder>(DiffUtilCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -22,7 +22,10 @@ class CategoryAdapter(): ListAdapter<CategoryData, CategoryAdapter.CategoryViewH
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val data = getItem(position)
+        val bd = holder.binding
 
+        bd.name.text = data.catName
+        Glide.with(context).load(data.catImage).placeholder(R.drawable.person).into(bd.image)
     }
 
 

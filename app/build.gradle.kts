@@ -89,7 +89,11 @@ dependencies {
     kapt ("com.google.dagger:hilt-compiler:2.48")
 
 
+    //quantity
     implementation ("com.github.kojofosu:Quantitizer:1.6.8")
+
+    //load image
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 }
 kapt {

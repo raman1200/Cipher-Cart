@@ -1,8 +1,14 @@
 package com.ecommerce.project.ciphercart.utils
 
+import android.util.Log
 import com.ecommerce.project.ciphercart.model.CategoryData
 import com.ecommerce.project.ciphercart.model.ProductData
-import com.google.android.play.integrity.internal.f
+import com.ecommerce.project.ciphercart.model.SplOfferData
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.CATEGORIES_COLLECTION
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.PRODUCTS_COLLECTION
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.SPL_OFFERS_COLLECTION
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.math.log
 
 class TempData {
     val catList = listOf<CategoryData>(
@@ -30,5 +36,34 @@ class TempData {
         ProductData(17,"Women Printed Viscose Rayon Ethnic Dress ",8,10, listOf("https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Product%2F17%2Fkurta1.png?alt=media&token=6a53b27f-7194-42fe-8678-4df3ef3e2fe7","https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Product%2F17%2Fkurta3.png?alt=media&token=768f8d39-9dab-4bd1-8013-0591baf05bf3"),"Owing to its beautiful mirror work on the neck, the Jaishree Fab Women’s Printed Ethnic Dress exudes an air of elegance and sophistication. Moreover, the intricate mirror work on the neckline is a traditional Indian embroidery technique known as shisha embroidery, which involves attaching small mirrors or reflective pieces onto the fabric to create a dazzling effect. Furthermore, this kurta also has a round neck with a yoke and block print, which adds to its overall charm. Additionally, the print on the borders of this kurta is particularly eye-catching and adds a pop of colour to the outfit. Not to mention, the minimal print on the rest of this kurta gives it a balanced and sophisticated look. Lastly, the two side slits on this kurta make it easy to move around in, while the calf-length design offers a touch of elegance and coverage.",420.0,0.0,4.6,false,false),
 
     )
+
+    val splOfferList = listOf<SplOfferData>(
+        SplOfferData(1, "https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Banner%2FWhatsApp%20Image%202023-12-04%20at%2022.28.18_12e3d830.jpg?alt=media&token=86cb7e2f-b854-412b-aa6e-bdcb2a44d702","5/12/2023","1/1/2024"),
+        SplOfferData(2,"https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Banner%2FWhatsApp%20Image%202023-12-04%20at%2022.28.18_38c7f9de.jpg?alt=media&token=a1d6f760-873a-4862-8ee2-5a8874802887","5/12/2023","1/1/2024"),
+        SplOfferData(3,"https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Banner%2FWhatsApp%20Image%202023-12-04%20at%2022.28.19_1a2a28c7.jpg?alt=media&token=ac7c4c79-9baa-4641-aaff-2e2565cb20f7","5/12/2023","1/1/2024"),
+        SplOfferData(4,"https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Banner%2FWhatsApp%20Image%202023-12-04%20at%2022.28.19_08d3a938.jpg?alt=media&token=c23b6466-6a38-44ed-9b3d-b9e233e1f6db","5/12/2023","1/1/2024"),
+        SplOfferData(5,"https://firebasestorage.googleapis.com/v0/b/cipher-cart.appspot.com/o/Banner%2F1.png?alt=media&token=fef5f729-a40e-474b-bd9a-d7cb1fbff8c6","5/12/2023","1/1/2024")
+    )
+
+    fun uploadCategory(){
+        val fb = FirebaseFirestore.getInstance()
+        for(cat in catList)
+            fb.collection(CATEGORIES_COLLECTION).document().set(cat)
+    }
+    fun uploadProduct(){
+        val fb = FirebaseFirestore.getInstance()
+        for(prod in prodList)
+            fb.collection(PRODUCTS_COLLECTION).document().set(prod)
+    }
+    fun uploadOffer() {
+        val fb = FirebaseFirestore.getInstance()
+        for(offer in splOfferList)
+            fb.collection(SPL_OFFERS_COLLECTION).document().set(offer).addOnCompleteListener {
+                if(it.isSuccessful)
+                    Log.e("TAG", "success")
+                else
+                    Log.e("TAG", it.exception!!.localizedMessage)
+            }
+    }
 
 }
