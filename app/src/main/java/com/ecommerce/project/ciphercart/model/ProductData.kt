@@ -11,7 +11,7 @@ data class ProductData(
     var discount:Double,
     var rating:Double,
     var isVariant:Boolean,
-    var inActive:Boolean
+    var inEmpty:Boolean
 ){
     constructor(): this(0,"",0,0, listOf("image1", "image2"), "", 0.0, 0.0, 0.0, false, false)
 }
