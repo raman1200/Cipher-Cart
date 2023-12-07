@@ -12,7 +12,7 @@ import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.CategoryItemViewBinding
 import com.ecommerce.project.ciphercart.model.CategoryData
 
-class CategoryAdapter(val context: Context): ListAdapter<CategoryData, CategoryAdapter.CategoryViewHolder>(DiffUtilCallBack()) {
+class CategoryAdapter(val context: Context, val onCLick:CategoryItemClick): ListAdapter<CategoryData, CategoryAdapter.CategoryViewHolder>(DiffUtilCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -26,6 +26,11 @@ class CategoryAdapter(val context: Context): ListAdapter<CategoryData, CategoryA
 
         bd.name.text = data.catName
         Glide.with(context).load(data.catImage).placeholder(R.drawable.person).into(bd.image)
+
+        bd.catItem.setOnClickListener {
+            onCLick.onCategoryItemClick(data)
+        }
+
     }
 
 
@@ -40,5 +45,8 @@ class CategoryAdapter(val context: Context): ListAdapter<CategoryData, CategoryA
         override fun areContentsTheSame(oldItem: CategoryData, newItem: CategoryData): Boolean {
             return oldItem == newItem
         }
+    }
+    interface CategoryItemClick {
+        fun onCategoryItemClick(data: CategoryData)
     }
 }

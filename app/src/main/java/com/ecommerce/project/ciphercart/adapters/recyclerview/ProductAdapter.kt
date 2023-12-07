@@ -12,7 +12,7 @@ import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ProductItemViewBinding
 import com.ecommerce.project.ciphercart.model.ProductData
 
-class ProductAdapter(val context: Context): ListAdapter<ProductData, ProductAdapter.ProductViewHolder>(DiffUtilCallBack()) {
+class ProductAdapter(val context: Context, val onClick: OnClick): ListAdapter<ProductData, ProductAdapter.ProductViewHolder>(DiffUtilCallBack()) {
 
     class ProductViewHolder(itemView: View):ViewHolder(itemView){
         val binding = ProductItemViewBinding.bind(itemView)
@@ -31,6 +31,9 @@ class ProductAdapter(val context: Context): ListAdapter<ProductData, ProductAdap
         bind.prodTitle.text = data.prodName
         bind.prodPrice.text = data.price.toString()
         bind.ratingTxt.text = data.rating.toString()
+        bind.prodItem.setOnClickListener {  onClick.onItemClick(data!!) }
+
+
 
     }
 
@@ -43,5 +46,8 @@ class ProductAdapter(val context: Context): ListAdapter<ProductData, ProductAdap
             return oldItem == newItem
         }
 
+    }
+    interface OnClick {
+        fun onItemClick(data: ProductData)
     }
 }

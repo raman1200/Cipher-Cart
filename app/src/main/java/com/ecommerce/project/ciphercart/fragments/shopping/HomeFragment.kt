@@ -1,33 +1,27 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.adapters.recyclerview.CategoryAdapter
 import com.ecommerce.project.ciphercart.adapters.recyclerview.ProductAdapter
 import com.ecommerce.project.ciphercart.databinding.FragmentHomeBinding
-import com.ecommerce.project.ciphercart.model.SplOfferData
+import com.ecommerce.project.ciphercart.model.CategoryData
+import com.ecommerce.project.ciphercart.model.ProductData
 import com.ecommerce.project.ciphercart.resource.Response
-import com.ecommerce.project.ciphercart.utils.Constants
-import com.ecommerce.project.ciphercart.utils.TempData
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
-import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.CategoryItemClick {
 
     lateinit var binding:FragmentHomeBinding
     lateinit var catAdapter:CategoryAdapter
@@ -71,13 +65,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setProdAdapter() {
-        prodAdapter = ProductAdapter(requireContext())
+        prodAdapter = ProductAdapter(requireContext(), this)
         binding.productRecyclerView.adapter = prodAdapter
         binding.productRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     private fun setCatAdapter() {
-        catAdapter = CategoryAdapter(requireContext())
+        catAdapter = CategoryAdapter(requireContext(), this)
         binding.catRecyclerView.adapter = catAdapter
         binding.catRecyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
     }
@@ -86,7 +80,7 @@ class HomeFragment : Fragment() {
         productViewModel.getSplOffer.observe(requireActivity()){
             when(it){
                 is Response.Loading -> {
-                    toast(requireContext(), "Loading Offers")
+//                    toast(requireContext(), "Loading Offers")
                 }
                 is Response.Success -> {
                     for(i in it.data!!)
@@ -101,12 +95,15 @@ class HomeFragment : Fragment() {
         productViewModel.getProductData.observe(requireActivity()){
             when(it){
                 is Response.Loading -> {
-                    toast(requireContext(), "Loading product")
+//                    toast(requireContext(), "Loading product")
+                    binding.prodPb.visibility = View.VISIBLE
                 }
                 is Response.Success -> {
+                    binding.prodPb.visibility = View.GONE
                     prodAdapter.submitList(it.data)
                 }
                 is Response.Error -> {
+                    binding.prodPb.visibility = View.GONE
                     toast(requireContext(), it.message.toString())
                 }
             }
@@ -114,13 +111,15 @@ class HomeFragment : Fragment() {
         productViewModel.getCatData.observe(requireActivity()){
             when(it){
                 is Response.Loading -> {
-                    toast(requireContext(), "Loading Category")
+                    binding.catPb.visibility = View.VISIBLE
+//                    toast(requireContext(), "Loading Category")
                 }
                 is Response.Success -> {
-                    toast(requireContext(), it.data!!.size.toString())
+                    binding.catPb.visibility = View.GONE
                     catAdapter.submitList(it.data)
                 }
                 is Response.Error -> {
+                    binding.catPb.visibility = View.GONE
                     toast(requireContext(), it.message.toString())
                 }
             }
@@ -133,7 +132,7 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_searchActivity)
             }
             productRecyclerView.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_productsViewFragment3)
+                findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment)
             }
             saved.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_savedFragment)
@@ -142,8 +141,18 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
 
             }
-
         }
+    }
+
+    override fun onItemClick(data: ProductData) {
+//        toast(requireContext(), position.toString())
+        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(data)
+        findNavController().navigate(action)
+    }
+
+    override fun onCategoryItemClick(data: CategoryData) {
+        val action = HomeFragmentDirections.actionHomeFragmentToProductsViewFragment(data)
+        findNavController().navigate(action)
     }
 
 }

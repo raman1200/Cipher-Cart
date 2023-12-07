@@ -51,6 +51,8 @@ class FirebaseDb {
     fun getAllProduct() = productCollectionRef.get()
     fun getAllSplOffers() = splOfferCollectionRef.get()
 
+    fun getProductsByCategory(id:Int) = productCollectionRef.whereEqualTo("catId", id).get()
+
     fun logout() = auth.signOut()
 
 

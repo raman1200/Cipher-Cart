@@ -22,4 +22,7 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     fun getAllSplOffers() {
         productRepository.getAllOffers()
     }
+    fun getProductsByCategory(id:Int) {
+        productRepository.getProdutsByCategory(id)
+    }
 }
