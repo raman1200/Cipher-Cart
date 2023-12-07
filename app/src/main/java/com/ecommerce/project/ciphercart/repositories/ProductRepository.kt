@@ -15,6 +15,19 @@ class ProductRepository(private val firebaseDb:FirebaseDb) {
     val prodData = MutableLiveData<Response<List<ProductData>>>()
     val splOffer = MutableLiveData<Response<List<SplOfferData>>>()
 
+    fun getProdutsByCategory(catId:Int) {
+        prodData.postValue(Response.Loading())
+        firebaseDb.getProductsByCategory(catId).addOnCompleteListener {
+            if(it.isSuccessful){
+                val data = it.result.toObjects<ProductData>()
+                prodData.postValue(Response.Success(data))
+            }
+            else{
+                prodData.postValue(Response.Error(it.exception!!.message))
+            }
+        }
+    }
+
     fun getAllCategory() {
         catData.postValue(Response.Loading())
         firebaseDb.getAllCategory().addOnCompleteListener {

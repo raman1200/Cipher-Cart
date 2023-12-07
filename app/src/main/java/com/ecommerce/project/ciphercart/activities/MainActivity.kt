@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 // Hide the BottomNavigationView when navigating to a specific fragment
+                R.id.productsViewFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                R.id.productDetailFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
                 R.id.notificationSettingFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
