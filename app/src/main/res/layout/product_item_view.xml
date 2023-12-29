@@ -24,8 +24,10 @@
             android:id="@+id/prod_image"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:background="@color/grey_300"
             android:src="@drawable/pic"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
             />
     </com.google.android.material.card.MaterialCardView>
 

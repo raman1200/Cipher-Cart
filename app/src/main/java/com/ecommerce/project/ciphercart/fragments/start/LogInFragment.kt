@@ -20,13 +20,17 @@ import com.ecommerce.project.ciphercart.databinding.FragmentLogInBinding
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
+import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
+import com.ecommerce.project.ciphercart.utils.goToMainActivity
+import com.ecommerce.project.ciphercart.utils.hideKeyboard
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.LogInViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,8 +41,7 @@ class LogInFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
 
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
+    lateinit var userDataManager: UserDataManager
 
     private val logInViewModel:LogInViewModel by viewModels()
 
@@ -60,21 +63,25 @@ class LogInFragment : Fragment() {
         return binding.root
     }
 
+
     private fun observe() {
         logInViewModel.logIn.observe(requireActivity()) {
 
             when (it) {
                 is Response.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
                     toast(requireContext(), "loading")
                 }
 
                 is Response.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    userDataManager.saveUserData(it.data)
                     toast(requireContext(), "Success")
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
-                    startActivity(intent)
+                    goToMainActivity(requireActivity())
                 }
 
                 is Response.Error -> {
+                    binding.progressBar.visibility = View.GONE
                     toast(requireContext(), it.message!!)
                 }
             }
@@ -85,8 +92,10 @@ class LogInFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Response.Success -> {
+                    userDataManager.saveUserData(it.data)
                     binding.progressBar.visibility = View.GONE
                     toast(requireContext(), "Success")
+                    goToMainActivity(requireActivity())
                 }
                 is Response.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -96,19 +105,11 @@ class LogInFragment : Fragment() {
         }
     }
 
-
-
-
-
-
-
-
     private fun initialize() {
-        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        googleSignInClient = logInViewModel.getGoogleSignInClient(requireActivity())
 
+        googleSignInClient = logInViewModel.getGoogleSignInClient(requireActivity())
     }
+
     private fun focusListeners() {
         binding.apply {
             etHintTextChange(emailEditText, emailTextInputLayout, "Email")
@@ -117,10 +118,11 @@ class LogInFragment : Fragment() {
     }
 
     private fun clickListeners() {
-
         binding.apply {
+            skip.setOnClickListener {
+                goToMainActivity(requireActivity())
+            }
             signUp.setOnClickListener {
-
                 findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
@@ -133,9 +135,7 @@ class LogInFragment : Fragment() {
                     passwordTextInputLayout.error = "Please enter your password"
                 }
                 else{
-//                    findNavController().navigate(R.id.action_logInFragment_to_mainActivity)
                     logInViewModel.logInbyUser(email, password)
-
                 }
             }
             google1.setOnClickListener {
@@ -143,8 +143,8 @@ class LogInFragment : Fragment() {
                 signInWithGoogle()
             }
             forgetPassword.setOnClickListener {
-                editor.putInt("value", 2)
-                editor.apply()
+//                editor.putInt("value", 2)
+//                editor.apply()
 //                val action = LogInFragmentDirections.action_logInFragment_to_resetPasswordFragment(UserData())
 //                findNavController().navigate(action)
                 findNavController().navigate(R.id.action_logInFragment_to_resetPasswordFragment)

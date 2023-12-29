@@ -68,17 +68,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Raman Verma"
+                    android:text="Guest User"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/black"
-                    android:text="9871609194"
+                    android:text=""
                     android:textSize="15sp"
                     android:textStyle="bold" />
 

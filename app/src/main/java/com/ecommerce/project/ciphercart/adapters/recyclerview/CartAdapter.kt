@@ -15,7 +15,7 @@ class CartAdapter():ListAdapter<CartData,CartAdapter.CartViewHolder>(DiffUtilCal
     }
     class DiffUtilCallBack():DiffUtil.ItemCallback<CartData>() {
         override fun areItemsTheSame(oldItem: CartData, newItem: CartData): Boolean {
-            return oldItem.cartId == newItem.cartId
+            return oldItem.prodId == newItem.prodId
         }
 
         override fun areContentsTheSame(oldItem: CartData, newItem: CartData): Boolean {

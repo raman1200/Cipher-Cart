@@ -1,5 +1,6 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,11 +15,14 @@ import com.ecommerce.project.ciphercart.adapters.recyclerview.ProductAdapter
 import com.ecommerce.project.ciphercart.databinding.FragmentHomeBinding
 import com.ecommerce.project.ciphercart.model.CategoryData
 import com.ecommerce.project.ciphercart.model.ProductData
+import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.CategoryItemClick {
@@ -26,18 +30,15 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
     lateinit var binding:FragmentHomeBinding
     lateinit var catAdapter:CategoryAdapter
     lateinit var prodAdapter:ProductAdapter
-    lateinit var sliderList:MutableList<CarouselItem>
+    @Inject
+    lateinit var userDataManager: UserDataManager
     private val productViewModel:ProductViewModel by viewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
-
-
 
         init()
         clickListeners()
@@ -49,18 +50,18 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
     }
 
     private fun init() {
-        sliderList = mutableListOf<CarouselItem>()
         productViewModel.getAllCategory()
         productViewModel.getAllProduct()
         productViewModel.getAllSplOffers()
         setCatAdapter()
         setProdAdapter()
         setSlider()
-
+        val name = userDataManager.getUsername()
+        if(name!=null)
+            binding.name.text = name
     }
 
     private fun setSlider() {
-
 
     }
 
@@ -83,6 +84,7 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
 //                    toast(requireContext(), "Loading Offers")
                 }
                 is Response.Success -> {
+                    val sliderList = mutableListOf<CarouselItem>()
                     for(i in it.data!!)
                         sliderList.add(CarouselItem(i.img))
                     binding.slider.setData(sliderList)

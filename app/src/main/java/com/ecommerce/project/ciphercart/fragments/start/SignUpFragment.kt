@@ -2,6 +2,7 @@ package com.ecommerce.project.ciphercart.fragments.start
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.os.Bundle
@@ -16,13 +17,17 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.activities.MainActivity
 import com.ecommerce.project.ciphercart.databinding.FragmentSignUpBinding
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.SHARED_PREFERENCES_NAME
+import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.getDialog
+import com.ecommerce.project.ciphercart.utils.goToMainActivity
+import com.ecommerce.project.ciphercart.utils.hideKeyboard
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.RegisterViewModel
@@ -38,16 +43,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
     lateinit var binding:FragmentSignUpBinding
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
-
-    private lateinit var editor:Editor
     lateinit var userData: UserData
     private lateinit var dialog:Dialog
     private lateinit var verifyLayout:LinearLayout
     private lateinit var congratulationLayout:LinearLayout
 
+    @Inject
+    lateinit var userDataManager: UserDataManager
 
     private val registerViewModel: RegisterViewModel by viewModels()
 
@@ -77,8 +79,9 @@ class SignUpFragment : Fragment() {
                 }
 
                 is Response.Success -> {
-                    toast(requireContext(), "Success")
                     dialog.dismiss()
+                    userDataManager.saveUserData(it.data)
+                    goToMainActivity(requireActivity())
                 }
 
                 is Response.Error -> {
@@ -97,7 +100,8 @@ class SignUpFragment : Fragment() {
 
     private fun initialize() {
 //        sharedPreferences = requireContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
+//        editor = sharedPreferences.edit()
+
         userData = UserData()
         dialog = getDialog(requireContext())
         verifyLayout = dialog.findViewById<LinearLayout>(R.id.verify)
@@ -112,6 +116,7 @@ class SignUpFragment : Fragment() {
             etHintTextChange(emailEditText, emailTextInputLayout, "Email")
             etHintTextChange(numberEditText, numberTextInputLayout, "Number")
             etHintTextChange(passwordEditText, passwordTextInputLayout, "Password")
+
         }
     }
 
@@ -159,8 +164,8 @@ class SignUpFragment : Fragment() {
                                             userData.name = name
                                             userData.email = email
                                             userData.number = mobile
-                                            editor.putInt("value", 1)
-                                            editor.apply()
+//                                            editor.putInt("value", 1)
+//                                            editor.apply()
                                             registerViewModel.registerUser(userData, password)
                                         }
                                     }
@@ -168,11 +173,6 @@ class SignUpFragment : Fragment() {
                             }
                         }
                     }
-
-
-//                    val action = SignUpFragmentDirections.actionSignUpFragmentToForgotPasswordFragment(user)
-//                    findNavController().navigate(action)
-
                 }
 
 
@@ -184,6 +184,7 @@ class SignUpFragment : Fragment() {
                 numberTextInputLayout.clearFocus()
                 passwordTextInputLayout.clearFocus()
                 nameTextInputLayout.clearFocus()
+                hideKeyboard(activity, view)
             }
         }
     }

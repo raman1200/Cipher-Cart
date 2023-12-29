@@ -1,6 +1,7 @@
 package com.ecommerce.project.ciphercart.viewmodels
 
 import androidx.lifecycle.ViewModel
+import com.ecommerce.project.ciphercart.model.CartData
 import com.ecommerce.project.ciphercart.repositories.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.asFlow
@@ -12,6 +13,7 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     val getCatData = productRepository.catData
     val getProductData = productRepository.prodData
     val getSplOffer = productRepository.splOffer
+    val getCartData = productRepository.cartData
 
     fun getAllCategory(){
         productRepository.getAllCategory()
@@ -23,6 +25,15 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
         productRepository.getAllOffers()
     }
     fun getProductsByCategory(id:Int) {
-        productRepository.getProdutsByCategory(id)
+        productRepository.getProductsByCategory(id)
+    }
+    fun uploadCartData(data:CartData) {
+        productRepository.uploadCartData(data)
+    }
+    fun getCartData() {
+        productRepository.getCartData()
+    }
+    fun getProductsById(list: List<CartData>) {
+        productRepository.getProductById(list)
     }
 }

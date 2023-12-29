@@ -16,7 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <TextView
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:text="Skip"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
@@ -107,6 +116,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/white"
                 android:padding="2dp"
+                android:textColor="@color/grey_700"
                 android:text="or continue with"
                 android:textSize="16sp"
                 android:textStyle="bold" />

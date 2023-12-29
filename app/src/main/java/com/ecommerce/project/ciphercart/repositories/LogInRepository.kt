@@ -16,13 +16,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import javax.inject.Inject
 
-class LogInRepository(val firebaseDb: FirebaseDb) {
+class LogInRepository @Inject constructor(val firebaseDb: FirebaseDb) {
 
     val logIn = MutableLiveData<Response<UserData>>()
     val newpassword = MutableLiveData<Response<String>>()
     val googleLogin = MutableLiveData<Response<UserData>>()
 
+    fun logout() {
+        firebaseDb.logout()
+    }
+    fun isUserLoggedIn() = firebaseDb.isUserLoggedIn()
 
     fun LogInUser(email: String, password: String) {
         logIn.postValue(Response.Loading())

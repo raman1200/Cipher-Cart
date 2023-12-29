@@ -4,6 +4,8 @@ import android.content.Context
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.repositories.LogInRepository
 import com.ecommerce.project.ciphercart.repositories.RegisterRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +18,7 @@ import dagger.hilt.components.SingletonComponent
 object LogInModule {
 
     @Provides
-    fun provideLogInRepository():LogInRepository{
-        return LogInRepository(FirebaseDb())
+    fun provideLogInRepository(auth: FirebaseAuth, firestore: FirebaseFirestore):LogInRepository{
+        return LogInRepository(FirebaseDb(auth, firestore))
     }
 }

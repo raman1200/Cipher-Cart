@@ -4,14 +4,17 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import android.widget.Toolbar
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.activities.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
@@ -26,6 +29,13 @@ fun etHintTextChange(editText: TextInputEditText, textInputLayout:TextInputLayou
             textInputLayout.hint = hint // Restore the label when not focused
         }
     }
+}
+fun hideKeyboard(activity:Activity?, view: View?) {
+    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view?.windowToken, 0)
+}
+fun goToMainActivity(activity: Activity){
+    activity.startActivity(Intent(activity, MainActivity::class.java))
 }
 fun setUpActionBar(toolbar: Toolbar, requireActivity:Activity) {
     requireActivity.setActionBar(toolbar)

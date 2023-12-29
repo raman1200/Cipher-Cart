@@ -17,8 +17,13 @@ class LogInViewModel @Inject constructor (private val logInRepository: LogInRepo
     val newPassword = logInRepository.newpassword
     val googleLogin = logInRepository.googleLogin
 
-    fun logInbyUser(email: String, password: String) {
 
+    fun logout() {
+        logInRepository.logout()
+    }
+    fun isUserLoggedIn() = logInRepository.isUserLoggedIn()
+
+    fun logInbyUser(email: String, password: String) {
         logInRepository.LogInUser(email, password)
     }
     fun signInWithGoogle(idToken:String) {

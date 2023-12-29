@@ -10,9 +10,10 @@ import com.ecommerce.project.ciphercart.utils.getCurrentDateInLong
 import com.google.firebase.auth.FirebaseUser
 import java.util.Timer
 import java.util.TimerTask
+import javax.inject.Inject
 
 
-class RegisterRepository(val context: Context, val firebaseDb: FirebaseDb) {
+class RegisterRepository @Inject constructor(val context: Context, val firebaseDb: FirebaseDb) {
 
     val register = MutableLiveData<Response<UserData>>()
     val emailVerified = MutableLiveData<Boolean>()

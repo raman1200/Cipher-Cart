@@ -34,8 +34,18 @@ class ProductDetailFragment : Fragment() {
         initQuantityBtn()
         observer()
         setDesc()
+        clickListeners()
 
         return binding.root
+    }
+
+    private fun clickListeners() {
+        binding.apply {
+            cartBtn.setOnClickListener {
+                // upload cartData on fireStore
+
+            }
+        }
     }
 
     private fun setDesc() {
