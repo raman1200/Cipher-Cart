@@ -12,7 +12,8 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
-import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.activities.MainActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -38,9 +39,10 @@ fun goToMainActivity(activity: Activity){
     activity.startActivity(Intent(activity, MainActivity::class.java))
 }
 fun setUpActionBar(toolbar: Toolbar, requireActivity:Activity) {
-    requireActivity.setActionBar(toolbar)
-    requireActivity.actionBar!!.setDisplayHomeAsUpEnabled(true)
-    requireActivity.actionBar!!.setDisplayShowTitleEnabled(false)
+    (requireActivity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+    (requireActivity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowTitleEnabled(false)
+    (requireActivity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     toolbar.setNavigationIcon(R.drawable.back_arrow)
     toolbar.setNavigationOnClickListener {
         requireActivity.onBackPressed()

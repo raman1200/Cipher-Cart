@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.start.PinVerifyFragment">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:text="Verify" />
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.activities.LaunchActivity
 import com.ecommerce.project.ciphercart.databinding.FragmentProfileBinding
@@ -41,11 +42,15 @@ class ProfileFragment : Fragment() {
     private fun initialize() {
         val name = userDataManager.getUsername()
         val number = userDataManager.getMobile()
-        if(name!=null){
+        val image = userDataManager.getProfileImg()
+        if(!name.isNullOrBlank()){
             binding.name.text = name
         }
-        if(number!=null){
+        if(!number.isNullOrBlank()){
             binding.number.text = number
+        }
+        if(!image.isNullOrBlank()){
+            Glide.with(requireContext()).load(image).placeholder(R.drawable.person_profile).into(binding.profileImg)
         }
     }
 

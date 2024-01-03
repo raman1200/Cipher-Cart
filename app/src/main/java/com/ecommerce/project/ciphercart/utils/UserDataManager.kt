@@ -12,6 +12,7 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
         private const val KEY_EMAIL = "email"
         private const val KEY_MOBILE = "mobile"
         private const val KEY_DOB = "dob"
+        private const val KEY_IMG = "profile-img"
     }
     fun clearData() {
         val editor = sharedPreferences.edit()
@@ -23,6 +24,7 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
         editor.putString(KEY_EMAIL, userData?.email)
         editor.putString(KEY_MOBILE, userData?.number)
         editor.putString(KEY_DOB, userData?.dob)
+        editor.putString(KEY_IMG, userData?.image)
         editor.apply()
     }
 
@@ -34,7 +36,7 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
 
     fun getDob() = sharedPreferences.getString(KEY_DOB, null)
 
-
+    fun getProfileImg() = sharedPreferences.getString(KEY_IMG, null)
 
 }
 

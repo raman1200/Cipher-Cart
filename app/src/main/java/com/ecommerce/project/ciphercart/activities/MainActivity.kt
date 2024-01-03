@@ -2,6 +2,8 @@ package com.ecommerce.project.ciphercart.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.Menu
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -40,6 +42,12 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 // Hide the BottomNavigationView when navigating to a specific fragment
+                R.id.addressAddFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+//                R.id.map -> {
+//                    binding.bottomNav.visibility = View.GONE
+//                }
                 R.id.productsViewFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
@@ -80,8 +88,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
     override fun onBackPressed() {
 
         // Get the current destination fragment
@@ -96,5 +102,6 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
 
 }

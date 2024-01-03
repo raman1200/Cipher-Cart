@@ -7,7 +7,7 @@
     android:background="@color/white"
     tools:context=".fragments.start.LogInFragment">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_margin="10dp"
+        android:textColor="@color/grey_800"
         android:text="Skip"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

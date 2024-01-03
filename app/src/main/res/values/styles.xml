@@ -58,7 +58,7 @@
 
     </style>
     
-    <style name="SwitchbButton" >
+    <style name="SwitchbButton" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/grey_800</item>
@@ -67,6 +67,8 @@
         <item name="android:layout_marginEnd">20dp</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+
+
     </style>
     
     <style name="profileText">
@@ -87,4 +89,11 @@
         <item name="android:layout_marginStart">10dp</item>
 
     </style>
+
+    <style name="search_view" parent="Widget.Material3.SearchBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:hint">Search location here</item>
+    </style>
+
 </resources>

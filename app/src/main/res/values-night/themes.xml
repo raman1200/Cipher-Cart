@@ -2,7 +2,25 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CipherCart" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<!--         <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/grey_800</item>
+        <item name="colorSecondary">@color/grey_700</item>
+        <item name="colorSecondaryVariant">@color/grey_600</item>
+
+        <item name="colorError">@color/red</item>
+        <item name="colorOnPrimary">@color/grey_400</item>
+        <item name="colorOnSecondary">@color/grey_300</item>
+        <item name="colorOnBackground">@color/grey_200</item>
+
+        <item name="colorOnError">@color/red</item>
+
+        <item name="colorSurface">#ffffff</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorOnSurfaceVariant">@color/black</item>
+        <item name="colorOutline">@color/grey_500</item>
+
+
+
     </style>
 </resources>

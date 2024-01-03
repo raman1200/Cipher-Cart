@@ -1,14 +1,20 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.getSystemService
+import com.bumptech.glide.Glide
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentEditProfileBinding
 import com.ecommerce.project.ciphercart.model.UserData
@@ -17,6 +23,7 @@ import com.ecommerce.project.ciphercart.utils.etHintTextChange
 import com.ecommerce.project.ciphercart.utils.hideKeyboard
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import dagger.hilt.android.AndroidEntryPoint
+import org.imaginativeworld.whynotimagecarousel.utils.setImage
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -28,7 +35,7 @@ class EditProfileFragment : Fragment() {
     @Inject
     lateinit var userDataManager: UserDataManager
 
-
+    private var getContent: ActivityResultLauncher<Intent>? = null
     private var selectedYear = 0
     private var selectedMonth = 0
     private var selectedDay = 0
@@ -48,19 +55,37 @@ class EditProfileFragment : Fragment() {
         return binding.root
     }
     private fun initialize() {
+        setData()
+       getContent =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val selectedImageUri = result.data?.data
+                    binding.profileImg.setImageURI(selectedImageUri)
+                }
+            }
+
+    }
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        getContent?.launch(galleryIntent)
+    }
+    private fun setData() {
         val name = userDataManager.getUsername()
         val email = userDataManager.getEmail()
         val mobile = userDataManager.getMobile()
         val dob = userDataManager.getDob()
-        if(name!=null)
+        val image = userDataManager.getProfileImg()
+        if(!name.isNullOrBlank())
             binding.nameEditText.setText(name)
-        if(email!=null)
+        if(!email.isNullOrBlank())
             binding.emailEditText.setText(email)
-        if(mobile!=null)
+        if(!mobile.isNullOrBlank())
             binding.numberEditText.setText(mobile)
-        if(dob!=null)
+        if(dob.isNullOrBlank())
             binding.DOBEditText.setText(dob)
-
+        if(!image.isNullOrBlank()){
+             Glide.with(requireContext()).load(image).placeholder(R.drawable.person_profile).into(binding.profileImg)
+        }
     }
 
     private fun clickListeners() {
@@ -71,6 +96,9 @@ class EditProfileFragment : Fragment() {
                 numberEditText.clearFocus()
                 DOBEditText.clearFocus()
                 hideKeyboard(activity, view)
+            }
+            editImg.setOnClickListener {
+                openGallery()
             }
         }
     }

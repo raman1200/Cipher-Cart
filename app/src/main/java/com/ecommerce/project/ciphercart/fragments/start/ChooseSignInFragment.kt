@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentChooseSignInBinding
 import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.goToMainActivity
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.LogInViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -54,7 +55,7 @@ class ChooseSignInFragment : Fragment() {
                 }
                 is Response.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    toast(requireContext(), "Success")
+                    goToMainActivity(requireActivity())
                 }
                 is Response.Error -> {
                     binding.progressBar.visibility = View.GONE

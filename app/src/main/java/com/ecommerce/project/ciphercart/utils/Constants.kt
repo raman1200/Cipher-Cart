@@ -10,6 +10,6 @@ class Constants {
         const val SPL_OFFERS_COLLECTION = "spl-offers"
         const val CART_COLLECTION = "cart"
         const val SHARED_PREFERENCES_NAME = "my_prefs"
-
+        const val GOOGLE_API_KEY = "AIzaSyAjC_rqZ85nWPafs7uvnI47KWqJnszt2UQ"
     }
 }

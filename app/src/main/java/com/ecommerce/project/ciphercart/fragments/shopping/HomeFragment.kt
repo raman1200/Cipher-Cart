@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.adapters.recyclerview.CategoryAdapter
 import com.ecommerce.project.ciphercart.adapters.recyclerview.ProductAdapter
@@ -21,6 +22,7 @@ import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.internal.artificialFrame
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import javax.inject.Inject
 
@@ -57,8 +59,11 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
         setProdAdapter()
         setSlider()
         val name = userDataManager.getUsername()
-        if(name!=null)
+        val image = userDataManager.getProfileImg()
+        if(!name.isNullOrEmpty())
             binding.name.text = name
+       if(!image.isNullOrEmpty())
+           Glide.with(requireContext()).load(image).placeholder(R.drawable.person).into(binding.profileImg)
     }
 
     private fun setSlider() {
