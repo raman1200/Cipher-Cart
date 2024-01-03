@@ -7,12 +7,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.databinding.ProductCartItemBinding
 import com.ecommerce.project.ciphercart.model.CartData
 
 class CartAdapter():ListAdapter<CartData,CartAdapter.CartViewHolder>(DiffUtilCallBack()) {
-    inner class CartViewHolder(itemView:View):ViewHolder(itemView) {
 
+    inner class CartViewHolder(itemView:View):ViewHolder(itemView) {
+        // binding
+        val binding:ProductCartItemBinding
+        init {
+            binding = ProductCartItemBinding.bind(itemView)
+        }
     }
+
     class DiffUtilCallBack():DiffUtil.ItemCallback<CartData>() {
         override fun areItemsTheSame(oldItem: CartData, newItem: CartData): Boolean {
             return oldItem.prodId == newItem.prodId
@@ -30,6 +37,9 @@ class CartAdapter():ListAdapter<CartData,CartAdapter.CartViewHolder>(DiffUtilCal
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val data = getItem(position)
+        // bind the data
+        val bd = holder.binding
+        bd.prodName.text = data.prodName
     }
 
 }

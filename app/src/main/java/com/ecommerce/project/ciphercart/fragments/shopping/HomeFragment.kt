@@ -1,6 +1,5 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,13 +15,11 @@ import com.ecommerce.project.ciphercart.adapters.recyclerview.ProductAdapter
 import com.ecommerce.project.ciphercart.databinding.FragmentHomeBinding
 import com.ecommerce.project.ciphercart.model.CategoryData
 import com.ecommerce.project.ciphercart.model.ProductData
-import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.internal.artificialFrame
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import javax.inject.Inject
 
@@ -152,7 +149,6 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
     }
 
     override fun onItemClick(data: ProductData) {
-//        toast(requireContext(), position.toString())
         val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(data)
         findNavController().navigate(action)
     }
