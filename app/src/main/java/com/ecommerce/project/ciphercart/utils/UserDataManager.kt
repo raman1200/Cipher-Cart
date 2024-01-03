@@ -9,6 +9,7 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
 
     companion object {
         private const val KEY_USERNAME = "username"
+        private const val KEY_UID = "uid"
         private const val KEY_EMAIL = "email"
         private const val KEY_MOBILE = "mobile"
         private const val KEY_DOB = "dob"
@@ -18,9 +19,11 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
         val editor = sharedPreferences.edit()
         editor.clear().apply()
     }
+
     fun saveUserData(userData: UserData?) {
         val editor = sharedPreferences.edit()
         editor.putString(KEY_USERNAME, userData?.name)
+        editor.putString(KEY_UID, userData?.uid)
         editor.putString(KEY_EMAIL, userData?.email)
         editor.putString(KEY_MOBILE, userData?.number)
         editor.putString(KEY_DOB, userData?.dob)
@@ -35,6 +38,8 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
     fun getMobile() = sharedPreferences.getString(KEY_MOBILE, null)
 
     fun getDob() = sharedPreferences.getString(KEY_DOB, null)
+
+    fun getUid() = sharedPreferences.getString(KEY_UID, null)
 
     fun getProfileImg() = sharedPreferences.getString(KEY_IMG, null)
 

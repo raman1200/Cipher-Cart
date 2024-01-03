@@ -6,28 +6,30 @@ import com.ecommerce.project.ciphercart.model.CartData
 import com.ecommerce.project.ciphercart.model.CategoryData
 import com.ecommerce.project.ciphercart.model.ProductData
 import com.ecommerce.project.ciphercart.model.SplOfferData
+import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
+import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import javax.inject.Inject
 
-class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb) {
+class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , private val userDataManager: UserDataManager ) {
 
     val catData = MutableLiveData<Response<List<CategoryData>>>()
     val prodData = MutableLiveData<Response<List<ProductData>>>()
     val splOffer = MutableLiveData<Response<List<SplOfferData>>>()
     val cartData = MutableLiveData<Response<List<CartData>>>()
 
-    val uid =""        // get uid from sharedPref
+    val uid = userDataManager.getUid()        // get uid from sharedPref
 
     fun uploadCartData(data: CartData) {
-        firebaseDb.uploadCartData(data, uid)
+        firebaseDb.uploadCartData(data, uid!!)
     }
 
     fun getCartData(){
 
         cartData.postValue(Response.Loading())
-        firebaseDb.getCartData(uid).addOnCompleteListener {
+        firebaseDb.getCartData(uid!!).addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<CartData>()
                 cartData.postValue(Response.Success(data))
@@ -37,6 +39,8 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb) {
             }
         }
     }
+
+
     fun getProductById(list: List<CartData>) {
         prodData.postValue(Response.Loading())
         val prodList = mutableListOf<ProductData>()

@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide.init
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.activities.MainActivity
 import com.ecommerce.project.ciphercart.databinding.FragmentProductDetailBinding
 import com.ecommerce.project.ciphercart.model.ProductData
 import com.ecommerce.project.ciphercart.utils.Constants
@@ -29,24 +31,19 @@ class ProductDetailFragment : Fragment() {
         binding = FragmentProductDetailBinding.inflate(layoutInflater, container, false)
 
         setUpActionBar(binding.toolbar, requireActivity())
+
+
         init()
+        clickListeners()
         getData()
         initQuantityBtn()
         observer()
         setDesc()
-        clickListeners()
+
 
         return binding.root
     }
 
-    private fun clickListeners() {
-        binding.apply {
-            cartBtn.setOnClickListener {
-                // upload cartData on fireStore
-
-            }
-        }
-    }
 
     private fun setDesc() {
         var showMore = false
@@ -66,6 +63,16 @@ class ProductDetailFragment : Fragment() {
 
         }
     }
+
+    private fun clickListeners() {
+        binding.apply {
+            cartBtn.setOnClickListener {
+//                findNavController().navigate(R.id.action_productDetailFragment_to_myCartFragment)
+            }
+
+            }
+        }
+
 
     private fun init() {
         prodData = ProductData()
@@ -100,7 +107,6 @@ class ProductDetailFragment : Fragment() {
         binding.prodName.text  = data.prodName
         binding.desc.text = data.prodDesc
         binding.prodPrice.text = RUPEES_SYMBOL + data.price.toString()
-
         binding.totalPrice.text = RUPEES_SYMBOL + data.price.toString()
 
         val sliderList = mutableListOf<CarouselItem>()
