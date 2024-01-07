@@ -76,7 +76,7 @@ class LogInFragment : Fragment() {
                 is Response.Success -> {
                     binding.progressBar.visibility = View.GONE
                     userDataManager.saveUserData(it.data)
-                    toast(requireContext(), "Success")
+                    toast(requireContext(), "Success ")
                     goToMainActivity(requireActivity())
                 }
 

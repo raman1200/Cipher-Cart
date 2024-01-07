@@ -14,6 +14,8 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     val getProductData = productRepository.prodData
     val getSplOffer = productRepository.splOffer
     val getCartData = productRepository.cartData
+    val uploaded = productRepository.uploaded
+    val deleted = productRepository.deleted
 
     fun getAllCategory(){
         productRepository.getAllCategory()
@@ -36,4 +38,9 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     fun getProductsById(list: List<CartData>) {
         productRepository.getProductById(list)
     }
+
+    fun deleteCartData(id:String) {
+        productRepository.deleteCartData(id)
+    }
+
 }

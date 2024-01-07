@@ -16,10 +16,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:weightSum="2"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center">
@@ -38,22 +39,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_weight="2"
                 android:gravity="center_vertical">
 
-
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="5dp"/>
+                    >
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Home"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="5dp"/>
+
+                    <TextView
+                        android:id="@+id/deft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Default"
+                        android:visibility="gone"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:background="@drawable/edit_bg"
+                        android:textSize="12sp"
+                        android:backgroundTint="@color/grey_200"
+                        android:textColor="@color/grey_700"
+                        android:layout_marginStart="15dp"/>
+
+
+
+                </LinearLayout>
+
 
                 <TextView
+                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="61480 sunbrook park, PC 5679"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:textSize="14sp"
                     android:textColor="@color/grey_800"
                     android:layout_marginTop="5dp"
@@ -62,18 +93,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
                 android:orientation="vertical"
-                android:gravity="center_vertical" >
+                android:gravity="center"
+                 >
 
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/location"/>
+                    android:id="@+id/edit"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:src="@drawable/pencil"
+                    app:tint="@color/black" />
 
             </LinearLayout>
 

@@ -30,16 +30,18 @@
                 android:id="@+id/prod_image"
                 android:layout_width="120dp"
                 android:layout_height="130dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
+                android:paddingTop="5dp"
                 android:src="@drawable/pic"/>
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_weight="2"
             android:layout_width="0dp"
+
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
 
@@ -47,20 +49,27 @@
                 android:id="@+id/prod_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:layout_marginEnd="5dp"
                 android:text="Leather Bag"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/delete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--        <ImageView-->
-            <!--            android:id="@+id/delete"-->
-            <!--            android:layout_width="24dp"-->
-            <!--            android:layout_height="24dp"-->
-            <!--            android:src="@drawable/delete"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintTop_toTopOf="parent" />-->
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        android:background="@drawable/ripple_bg_grey"
+                        android:src="@drawable/delete"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/grey_800" />
 
             <TextView
                 android:id="@+id/color"
@@ -116,7 +125,6 @@
                 android:id="@+id/price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="₹ 500"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -128,11 +136,10 @@
                 android:id="@+id/h_q"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="@color/grey_500"
+                android:background="@drawable/btn_grad"
+                android:backgroundTint="@color/grey_200"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

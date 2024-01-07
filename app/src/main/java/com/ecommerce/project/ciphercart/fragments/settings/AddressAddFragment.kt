@@ -1,36 +1,26 @@
 package com.ecommerce.project.ciphercart.fragments.settings
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
+import androidx.fragment.app.viewModels
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentAddressAddBinding
-import com.ecommerce.project.ciphercart.utils.Constants
+import com.ecommerce.project.ciphercart.model.AddressData
 import com.ecommerce.project.ciphercart.utils.hideKeyboard
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
+import com.ecommerce.project.ciphercart.viewmodels.UserViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -43,17 +33,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.AutocompletePrediction
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.IOException
 import java.util.Locale
 
-
+@AndroidEntryPoint
 class AddressAddFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding:FragmentAddressAddBinding
@@ -61,7 +49,9 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
     private var centerMarker: Marker? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
-    private lateinit var placesClient: PlacesClient
+    private lateinit var geocoder:Geocoder
+    private val userViewModel:UserViewModel by viewModels()
+//    private lateinit var placesClient: PlacesClient
 
 
 
@@ -102,65 +92,129 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
         initialize()
         setUpActionBar(binding.toolbar, requireActivity())
         search()
+        clickListeners()
         focusListeners()
         bottomSheetSetup()
 
         return binding.root
     }
 
-    private fun search() {
-
-        // Initialize Places SDK
-        Places.initialize(requireContext(), "AIzaSyA2bBjAntKMPc4yF58Y5tWtC-0-Q9P_dw4")
-        placesClient = Places.createClient(requireContext())
-
-
-        binding.catSearchView.editText.doOnTextChanged { text, start, before, count ->
-            if(!text.isNullOrBlank()){
-                showSuggestions(text.toString())
-            }
-            else{
-                binding.listView.visibility = ListView.GONE
+    private fun clickListeners() {
+        binding.apply {
+            btn.setOnClickListener {
+                saveAddress()
             }
         }
     }
 
+    private fun saveAddress() {
+        binding.apply {
+            val nameAddress = nameAddress.text.toString()
+            val address = addressDetails.text.toString()
+            val defaultAddress = checkbox.isChecked
+            if(nameAddress.isEmpty()){
+                this.nameAddress.error = "Please Enter the Name Address"
+            }
+            else if(address.isEmpty()){
+                this.addressDetails.error = "Please Enter the Address"
+            }
+            else {
+                val addressData = AddressData(nameAddress = nameAddress, address = address, defaultAddress = defaultAddress)
+                // store data in firebase
+                userViewModel.addUserAddress(addressData)
+            }
+        }
+    }
+
+    private fun search() {
+
+        // Initialize Places SDK
+//        Places.initialize(requireContext(), "AIzaSyA2bBjAntKMPc4yF58Y5tWtC-0-Q9P_dw4")
+//        placesClient = Places.createClient(requireContext())
+//
+        binding.apply {
+            catSearchView.editText.setOnEditorActionListener { textView, i, keyEvent ->
+                loader.visibility = View.VISIBLE
+                val query = catSearchView.text.toString()
+                if(query.isNotEmpty()){
+                    setMarkerFromAddress(query)
+                }
+
+                return@setOnEditorActionListener false
+            }
+        }
+
+
+    }
+
+    private fun setMarkerFromAddress(address: String) {
+
+
+        try {
+            val addressList = geocoder.getFromLocationName(address, 1)
+            if(!addressList.isNullOrEmpty()){
+                val latLng = LatLng(addressList[0].latitude, addressList[0].longitude)
+                centerMarker?.position = latLng
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18f))
+                binding.apply {
+                    loader.visibility = View.GONE
+                    catSearchView.hide()
+                }
+
+            }
+        }catch (e:IOException){
+            toast(requireContext(), e.localizedMessage)
+            binding.apply {
+                loader.visibility = View.GONE
+                catSearchView.hide()
+            }
+            e.printStackTrace()
+
+        }
+
+
+
+
+    }
+
     private fun showSuggestions(query:String) {
-        val autocompleteRequest = FindAutocompletePredictionsRequest.builder()
-            .setTypeFilter(TypeFilter.ADDRESS)
-            .setSessionToken(AutocompleteSessionToken.newInstance())
-            .setQuery(query)
-            .build()
-
-        placesClient.findAutocompletePredictions(autocompleteRequest)
-            .addOnSuccessListener { response ->
-                val suggestions = response.autocompletePredictions
-                    .map { prediction -> prediction.getFullText(null).toString() }
-
-                toast(requireContext(), suggestions.size.toString())
-                val adapter = binding.listView.adapter as ArrayAdapter<String>
-                adapter.clear()
-                adapter.addAll(suggestions)
-                adapter.notifyDataSetChanged()
-
-                binding.listView.visibility = ListView.VISIBLE
-            }
-            .addOnFailureListener { exception ->
-                // Handle errors
-                toast(requireContext(), exception.localizedMessage)
-                binding.listView.visibility = ListView.GONE
-            }
+//        val autocompleteRequest = FindAutocompletePredictionsRequest.builder()
+//            .setTypeFilter(TypeFilter.ADDRESS)
+//            .setSessionToken(AutocompleteSessionToken.newInstance())
+//            .setQuery(query)
+//            .build()
+//
+//        placesClient.findAutocompletePredictions(autocompleteRequest)
+//            .addOnSuccessListener { response ->
+//                val suggestions = response.autocompletePredictions
+//                    .map { prediction -> prediction.getFullText(null).toString() }
+//
+//                toast(requireContext(), suggestions.size.toString())
+//                val adapter = binding.listView.adapter as ArrayAdapter<String>
+//                adapter.clear()
+//                adapter.addAll(suggestions)
+//                adapter.notifyDataSetChanged()
+//
+//                binding.listView.visibility = ListView.VISIBLE
+//            }
+//            .addOnFailureListener { exception ->
+//                // Handle errors
+//                toast(requireContext(), exception.localizedMessage)
+//                binding.listView.visibility = ListView.GONE
+//            }
     }
 
     private fun initialize() {
+        geocoder = Geocoder(requireContext(), Locale.getDefault())
+
         // Set up the ListView adapter
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
-        binding.listView.adapter = adapter
+//        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
+//        binding.listView.adapter = adapter
 
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
 
 
     }
@@ -212,7 +266,7 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
                }
 
                override fun onMarkerDragEnd(p0: Marker) {
-                   val address = getAddressFromLatLng(requireContext(),p0.position.latitude,p0.position.longitude)
+                   val address = getAddressFromLatLng(p0.position.latitude,p0.position.longitude)
                    binding.addressDetails.setText(address)
                }
 
@@ -237,7 +291,7 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
                         centerMarker?.position = currentLatLng
 //                        mMap.addMarker(MarkerOptions().position(currentLatLng).title("Address").draggable(true))
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18f))
-                        val address = getAddressFromLatLng(requireContext(), it.latitude, it.longitude)
+                        val address = getAddressFromLatLng(it.latitude, it.longitude)
                         binding.addressDetails.setText(address)
                         binding.pbLoader.visibility = View.GONE
                     }
@@ -255,7 +309,7 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
             // Set up map idle listener
             mMap.setOnCameraIdleListener {
                 // Get the address of the center of the screen
-                val address = getAddressFromLatLng(requireContext(),centerMarker?.position!!.latitude, centerMarker?.position!!.longitude)
+                val address = getAddressFromLatLng(centerMarker?.position!!.latitude, centerMarker?.position!!.longitude)
                 binding.addressDetails.setText(address)
                 binding.pbLoader.visibility = View.GONE
             }
@@ -282,26 +336,31 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
         // Create a BitmapDescriptor from the resized bitmap
         return BitmapDescriptorFactory.fromBitmap(scaledBitmap)
     }
-    private fun getAddressFromLatLng(context: Context, latitude: Double, longitude: Double): String {
+    private fun getAddressFromLatLng(latitude: Double, longitude: Double): String {
         binding.pbLoader.visibility = View.VISIBLE
-        val geocoder = Geocoder(context, Locale.getDefault())
+
         var addressText = ""
 
         try {
-            val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
+            runBlocking {
+                launch(Dispatchers.IO) {
+                    val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
 
-            if (!addresses.isNullOrEmpty()) {
-                val address: Address = addresses[0]
-                val addressParts = mutableListOf<String>()
+                    if (!addresses.isNullOrEmpty()) {
+                        val address: Address = addresses[0]
+                        val addressParts = mutableListOf<String>()
 
-                // Fetch the address lines using getAddressLine,
-                // join them, and separate with commas
-                for (i in 0..address.maxAddressLineIndex) {
-                    addressParts.add(address.getAddressLine(i))
+                        // Fetch the address lines using getAddressLine,
+                        // join them, and separate with commas
+                        for (i in 0..address.maxAddressLineIndex) {
+                            addressParts.add(address.getAddressLine(i))
+                        }
+
+                        addressText = addressParts.joinToString(separator = ", ")
+                    }
                 }
+            }.onJoin
 
-                addressText = addressParts.joinToString(separator = ", ")
-            }
         } catch (e: IOException) {
             toast(requireContext(), e.localizedMessage)
             e.printStackTrace()

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.repositories.ProductRepository
+import com.ecommerce.project.ciphercart.repositories.UserRepository
 import com.ecommerce.project.ciphercart.utils.Constants
 import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.google.firebase.auth.FirebaseAuth
@@ -45,6 +46,14 @@ object BasicModule {
     fun provideProductRepository(firebaseDb:FirebaseDb , userDataManager: UserDataManager): ProductRepository {
         return ProductRepository(firebaseDb, userDataManager)
     }
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(firebaseDb:FirebaseDb , userDataManager: UserDataManager): UserRepository {
+        return UserRepository(firebaseDb, userDataManager)
+    }
+
+
 
 
     @Singleton

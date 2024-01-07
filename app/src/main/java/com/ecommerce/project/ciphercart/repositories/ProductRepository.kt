@@ -19,11 +19,39 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
     val prodData = MutableLiveData<Response<List<ProductData>>>()
     val splOffer = MutableLiveData<Response<List<SplOfferData>>>()
     val cartData = MutableLiveData<Response<List<CartData>>>()
+    val uploaded = MutableLiveData<Response<String>>()
+    val deleted = MutableLiveData<Response<String>>()
+
 
     val uid = userDataManager.getUid()        // get uid from sharedPref
 
+
+    fun deleteCartData(id:String) {
+        uid?.let {uid ->
+            deleted.postValue(Response.Loading())
+            firebaseDb.deleteCartData(id, uid).addOnCompleteListener {
+                if(it.isSuccessful){
+                    deleted.postValue(Response.Success("Deleted"))
+                }
+                else{
+                    deleted.postValue(Response.Error(it.exception?.localizedMessage))
+                }
+            }
+        }
+
+    }
+
+
     fun uploadCartData(data: CartData) {
-        firebaseDb.uploadCartData(data, uid!!)
+        uploaded.postValue(Response.Loading())
+        firebaseDb.uploadCartData(data, uid!!).addOnCompleteListener {
+            if(it.isSuccessful) {
+                uploaded.postValue(Response.Success(data.prodId))
+            }
+            else{
+                uploaded.postValue(Response.Error(it.exception?.localizedMessage))
+            }
+        }
     }
 
     fun getCartData(){
