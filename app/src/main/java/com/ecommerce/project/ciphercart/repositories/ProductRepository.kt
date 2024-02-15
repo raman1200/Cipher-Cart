@@ -15,22 +15,43 @@ import javax.inject.Inject
 
 class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , private val userDataManager: UserDataManager ) {
 
-    val catData = MutableLiveData<Response<List<CategoryData>>>()
-    val prodData = MutableLiveData<Response<List<ProductData>>>()
-    val splOffer = MutableLiveData<Response<List<SplOfferData>>>()
-    val cartData = MutableLiveData<Response<List<CartData>>>()
+    val catDataList = MutableLiveData<Response<List<CategoryData>>>()
+    val prodDataList = MutableLiveData<Response<List<ProductData>>>()
+    val splOfferList = MutableLiveData<Response<List<SplOfferData>>>()
+    val cartDataList = MutableLiveData<Response<List<CartData>>>()
     val uploaded = MutableLiveData<Response<String>>()
     val deleted = MutableLiveData<Response<String>>()
+    val prodData = MutableLiveData<Response<ProductData>>()
 
 
     val uid = userDataManager.getUid()        // get uid from sharedPref
 
+
+    fun isAddedOnCart(id:String) : Boolean {
+        var bool = false
+        uid?.let {
+
+            firebaseDb.isAddedOnCart(id, uid).addOnCompleteListener {
+                if(it.isSuccessful){
+                    val data = it.result.toObjects<CartData>()
+                    if(!data.isEmpty())
+                        bool = true
+                }
+                else{
+                    bool = false
+                }
+            }
+
+        }
+        return bool
+    }
 
     fun deleteCartData(id:String) {
         uid?.let {uid ->
             deleted.postValue(Response.Loading())
             firebaseDb.deleteCartData(id, uid).addOnCompleteListener {
                 if(it.isSuccessful){
+                    userDataManager.deleteCartId(id)
                     deleted.postValue(Response.Success("Deleted"))
                 }
                 else{
@@ -56,85 +77,107 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
 
     fun getCartData(){
 
-        cartData.postValue(Response.Loading())
+        cartDataList.postValue(Response.Loading())
         firebaseDb.getCartData(uid!!).addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<CartData>()
-                cartData.postValue(Response.Success(data))
+                cartDataList.postValue(Response.Success(data))
             }
             else{
-                cartData.postValue(Response.Error(it.exception!!.message))
+                cartDataList.postValue(Response.Error(it.exception!!.message))
             }
         }
     }
-
-
-    fun getProductById(list: List<CartData>) {
+    fun getProductById(prodId:String) {
         prodData.postValue(Response.Loading())
-        val prodList = mutableListOf<ProductData>()
-        list.forEach {cartData ->
-            firebaseDb.getProductsById(cartData.prodId).addOnCompleteListener {
-                if(it.isSuccessful){
-                    val data = it.result.toObject<ProductData>()
-                    prodList.add(data!!)
-                }
-               else {
-                    prodData.postValue(Response.Error(it.exception!!.message))
-                }
+        firebaseDb.getProductById(prodId).addOnCompleteListener {
+            if(it.isSuccessful){
+                val data = it.result.toObject<ProductData>()
+                prodData.postValue(Response.Success(data))
+            }
+            else {
+                prodData.postValue(Response.Error(it.exception!!.message))
             }
         }
-        prodData.postValue(Response.Success(prodList))
-
-
     }
+
+//
+//    fun getProductByIds(list: List<CartData>) {
+//        prodDataList.postValue(Response.Loading())
+//        val prodList = mutableListOf<ProductData>()
+//        list.forEach {cartData ->
+//            firebaseDb.getProductById(cartData.prodId).addOnCompleteListener {
+//                if(it.isSuccessful){
+//                    val data = it.result.toObject<ProductData>()
+//                    prodList.add(data!!)
+//                }
+//               else {
+//                    prodDataList.postValue(Response.Error(it.exception!!.message))
+//                }
+//            }
+//        }
+//        prodDataList.postValue(Response.Success(prodList))
+//
+//
+//    }
 
     fun getProductsByCategory(catId:Int) {
-        prodData.postValue(Response.Loading())
+        prodDataList.postValue(Response.Loading())
         firebaseDb.getProductsByCategory(catId).addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<ProductData>()
-                prodData.postValue(Response.Success(data))
+                prodDataList.postValue(Response.Success(data))
             }
             else{
-                prodData.postValue(Response.Error(it.exception!!.message))
+                prodDataList.postValue(Response.Error(it.exception!!.message))
             }
         }
     }
 
     fun getAllCategory() {
-        catData.postValue(Response.Loading())
+        catDataList.postValue(Response.Loading())
         firebaseDb.getAllCategory().addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<CategoryData>()
-                catData.postValue(Response.Success(data))
+                catDataList.postValue(Response.Success(data))
             }
             else{
-                catData.postValue(Response.Error(it.exception!!.message))
+                catDataList.postValue(Response.Error(it.exception!!.message))
             }
         }
     }
     fun getAllProduct() {
-        prodData.postValue(Response.Loading())
+        prodDataList.postValue(Response.Loading())
         firebaseDb.getAllProduct().addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<ProductData>()
-                prodData.postValue(Response.Success(data))
+                prodDataList.postValue(Response.Success(data))
             }
             else{
-                prodData.postValue(Response.Error(it.exception!!.message))
+                prodDataList.postValue(Response.Error(it.exception!!.message))
             }
         }
     }
     fun getAllOffers() {
-        splOffer.postValue(Response.Loading())
+        splOfferList.postValue(Response.Loading())
         firebaseDb.getAllSplOffers().addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<SplOfferData>()
-                splOffer.postValue(Response.Success(data))
+                splOfferList.postValue(Response.Success(data))
             }
             else{
-                splOffer.postValue(Response.Error(it.exception!!.message))
+                splOfferList.postValue(Response.Error(it.exception!!.message))
             }
         }
+    }
+
+    suspend fun updateCartData(list:List<CartData>){
+        list.forEach{
+            uid?.let { uid ->
+                firebaseDb.updateCartData(it,uid)
+            }
+
+        }
+
     }
 }

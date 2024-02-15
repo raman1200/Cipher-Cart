@@ -51,7 +51,7 @@ class FirebaseDb @Inject constructor(
 
     fun getProductsByCategory(id:Int) = productCollectionRef.whereEqualTo("catId", id).get()
 
-    fun getProductsById(prodId:String) = productCollectionRef.document(prodId).get()
+    fun getProductById(prodId:String) = productCollectionRef.document(prodId).get()
 
 
 
@@ -63,6 +63,11 @@ class FirebaseDb @Inject constructor(
     fun deleteCartData(id:String, uid: String) = usersCollectionRef.document(uid).collection(
         CART_COLLECTION).document(id).delete()
 
+    fun isAddedOnCart(id:String, uid: String) = usersCollectionRef.document(uid).collection(
+        CART_COLLECTION).whereEqualTo("prodId",id).get()
+
+    suspend fun updateCartData(cartData:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(cartData.prodId).set(cartData)
+
     // address
     fun addUserAddress(data:AddressData, uid:String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).document(data.id).set(data)
 
@@ -70,6 +75,7 @@ class FirebaseDb @Inject constructor(
 
     // logout
     fun logout() = auth.signOut()
+
 
 
 }

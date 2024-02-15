@@ -14,6 +14,7 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
         private const val KEY_MOBILE = "mobile"
         private const val KEY_DOB = "dob"
         private const val KEY_IMG = "profile-img"
+        private const val KEY_CART_IDS = "cart-prod_ids"
     }
     fun clearData() {
         val editor = sharedPreferences.edit()
@@ -43,5 +44,67 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
 
     fun getProfileImg() = sharedPreferences.getString(KEY_IMG, null)
 
+
+//    fun addCartId(id:String) {
+//        val currentIds = getCartIds()
+//        currentIds?.let {
+//            currentIds.add(id)
+//            saveCartIds(currentIds)
+//        }
+//    }
+//
+//    fun isAddedOnCart(id: String):Boolean {
+//        val ids = getCartIds()
+//        ids?.let {
+//            return ids.contains(id)
+//        }
+//        return false
+//    }
+//    fun deleteCartId(id: String) {
+//        val currentIds = getCartIds()?.toMutableSet() // Convert to mutable set
+//        currentIds?.remove(id) // Remove the specified id
+//        if (currentIds != null) {
+//            saveCartIds(currentIds)
+//        } // Save the modified set back to SharedPreferences
+//    }
+//
+//
+//    private fun saveCartIds(ids:Set<String>) {
+//        val editor = sharedPreferences.edit()
+//        editor.putStringSet(KEY_CART_IDS, ids)
+//        editor.commit()
+//    }
+//    fun getCartIds() = sharedPreferences.getStringSet(KEY_CART_IDS, setOf())
+
+    fun addCartId(id: String) {
+        val currentIds = getCartIds().toMutableSet()
+        currentIds.add(id)
+        saveCartIds(currentIds)
+    }
+
+    // Function to check if an ID is added to the cart
+    fun isAddedOnCart(id: String): Boolean {
+        val ids = getCartIds()
+        return ids.contains(id)
+    }
+
+    // Function to remove an ID from the cart
+    fun deleteCartId(id: String) {
+        val currentIds = getCartIds().toMutableSet()
+        currentIds.remove(id)
+        saveCartIds(currentIds)
+    }
+
+    // Function to save the cart IDs to SharedPreferences
+    private fun saveCartIds(ids: Set<String>) {
+        val editor = sharedPreferences.edit()
+        editor.putStringSet(KEY_CART_IDS, ids)
+        editor.apply()
+    }
+
+    // Function to retrieve the cart IDs from SharedPreferences
+    fun getCartIds(): Set<String> {
+        return sharedPreferences.getStringSet(KEY_CART_IDS, setOf()) ?: setOf()
+    }
 }
 

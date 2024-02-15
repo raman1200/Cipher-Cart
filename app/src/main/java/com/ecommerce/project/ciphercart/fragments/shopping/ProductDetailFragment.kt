@@ -1,5 +1,6 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentProductDetailBinding
 import com.ecommerce.project.ciphercart.model.CartData
 import com.ecommerce.project.ciphercart.model.ProductData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.RUPEES_SYMBOL
+import com.ecommerce.project.ciphercart.utils.UserDataManager
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
@@ -20,14 +23,19 @@ import com.mcdev.quantitizerlibrary.AnimationStyle
 import com.mcdev.quantitizerlibrary.QuantitizerListener
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
 
     lateinit var binding:FragmentProductDetailBinding
     private val productViewModel: ProductViewModel by viewModels()
-    lateinit var prodData: ProductData
+    var prodData : ProductData? = null
+    var cart:CartData? = null
     lateinit var cartData: CartData
+
+    @Inject
+    lateinit var userDataManager: UserDataManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,27 +48,46 @@ class ProductDetailFragment : Fragment() {
 
         init()
         clickListeners()
-        getData()
-        initQuantityBtn()
-        observer()
         liveData()
+        getData()
         setDesc()
-
+        setBtn()
+        observer()
 
         return binding.root
     }
 
+    private fun setBtn(text:String="Already Added") {
+        val prodId = if(prodData!=null){
+            prodData!!.prodId
+        }else{
+            cart!!.prodId
+        }
+
+
+
+        val value = userDataManager.isAddedOnCart(prodId)
+        if(value){
+            binding.apply {
+                cartBtn.isEnabled = false
+                cartBtn.text = text
+                cartBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.grey_300))
+                cartBtn.setIconTintResource(R.color.grey_800)
+                cartBtn.setTextColor(resources.getColor(R.color.grey_800))
+            }
+        }
+
+    }
+
     private fun liveData() {
+
         productViewModel.uploaded.observe(requireActivity()){
             when(it){
                 is Response.Loading -> {
 //                    toast(requireContext(), "uploading cart data...")
                 }
                 is Response.Success -> {
-//                    if(prodData.prodId == it.data){
-//                        toast(requireContext(), "Added")
-//
-//                    }
+
 
                 }
                 is Response.Error -> {
@@ -95,18 +122,55 @@ class ProductDetailFragment : Fragment() {
     private fun clickListeners() {
         binding.apply {
             cartBtn.setOnClickListener {
-                cartData = CartData(prodId = prodData.prodId, quantity = hQ.value, prodName = prodData.prodName, prodImage = prodData.images[0], price = prodData.price)
+                prodData?.let {prodData ->
+                    cartData = CartData(prodId = prodData.prodId, quantity = hQ.value, prodName = prodData.prodName, prodImage = prodData.images[0], price = prodData.price)
+                    productViewModel.uploadCartData(data = cartData)
+                    userDataManager.addCartId(prodData.prodId)
+                    setBtn("Added in Cart")
+                }
 
-                productViewModel.uploadCartData(data = cartData)
             }
         }
     }
 
     private fun init() {
-        prodData = ProductData()
+        initQuantityBtn()
     }
 
     private fun observer() {
+
+        productViewModel.prodData.observe(requireActivity()) {
+
+            when(it) {
+                is Response.Loading -> {
+                    binding.pbLoader.visibility = View.VISIBLE
+                    binding.details.visibility = View.INVISIBLE
+                    binding.constraintLayout.visibility = View.INVISIBLE
+
+
+                }
+                is Response.Success -> {
+                    binding.pbLoader.visibility = View.GONE
+                    binding.details.visibility = View.VISIBLE
+                    binding.constraintLayout.visibility = View.VISIBLE
+                    it.data?.let {data ->
+                        setData(data)
+                    }
+
+                }
+                is Response.Error -> {
+                    binding.pbLoader.visibility = View.GONE
+                    binding.details.visibility = View.INVISIBLE
+                    binding.constraintLayout.visibility = View.INVISIBLE
+                    toast(requireContext(),it.message.toString())
+                }
+
+            }
+
+        }
+
+
+
         binding.hQ.setQuantitizerListener(object : QuantitizerListener {
             override fun onDecrease() {
 
@@ -117,7 +181,8 @@ class ProductDetailFragment : Fragment() {
             }
 
             override fun onValueChanged(value: Int) {
-                binding.totalPrice.text = RUPEES_SYMBOL + (value*(prodData.price)).toString()
+                val price = prodData?.price ?:cart?.price
+                binding.totalPrice.text = RUPEES_SYMBOL + (value*(price!!)).toString()
             }
 
         })
@@ -125,17 +190,30 @@ class ProductDetailFragment : Fragment() {
 
     private fun getData() {
         val safeArgs:ProductDetailFragmentArgs by navArgs()
-        prodData = safeArgs.ProductData
+        prodData = safeArgs.productData
+        cart = safeArgs.cartData
 
-        setData(prodData)
+        cart?.let {
+            productViewModel.getProductById(it.prodId)
+            binding.hQ.value = it.quantity
+        }
+
+
+        prodData?.let { setData(it) }
+
+
     }
+
+
 
     private fun setData(data: ProductData) {
 
-        binding.prodName.text  = data.prodName
-        binding.desc.text = data.prodDesc
-        binding.prodPrice.text = RUPEES_SYMBOL + data.price.toString()
-        binding.totalPrice.text = RUPEES_SYMBOL + data.price.toString()
+        binding.apply {
+            prodName.text  = data.prodName
+            desc.text = data.prodDesc
+            totalPrice.text = RUPEES_SYMBOL + (hQ.value*(data.price!!)).toString()
+            prodPrice.text = RUPEES_SYMBOL + data.price.toString()
+        }
 
         val sliderList = mutableListOf<CarouselItem>()
         for(img in data.images)
@@ -153,9 +231,6 @@ class ProductDetailFragment : Fragment() {
         b.hQ.buttonAnimationEnabled = false
         b.hQ.textAnimationStyle = AnimationStyle.FALL_IN
     }
-
-
-
-    }
+}
 
 

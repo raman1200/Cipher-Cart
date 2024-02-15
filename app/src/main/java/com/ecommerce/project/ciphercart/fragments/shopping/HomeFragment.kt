@@ -149,7 +149,7 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
     }
 
     override fun onItemClick(data: ProductData) {
-        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(data)
+        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(productData = data)
         findNavController().navigate(action)
     }
 

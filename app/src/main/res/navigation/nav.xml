@@ -33,7 +33,11 @@
         android:id="@+id/myCartFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.MyCartFragment"
         android:label="fragment_my_cart"
-        tools:layout="@layout/fragment_my_cart" />
+        tools:layout="@layout/fragment_my_cart" >
+        <action
+            android:id="@+id/action_myCartFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myOrdersFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.MyOrdersFragment"
@@ -91,8 +95,15 @@
         tools:layout="@layout/fragment_product_detail" >
 
         <argument
-            android:name="ProductData"
+            android:name="productData"
+            android:defaultValue="@null"
+            app:nullable="true"
             app:argType="com.ecommerce.project.ciphercart.model.ProductData" />
+        <argument
+            android:name="cartData"
+            app:nullable="true"
+            android:defaultValue="@null"
+            app:argType="com.ecommerce.project.ciphercart.model.CartData" />
     </fragment>
     <fragment
         android:id="@+id/productsViewFragment"
