@@ -76,7 +76,6 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
     }
 
     fun getCartData(){
-
         cartDataList.postValue(Response.Loading())
         firebaseDb.getCartData(uid!!).addOnCompleteListener {
             if(it.isSuccessful){
@@ -171,7 +170,7 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
         }
     }
 
-    suspend fun updateCartData(list:List<CartData>){
+    fun updateCartData(list:List<CartData>){
         list.forEach{
             uid?.let { uid ->
                 firebaseDb.updateCartData(it,uid)

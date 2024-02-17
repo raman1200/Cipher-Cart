@@ -17,7 +17,7 @@ import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
+import java.text.FieldPosition
 
 @AndroidEntryPoint
 class MyCartFragment : Fragment(), CartAdapter.CartInterface {
@@ -27,6 +27,7 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
     var price = 0.0
     var pp = 0.0
     private val productViewModel: ProductViewModel by viewModels()
+    lateinit var cartList: MutableList<CartData>
 
 
     override fun onCreateView(
@@ -69,8 +70,9 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
                 when(it) {
                     is Response.Loading -> {}
                     is Response.Success -> {
-//                        toast(requireContext(),"Item Deleted Successfully")
+                        toast(requireContext(),"Item Deleted Successfully")
                         productViewModel.getCartData()
+                        productViewModel.deleted.value = null
                     }
                     is Response.Error -> {
                         toast(requireContext(),it.message.toString())
@@ -89,6 +91,7 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
                     }
                     is Response.Success -> {
                         it.data?.let { list ->
+                            cartList = list.toMutableList()
                             if(list.isEmpty()){
                                 pbLoader.visibility = View.GONE
                                 noDraft.visibility = View.VISIBLE
@@ -108,7 +111,6 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
                                 totalPrice.text = Constants.RUPEES_SYMBOL+ price
                             }
                         }
-
                     }
                     is Response.Error -> {
                         pbLoader.visibility = View.GONE
@@ -122,10 +124,13 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
 
     }
 
-    override fun deleteItem(id: String) {
+    override fun deleteItem(data: CartData) {
         // delete cart item
-        productViewModel.deleteCartData(id)
-        toast(requireContext(),"Item Deleted Successfully")
+//        cartAdapter.currentList.remove(data)
+        productViewModel.deleteCartData(data.prodId)    //  delete element from firebase
+        cartList.remove(data)
+        cartAdapter.submitList(cartList)
+
     }
 
     override fun onCartItemClick(data: CartData) {
@@ -134,15 +139,19 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
         findNavController().navigate(action)
     }
 
-    override fun hQValue(p: Double, data: CartData, value:Int) {
-        pp += p
-        binding.totalPrice.text = Constants.RUPEES_SYMBOL+ pp
+    override fun hQValue(value:Int, position: Int) {
+        cartList[position].quantity = value
+        val list = cartAdapter.currentList
+        var tp =0.0
+        list.forEach{
+            tp += it.quantity*it.price
+        }
+        binding.totalPrice.text = Constants.RUPEES_SYMBOL+ tp
     }
 
     override fun onStop() {
         productViewModel.updateCartData(cartAdapter.currentList)
         super.onStop()
-
     }
 
 }

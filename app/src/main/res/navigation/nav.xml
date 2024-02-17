@@ -156,6 +156,12 @@
         android:id="@+id/addressAddFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.settings.AddressAddFragment"
         android:label="fragment_address_add"
-        tools:layout="@layout/fragment_address_add" />
+        tools:layout="@layout/fragment_address_add" >
+        <argument
+            android:name="address"
+            app:argType="com.ecommerce.project.ciphercart.model.AddressData"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
 </navigation>

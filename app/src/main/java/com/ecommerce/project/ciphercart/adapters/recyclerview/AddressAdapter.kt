@@ -27,6 +27,10 @@ class AddressAdapter():ListAdapter<AddressData,AddressAdapter.AddressViewHolder>
             address.text = data.address
             if(data.defaultAddress)
                 deft.visibility = View.VISIBLE
+
+            edit.setOnClickListener {
+
+            }
         }
     }
     class DiffUtilCallBack(): DiffUtil.ItemCallback<AddressData>() {

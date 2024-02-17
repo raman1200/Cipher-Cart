@@ -64,8 +64,6 @@ class ProductDetailFragment : Fragment() {
             cart!!.prodId
         }
 
-
-
         val value = userDataManager.isAddedOnCart(prodId)
         if(value){
             binding.apply {
@@ -140,7 +138,6 @@ class ProductDetailFragment : Fragment() {
     private fun observer() {
 
         productViewModel.prodData.observe(requireActivity()) {
-
             when(it) {
                 is Response.Loading -> {
                     binding.pbLoader.visibility = View.VISIBLE
@@ -193,11 +190,11 @@ class ProductDetailFragment : Fragment() {
         prodData = safeArgs.productData
         cart = safeArgs.cartData
 
+
         cart?.let {
             productViewModel.getProductById(it.prodId)
             binding.hQ.value = it.quantity
         }
-
 
         prodData?.let { setData(it) }
 
@@ -207,7 +204,6 @@ class ProductDetailFragment : Fragment() {
 
 
     private fun setData(data: ProductData) {
-
         binding.apply {
             prodName.text  = data.prodName
             desc.text = data.prodDesc
@@ -230,6 +226,11 @@ class ProductDetailFragment : Fragment() {
         b.hQ.minValue = 1
         b.hQ.buttonAnimationEnabled = false
         b.hQ.textAnimationStyle = AnimationStyle.FALL_IN
+    }
+
+    override fun onStop() {
+        super.onStop()
+        productViewModel.prodData.value = null
     }
 }
 

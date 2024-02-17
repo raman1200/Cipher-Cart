@@ -13,6 +13,7 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(private val userRepository: UserRepository):ViewModel() {
 
     val getAllAddressData = userRepository.addresses
+    val uploadedAddress = userRepository.uploadAddress
 
     fun addUserAddress(address: AddressData) {
         userRepository.addUserAddress(address)

@@ -53,31 +53,33 @@ class CartAdapter(private val context: Context, private val cartInterface: CartI
         holder.binding.apply {
             data?.let {data ->
             prodName.text = data.prodName
-            price.text = Constants.RUPEES_SYMBOL + data.price.toString()
             Glide.with(context).load(data.prodImage).placeholder(R.drawable.pic).into(prodImage)
             setUpQuantizer(hQ)
             hQ.value = data.quantity
             price.text = Constants.RUPEES_SYMBOL + data.quantity*data.price
-            var cp = hQ.value*data.price
             hQ.setQuantitizerListener(object :QuantitizerListener{
                 override fun onDecrease() {}
                 override fun onIncrease() {}
                 override fun onValueChanged(value: Int) {
                     currentList[holder.bindingAdapterPosition].quantity = value
+
                     val p = (value*data.price)
                     price.text = Constants.RUPEES_SYMBOL + p
-                    val s = if(cp>p){
-                        -data.price
-                    }else{
-                        data.price
-                    }
-                    cartInterface.hQValue(s, data, value)
-                    cp = p
+                   cartInterface.hQValue(value, holder.bindingAdapterPosition)
+//                    val s = if(cp>p){
+//                        -data.price
+//                    }else{
+//                        data.price
+//                    }
+//                    toast(context, cp.toString()+" "+p)
+//                    cartInterface.hQValue(s, data, value)
+//                    cp = p
+
                 }
             })
 
             delete.setOnClickListener {
-                cartInterface.deleteItem(data.prodId)
+                cartInterface.deleteItem(data)
             }
             prodItem.setOnClickListener {
                 cartInterface.onCartItemClick(data)
@@ -97,9 +99,9 @@ class CartAdapter(private val context: Context, private val cartInterface: CartI
     }
 
     interface CartInterface {
-        fun deleteItem(id:String)
+        fun deleteItem(data: CartData)
         fun onCartItemClick(data:CartData)
-        fun hQValue(price:Double, cartData: CartData, value:Int)
+        fun hQValue(value:Int, position:Int)
     }
 
 }

@@ -12,7 +12,6 @@ import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FirebaseDb @Inject constructor(
@@ -66,12 +65,19 @@ class FirebaseDb @Inject constructor(
     fun isAddedOnCart(id:String, uid: String) = usersCollectionRef.document(uid).collection(
         CART_COLLECTION).whereEqualTo("prodId",id).get()
 
-    suspend fun updateCartData(cartData:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(cartData.prodId).set(cartData)
+    fun updateCartData(cartData:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(cartData.prodId).set(cartData)
 
     // address
     fun addUserAddress(data:AddressData, uid:String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).document(data.id).set(data)
 
     fun getAllAddress(uid: String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).get()
+
+    fun findDefaultAddress(uid:String) = usersCollectionRef.document(uid)
+        .collection(ADDRESS_COLLECTION).whereEqualTo("defaultAddress",true).get()
+
+    fun removeDefaultAddress(uid: String, id: String) = usersCollectionRef.document(uid).collection(
+        ADDRESS_COLLECTION).document(id).update("defaultAddress",false)
+
 
     // logout
     fun logout() = auth.signOut()

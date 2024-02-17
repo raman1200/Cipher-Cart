@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentAddressAddBinding
 import com.ecommerce.project.ciphercart.model.AddressData
+import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.hideKeyboard
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
@@ -92,11 +93,31 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
         initialize()
         setUpActionBar(binding.toolbar, requireActivity())
         search()
+        observer()
         clickListeners()
         focusListeners()
         bottomSheetSetup()
 
         return binding.root
+    }
+
+    private fun observer() {
+        userViewModel.uploadedAddress.observe(requireActivity()){
+            when(it){
+                is Response.Loading ->{
+                    binding.pbLoader.visibility = View.VISIBLE
+                }
+                is Response.Success ->{
+                    binding.pbLoader.visibility = View.GONE
+                    toast(requireContext(), "Added")
+
+                }
+                is Response.Error ->{
+                    binding.pbLoader.visibility = View.GONE
+                }
+
+            }
+        }
     }
 
     private fun clickListeners() {
@@ -122,6 +143,7 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
                 val addressData = AddressData(nameAddress = nameAddress, address = address, defaultAddress = defaultAddress)
                 // store data in firebase
                 userViewModel.addUserAddress(addressData)
+
             }
         }
     }
@@ -323,19 +345,21 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
+            onMapReady(googleMap)
+
         }
     }
-    private fun getCustomMarkerIcon(): BitmapDescriptor {
-        // Load the custom marker icon from the drawable folder
-        val resourceId = R.drawable.map_marker
-        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, resourceId)
-
-        // Resize the bitmap if needed
-        val scaledBitmap: Bitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, false)
-
-        // Create a BitmapDescriptor from the resized bitmap
-        return BitmapDescriptorFactory.fromBitmap(scaledBitmap)
-    }
+//    private fun getCustomMarkerIcon(): BitmapDescriptor {
+//        // Load the custom marker icon from the drawable folder
+//        val resourceId = R.drawable.map_marker
+//        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, resourceId)
+//
+//        // Resize the bitmap if needed
+//        val scaledBitmap: Bitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, false)
+//
+//        // Create a BitmapDescriptor from the resized bitmap
+//        return BitmapDescriptorFactory.fromBitmap(scaledBitmap)
+//    }
     private fun getAddressFromLatLng(latitude: Double, longitude: Double): String {
         binding.pbLoader.visibility = View.VISIBLE
 
