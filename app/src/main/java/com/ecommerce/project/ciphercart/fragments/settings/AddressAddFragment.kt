@@ -14,7 +14,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.ecommerce.project.ciphercart.R
+import com.ecommerce.project.ciphercart.adapters.recyclerview.AddressAdapter
 import com.ecommerce.project.ciphercart.databinding.FragmentAddressAddBinding
 import com.ecommerce.project.ciphercart.model.AddressData
 import com.ecommerce.project.ciphercart.resource.Response
@@ -43,7 +45,7 @@ import java.io.IOException
 import java.util.Locale
 
 @AndroidEntryPoint
-class AddressAddFragment : Fragment(), OnMapReadyCallback {
+class AddressAddFragment : Fragment(),OnMapReadyCallback {
 
     private lateinit var binding:FragmentAddressAddBinding
     private lateinit var mMap: GoogleMap
@@ -51,6 +53,7 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var geocoder:Geocoder
+    private lateinit var addressData: AddressData
     private val userViewModel:UserViewModel by viewModels()
 //    private lateinit var placesClient: PlacesClient
 
@@ -91,6 +94,7 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
         binding = FragmentAddressAddBinding.inflate(layoutInflater, container, false)
 
         initialize()
+        getData()
         setUpActionBar(binding.toolbar, requireActivity())
         search()
         observer()
@@ -99,6 +103,25 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
         bottomSheetSetup()
 
         return binding.root
+    }
+
+    private fun getData() {
+        val addressArgs:AddressAddFragmentArgs by navArgs()
+        val getAddressData = addressArgs.address
+        getAddressData?.let {
+            binding.apply {
+                nameAddress.setText(it.nameAddress)
+                addressDetails.setText(it.address)
+                checkbox.isChecked = it.defaultAddress
+                btn.text = "Update"
+                title.text = "Update The Address"
+                val currentLatLng = LatLng(it.latitude, it.longitude)
+                centerMarker?.position = currentLatLng
+
+
+            }
+        }
+
     }
 
     private fun observer() {
@@ -140,8 +163,10 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
                 this.addressDetails.error = "Please Enter the Address"
             }
             else {
-                val addressData = AddressData(nameAddress = nameAddress, address = address, defaultAddress = defaultAddress)
                 // store data in firebase
+                addressData.nameAddress = nameAddress
+                addressData.address = address
+                addressData.defaultAddress = defaultAddress
                 userViewModel.addUserAddress(addressData)
 
             }
@@ -226,8 +251,10 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
 //            }
     }
 
-    private fun initialize() {
+    private fun   initialize() {
         geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+        addressData = AddressData()
 
         // Set up the ListView adapter
 //        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
@@ -314,6 +341,8 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
 //                        mMap.addMarker(MarkerOptions().position(currentLatLng).title("Address").draggable(true))
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18f))
                         val address = getAddressFromLatLng(it.latitude, it.longitude)
+                        addressData.latitude = it.latitude
+                        addressData.longitude = it.longitude
                         binding.addressDetails.setText(address)
                         binding.pbLoader.visibility = View.GONE
                     }
@@ -396,8 +425,6 @@ class AddressAddFragment : Fragment(), OnMapReadyCallback {
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
-
-
 
 
 }

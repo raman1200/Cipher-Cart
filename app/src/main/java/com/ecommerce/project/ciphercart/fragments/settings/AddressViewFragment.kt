@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.adapters.recyclerview.AddressAdapter
 import com.ecommerce.project.ciphercart.databinding.FragmentAddressViewBinding
+import com.ecommerce.project.ciphercart.fragments.shopping.MyCartFragmentDirections
+import com.ecommerce.project.ciphercart.model.AddressData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.viewmodels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressViewFragment : Fragment() {
+class AddressViewFragment : Fragment(),AddressAdapter.AddressInterface {
 
     lateinit var binding: FragmentAddressViewBinding
     lateinit var addressAdapter: AddressAdapter
@@ -76,7 +78,7 @@ class AddressViewFragment : Fragment() {
 
     private fun initialize() {
         userViewModel.getAllAddress()
-        addressAdapter = AddressAdapter()
+        addressAdapter = AddressAdapter(this)
 
         binding.apply {
             recyclerView.adapter = addressAdapter
@@ -90,6 +92,11 @@ class AddressViewFragment : Fragment() {
                 findNavController().navigate(R.id.action_addressViewFragment_to_addressAddFragment)
             }
         }
+    }
+
+    override fun updateAddress(data: AddressData) {
+        val action = AddressViewFragmentDirections.actionAddressViewFragmentToAddressAddFragment(address = data)
+        findNavController().navigate(action)
     }
 
 
