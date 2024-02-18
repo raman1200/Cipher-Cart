@@ -41,12 +41,22 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
         setUpActionBar(binding.toolbar, requireActivity())
         initialize()
         observer()
+        clickListeners()
 
 
 
         return binding.root
 
 
+    }
+
+    private fun clickListeners() {
+        binding.apply {
+            checkoutBtn.setOnClickListener {
+                val action = MyCartFragmentDirections.actionMyCartFragmentToCheckoutFragment(cartList.toTypedArray())
+                findNavController().navigate(action)
+            }
+        }
     }
 
     private fun initialize() {

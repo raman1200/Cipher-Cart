@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:background="@color/grey_200">
+    tools:context=".fragments.shopping.CheckoutFragment"
+    android:background="@color/grey_100">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar4"
@@ -28,7 +28,6 @@
             android:layout_gravity="start"/>
 
 
-
     </androidx.appcompat.widget.Toolbar>
 
     <View
@@ -41,7 +40,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        android:background="@color/grey_600"/>
+        android:background="@color/grey_400"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,94 +74,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Shipping Address"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:layout_marginTop="8dp"
                         android:layout_marginStart="15dp"/>
 
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:padding="10dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-
-                        android:layout_marginStart="17dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="18dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:padding="10dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/location2"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center_vertical">
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Home"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/black"
-                                    android:layout_marginStart="5dp"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="61480 sunbrook park, PC 5679"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/grey_600"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginStart="5dp"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center_vertical" >
-
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="right"
-                                    android:layout_marginEnd="20dp"
-                                    android:src="@drawable/location"/>
-
-                            </LinearLayout>
-
-
-
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
+                  <include layout="@layout/address_list"
+                      />
 
                     <View
                         android:layout_width="match_parent"
@@ -170,7 +90,7 @@
                         android:layout_marginTop="18dp"
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="18dp"
-                        android:background="@color/grey_600"/>
+                        android:background="@color/grey_400"/>
 
 
 
@@ -178,15 +98,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Order List"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:layout_marginTop="16dp"
                         android:layout_marginStart="15dp"/>
-
-
-
-
 
                 </LinearLayout>
 
@@ -199,10 +115,10 @@
 
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/orderlist"
+                        android:id="@+id/order_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:listitem="@layout/orderlist_items"/>
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/checkout_items" />
 
                     <View
                         android:layout_width="match_parent"
@@ -210,13 +126,14 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="18dp"
-                        android:background="@color/grey_600"/>
+                        android:background="@color/grey_400"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
 
@@ -224,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Choose Shipping"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
@@ -340,6 +257,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:orientation="vertical">
 
 
@@ -349,6 +267,7 @@
                         android:text="Promo code"
                         android:textSize="20dp"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="15dp"/>
@@ -357,6 +276,7 @@
                         android:id="@+id/promocode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="15dp"
                         android:text="Enter the promo code"
@@ -368,6 +288,7 @@
                         android:padding="10dp"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginStart="17dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginTop="18dp">
@@ -376,10 +297,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:background="@color/white"
                             android:orientation="vertical">
-
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -387,8 +306,6 @@
                                 android:orientation="horizontal"
                                 android:layout_marginTop="15dp"
                                 android:weightSum="3">
-
-
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -398,7 +315,7 @@
                                     android:layout_weight="2"
                                     android:layout_gravity="start"
                                     android:textSize="20sp"
-                                    android:textColor="@color/grey_600"/>
+                                    android:textColor="@color/grey_800"/>
 
 
                                 <TextView
@@ -412,14 +329,6 @@
                                     android:textSize="20sp"
                                     android:textColor="@color/black"
                                     />
-
-
-
-
-
-
-
-
                             </LinearLayout>
 
                             <LinearLayout
@@ -439,7 +348,7 @@
                                     android:layout_weight="2"
                                     android:layout_gravity="start"
                                     android:textSize="20sp"
-                                    android:textColor="@color/grey_600"/>
+                                    android:textColor="@color/grey_800"/>
 
 
                                 <TextView
@@ -448,18 +357,11 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="end"
                                     android:layout_weight="1"
-                                    android:text="$150"
+                                    android:text="Free"
                                     android:layout_marginEnd="20dp"
                                     android:textSize="20sp"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/green"
                                     />
-
-
-
-
-
-
-
 
                             </LinearLayout>
 
@@ -480,7 +382,7 @@
                                     android:layout_weight="2"
                                     android:layout_gravity="start"
                                     android:textSize="20sp"
-                                    android:textColor="@color/grey_600"/>
+                                    android:textColor="@color/grey_800"/>
 
 
                                 <TextView
@@ -489,18 +391,11 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="end"
                                     android:layout_weight="1"
-                                    android:text="-$100"
+                                    android:text="-"
                                     android:layout_marginEnd="20dp"
                                     android:textSize="20sp"
                                     android:textColor="@color/black"
                                     />
-
-
-
-
-
-
-
 
                             </LinearLayout>
 
@@ -510,7 +405,7 @@
                                 android:layout_marginTop="18dp"
                                 android:layout_marginStart="18dp"
                                 android:layout_marginEnd="18dp"
-                                android:background="@color/grey_600"/>
+                                android:background="@color/grey_800"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -526,11 +421,12 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Total"
+                                    android:textStyle="bold"
                                     android:layout_marginStart="20dp"
                                     android:layout_weight="2"
                                     android:layout_gravity="start"
                                     android:textSize="20sp"
-                                    android:textColor="@color/grey_600"/>
+                                    android:textColor="@color/grey_800"/>
 
 
                                 <TextView
@@ -538,6 +434,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="end"
+                                    android:textStyle="bold"
                                     android:layout_weight="1"
                                     android:text="$1500"
                                     android:layout_marginEnd="20dp"
@@ -561,24 +458,23 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginEnd="18dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@color/grey_600"/>
 
-                <Button
-                    android:id="@+id/button_payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/continue_btn"
+                    style="@style/ElevatedButton"
                     android:text="Continue to Payment"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:drawableEnd="@drawable/right_arrow"
-                    android:layout_marginBottom="10dp"/>
+                    app:icon="@drawable/right_fill_arrow"
+                    app:iconTint="@color/white"
+                    app:iconGravity="textEnd"
+                    android:minHeight="70dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
 
             </LinearLayout>
 

@@ -76,14 +76,16 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
     }
 
     fun getCartData(){
-        cartDataList.postValue(Response.Loading())
-        firebaseDb.getCartData(uid!!).addOnCompleteListener {
-            if(it.isSuccessful){
-                val data = it.result.toObjects<CartData>()
-                cartDataList.postValue(Response.Success(data))
-            }
-            else{
-                cartDataList.postValue(Response.Error(it.exception!!.message))
+        uid?.let {
+            cartDataList.postValue(Response.Loading())
+            firebaseDb.getCartData(uid).addOnCompleteListener {
+                if(it.isSuccessful){
+                    val data = it.result.toObjects<CartData>()
+                    cartDataList.postValue(Response.Success(data))
+                }
+                else{
+                    cartDataList.postValue(Response.Error(it.exception!!.message))
+                }
             }
         }
     }

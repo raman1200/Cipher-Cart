@@ -65,7 +65,7 @@ class CartAdapter(private val context: Context, private val cartInterface: CartI
 
                     val p = (value*data.price)
                     price.text = Constants.RUPEES_SYMBOL + p
-                   cartInterface.hQValue(value, holder.bindingAdapterPosition)
+                    cartInterface.hQValue(value, holder.bindingAdapterPosition)
 //                    val s = if(cp>p){
 //                        -data.price
 //                    }else{

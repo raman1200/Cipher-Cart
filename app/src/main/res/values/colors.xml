@@ -81,4 +81,5 @@
     <color name="fortnightly_theme_dark_shadow">#000000</color>
     <color name="fortnightly_theme_dark_surfaceTint">#4FD8EB</color>
     <color name="fortnightly_theme_dark_surfaceTintColor">#4FD8EB</color>
+    <color name="green">#008000</color>
 </resources>

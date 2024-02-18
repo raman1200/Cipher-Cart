@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.addressAddFragment -> {
                     binding.bottomNav.visibility = View.GONE
                 }
+                R.id.checkoutFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
 //                R.id.map -> {
 //                    binding.bottomNav.visibility = View.GONE
 //                }

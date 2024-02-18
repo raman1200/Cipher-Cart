@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_myCartFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_myCartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/myOrdersFragment"
@@ -162,6 +165,15 @@
             app:argType="com.ecommerce.project.ciphercart.model.AddressData"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.shopping.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" >
+        <argument
+            android:name="cartList"
+            app:argType="com.ecommerce.project.ciphercart.model.CartData[]" />
     </fragment>
 
 </navigation>
