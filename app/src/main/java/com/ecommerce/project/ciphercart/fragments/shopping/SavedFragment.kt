@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,15 +63,23 @@ class SavedFragment : Fragment(), ProductAdapter.OnClick {
             when(it){
                 is Response.Loading -> {
 //                    toast(requireContext(), "uploading cart data...")
+                      binding.WishLoader.visibility = View.VISIBLE
                 }
                 is Response.Success -> {
                     toast(requireContext(),it.data?.size.toString())
                     it.data?.let {data ->
-                        productAdapter.submitList(data)
+                        val wishList = data.toMutableList()
+                        if (wishList.isEmpty()) {
+                            toast(requireContext(),"No Items Added In Wish list")
+                        }else{
+                            binding.WishLoader.visibility = View.GONE
+                            productAdapter.submitList(data)
+                        }
                     }
 
                 }
                 is Response.Error -> {
+                    binding.WishLoader.visibility = View.GONE
                     toast(requireContext(), it.message!!)
                 }
 

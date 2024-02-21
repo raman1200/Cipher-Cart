@@ -114,7 +114,7 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
     }
     suspend fun getProductByIds(prodList:  List<String>) {
 
-        CoroutineScope(Dispatchers.IO).launch {
+//        CoroutineScope(Dispatchers.IO).launch {
             val list: MutableList<ProductData> = ArrayList()
 
             wishProdList.postValue(Response.Loading())
@@ -135,10 +135,10 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
 
                 }
             }
-            delay(500)
+            delay(700)
             Log.e("RAMAN",list.size.toString())
             wishProdList.postValue(Response.Success(list))
-        }
+//        }
 
 
 
