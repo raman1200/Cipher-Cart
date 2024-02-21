@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navHostFragment:NavHostFragment
     private lateinit var navController:NavController
 
+
+
     private val binding by lazy {
        ActivityMainBinding.inflate(layoutInflater)
     }

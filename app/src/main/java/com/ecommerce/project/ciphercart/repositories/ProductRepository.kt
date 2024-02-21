@@ -1,5 +1,6 @@
 package com.ecommerce.project.ciphercart.repositories
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
 import com.ecommerce.project.ciphercart.model.CartData
@@ -9,14 +10,24 @@ import com.ecommerce.project.ciphercart.model.SplOfferData
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.UserDataManager
+import com.google.android.play.core.integrity.p
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.invoke
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , private val userDataManager: UserDataManager ) {
 
     val catDataList = MutableLiveData<Response<List<CategoryData>>>()
     val prodDataList = MutableLiveData<Response<List<ProductData>>>()
+    val prodCatDataList = MutableLiveData<Response<List<ProductData>>>()
+    val wishProdList = MutableLiveData<Response<List<ProductData>>>()
     val splOfferList = MutableLiveData<Response<List<SplOfferData>>>()
     val cartDataList = MutableLiveData<Response<List<CartData>>>()
     val uploaded = MutableLiveData<Response<String>>()
@@ -101,6 +112,39 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
             }
         }
     }
+    suspend fun getProductByIds(prodList:  List<String>) {
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val list: MutableList<ProductData> = ArrayList()
+
+            wishProdList.postValue(Response.Loading())
+//        Log.e("RAMAN",prodList.toString())
+//        prodList.forEach{
+            for (it in prodList) {
+//            Log.e("RAMAN",prodList.toString())
+                firebaseDb.getProductById(it).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val data = it.result.toObject<ProductData>()
+//                    Log.e("RAMAN",data?.prodId.toString())
+                        data?.let {
+                            list.add(it)
+                        }
+                    } else {
+                        wishProdList.postValue(Response.Error(it.exception!!.message))
+                    }
+
+                }
+            }
+            delay(500)
+            Log.e("RAMAN",list.size.toString())
+            wishProdList.postValue(Response.Success(list))
+        }
+
+
+
+    }
+
+
 
 //
 //    fun getProductByIds(list: List<CartData>) {
@@ -123,14 +167,14 @@ class ProductRepository @Inject constructor(private val firebaseDb:FirebaseDb , 
 //    }
 
     fun getProductsByCategory(catId:Int) {
-        prodDataList.postValue(Response.Loading())
+        prodCatDataList.postValue(Response.Loading())
         firebaseDb.getProductsByCategory(catId).addOnCompleteListener {
             if(it.isSuccessful){
                 val data = it.result.toObjects<ProductData>()
-                prodDataList.postValue(Response.Success(data))
+                prodCatDataList.postValue(Response.Success(data))
             }
             else{
-                prodDataList.postValue(Response.Error(it.exception!!.message))
+                prodCatDataList.postValue(Response.Error(it.exception!!.message))
             }
         }
     }

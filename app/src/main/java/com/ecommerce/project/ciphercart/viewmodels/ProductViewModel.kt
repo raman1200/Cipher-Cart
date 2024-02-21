@@ -15,6 +15,8 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
 
     val getCatData = productRepository.catDataList
     val getProductData = productRepository.prodDataList
+    val getProdCatData = productRepository.prodCatDataList
+    val getWishList = productRepository.wishProdList
     val getSplOffer = productRepository.splOfferList
     val getCartData = productRepository.cartDataList
     val uploaded = productRepository.uploaded
@@ -54,6 +56,12 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     fun updateCartData(list: List<CartData>) {
         viewModelScope.launch(Dispatchers.IO){
             productRepository.updateCartData(list)
+        }
+    }
+
+    fun getProductByList(list: List<String>){
+        viewModelScope.launch(Dispatchers.IO){
+            productRepository.getProductByIds(list)
         }
     }
 

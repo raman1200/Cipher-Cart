@@ -1,14 +1,18 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide.init
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentProductDetailBinding
 import com.ecommerce.project.ciphercart.model.CartData
@@ -33,6 +37,7 @@ class ProductDetailFragment : Fragment() {
     var prodData : ProductData? = null
     var cart:CartData? = null
     lateinit var cartData: CartData
+    private var select = false
 
     @Inject
     lateinit var userDataManager: UserDataManager
@@ -48,13 +53,26 @@ class ProductDetailFragment : Fragment() {
 
         init()
         clickListeners()
+        observer()
         liveData()
         getData()
         setDesc()
         setBtn()
-        observer()
+        setDil()
+
 
         return binding.root
+    }
+
+    private fun setDil() {
+        val prod = prodData?.prodId ?: cart?.prodId
+        val value = userDataManager.isAddedOnProd(prod!!)
+        if(value){
+            binding.apply {
+                favourite.setImageResource(R.drawable.saved2)
+                select = true
+            }
+        }
     }
 
     private fun setBtn(text:String="Already Added") {
@@ -125,6 +143,26 @@ class ProductDetailFragment : Fragment() {
                     productViewModel.uploadCartData(data = cartData)
                     userDataManager.addCartId(prodData.prodId)
                     setBtn("Added in Cart")
+                }
+
+            }
+
+            favourite.setOnClickListener{
+                val prod = prodData?.prodId ?: cart?.prodId
+                if (!select){
+                    select = true
+                    favourite.setImageResource(R.drawable.saved2)
+                    userDataManager.addProdId(prod!!)
+                    toast(requireContext(),"Added to Wish list")
+
+
+                }else{
+                    select = false
+                    favourite.setImageResource(R.drawable.saved)
+                    userDataManager.deleteProdId(prod!!)
+                    toast(requireContext(),"Removed From Wish list")
+
+
                 }
 
             }

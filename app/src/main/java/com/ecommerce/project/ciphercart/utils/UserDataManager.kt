@@ -1,6 +1,9 @@
 package com.ecommerce.project.ciphercart.utils
 
+import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build.VERSION_CODES.P
+import com.ecommerce.project.ciphercart.model.ProductData
 import com.ecommerce.project.ciphercart.model.UserData
 
 import javax.inject.Inject
@@ -15,6 +18,7 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
         private const val KEY_DOB = "dob"
         private const val KEY_IMG = "profile-img"
         private const val KEY_CART_IDS = "cart-prod_ids"
+        private const val KEY_PROD_IDS = "product_ids"
     }
     fun clearData() {
         val editor = sharedPreferences.edit()
@@ -106,5 +110,37 @@ class UserDataManager @Inject constructor(val sharedPreferences: SharedPreferenc
     fun getCartIds(): Set<String> {
         return sharedPreferences.getStringSet(KEY_CART_IDS, setOf()) ?: setOf()
     }
+
+
+    fun getProdIds(): Set<String> {
+        return sharedPreferences.getStringSet(KEY_PROD_IDS, setOf()) ?: setOf()
+    }
+
+    fun addProdId(id: String) {
+        val currentIds = getProdIds().toMutableSet()
+        currentIds.add(id)
+        saveProdIds(currentIds)
+    }
+
+    // Function to check if an ID is added
+    fun isAddedOnProd(id: String): Boolean {
+        val ids = getProdIds()
+        return ids.contains(id)
+    }
+
+    // Function to remove an ID from the prod
+    fun deleteProdId(id: String) {
+        val currentIds = getProdIds().toMutableSet()
+        currentIds.remove(id)
+        saveProdIds(currentIds)
+    }
+
+    // Function to save the prod IDs to SharedPreferences
+    private fun saveProdIds(ids: Set<String>) {
+        val editor = sharedPreferences.edit()
+        editor.putStringSet(KEY_PROD_IDS, ids)
+        editor.apply()
+    }
+
 }
 

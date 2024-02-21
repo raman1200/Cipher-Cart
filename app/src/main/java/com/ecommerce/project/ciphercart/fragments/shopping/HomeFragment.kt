@@ -143,7 +143,6 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
             }
             notification.setOnClickListener{
                 findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
-
             }
         }
     }

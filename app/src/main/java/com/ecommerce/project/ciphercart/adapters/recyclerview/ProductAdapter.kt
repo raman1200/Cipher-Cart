@@ -1,17 +1,21 @@
 package com.ecommerce.project.ciphercart.adapters.recyclerview
 
 import android.content.Context
+import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.ProductItemViewBinding
 import com.ecommerce.project.ciphercart.model.ProductData
 import com.ecommerce.project.ciphercart.utils.toast
+import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
 
 class ProductAdapter(val context: Context, val onClick: OnClick): ListAdapter<ProductData, ProductAdapter.ProductViewHolder>(DiffUtilCallBack()) {
 
@@ -20,11 +24,14 @@ class ProductAdapter(val context: Context, val onClick: OnClick): ListAdapter<Pr
     }
 
 
+    //create view-->dabba
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item_view, parent, false)
         return ProductViewHolder(view)
     }
 
+
+    //view mai data dena (set)
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
         val data = getItem(position)
@@ -38,6 +45,7 @@ class ProductAdapter(val context: Context, val onClick: OnClick): ListAdapter<Pr
 
     }
 
+    //only in listAdapter
     class DiffUtilCallBack : DiffUtil.ItemCallback<ProductData>() {
         override fun areItemsTheSame(oldItem: ProductData, newItem: ProductData): Boolean {
             return oldItem.prodId == newItem.prodId

@@ -59,7 +59,7 @@ class ProductsViewFragment : Fragment(),ProductAdapter.OnClick {
     }
 
     private fun liveData() {
-        productViewModel.getProductData.observe(requireActivity()){
+        productViewModel.getProdCatData.observe(requireActivity()){
             when(it){
                 is Response.Loading -> {
                     binding.pb.visibility = View.VISIBLE
@@ -95,6 +95,7 @@ class ProductsViewFragment : Fragment(),ProductAdapter.OnClick {
     }
 
     override fun onItemClick(data: ProductData) {
+        //pass the data from adapter to the next fragment
         val action = ProductsViewFragmentDirections.actionProductsViewFragment3ToProductDetailFragment2(data)
         findNavController().navigate(action)
     }
