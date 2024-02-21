@@ -54,6 +54,7 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var geocoder:Geocoder
     private lateinit var addressData: AddressData
+    private var bool = false
     private val userViewModel:UserViewModel by viewModels()
 //    private lateinit var placesClient: PlacesClient
 
@@ -114,11 +115,10 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
                 addressDetails.setText(it.address)
                 checkbox.isChecked = it.defaultAddress
                 btn.text = "Update"
-                title.text = "Update The Address"
-                val currentLatLng = LatLng(it.latitude, it.longitude)
-                centerMarker?.position = currentLatLng
-
-
+                title.text = "Update Address"
+                addressData.latitude = it.latitude
+                addressData.longitude = it.longitude
+                bool = true
             }
         }
 
@@ -133,7 +133,11 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
                 is Response.Success ->{
                     binding.pbLoader.visibility = View.GONE
                     toast(requireContext(), "Added")
-
+                    binding.apply {
+                        nameAddress.text.clear()
+                        addressDetails.text.clear()
+                    }
+                    userViewModel.uploadedAddress.value = null
                 }
                 is Response.Error ->{
                     binding.pbLoader.visibility = View.GONE
@@ -167,6 +171,8 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
                 addressData.nameAddress = nameAddress
                 addressData.address = address
                 addressData.defaultAddress = defaultAddress
+                addressData.latitude = centerMarker?.position?.latitude ?:0.0
+                addressData.longitude = centerMarker?.position?.longitude ?:0.0
                 userViewModel.addUserAddress(addressData)
 
             }
@@ -333,23 +339,27 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
 //                    .icon(customMarkerIcon)
             )
             // Get the last known location and move the camera
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location ->
-                    location?.let {
-                        val currentLatLng = LatLng(it.latitude, it.longitude)
-                        centerMarker?.position = currentLatLng
+            val currentLatLng = LatLng(addressData.latitude, addressData.longitude)
+            centerMarker?.position = currentLatLng
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18f))
+            if(!bool){
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location ->
+                        location?.let {
+                            val currentLatLng = LatLng(it.latitude, it.longitude)
+                            centerMarker?.position = currentLatLng
 //                        mMap.addMarker(MarkerOptions().position(currentLatLng).title("Address").draggable(true))
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18f))
-                        val address = getAddressFromLatLng(it.latitude, it.longitude)
-                        addressData.latitude = it.latitude
-                        addressData.longitude = it.longitude
-                        binding.addressDetails.setText(address)
-                        binding.pbLoader.visibility = View.GONE
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18f))
+                            val address = getAddressFromLatLng(it.latitude, it.longitude)
+                            binding.addressDetails.setText(address)
+                            binding.pbLoader.visibility = View.GONE
+                        }
                     }
-                }
+
+            }
 
             // Move camera to the center of the screen
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerMarker!!.position, 15f))
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerMarker!!.position, 18f))
 
             // Set up map move listener
             mMap.setOnCameraMoveListener {

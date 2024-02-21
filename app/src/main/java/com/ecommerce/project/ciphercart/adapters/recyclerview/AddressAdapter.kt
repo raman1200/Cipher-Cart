@@ -12,7 +12,7 @@ import com.ecommerce.project.ciphercart.databinding.AddressListBinding
 import com.ecommerce.project.ciphercart.model.AddressData
 import com.ecommerce.project.ciphercart.model.CartData
 
-class AddressAdapter(private val addressInterface: AddressInterface):ListAdapter<AddressData,AddressAdapter.AddressViewHolder>(DiffUtilCallBack()) {
+class AddressAdapter(private val addressInterface: AddressInterface, private val source:Boolean = false):ListAdapter<AddressData,AddressAdapter.AddressViewHolder>(DiffUtilCallBack()) {
     inner class AddressViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val binding = AddressListBinding.bind(itemView)
     }
@@ -30,8 +30,11 @@ class AddressAdapter(private val addressInterface: AddressInterface):ListAdapter
             if(data.defaultAddress)
                 deft.visibility = View.VISIBLE
 
+            if(source){
+                edit.visibility = View.INVISIBLE
+            }
             edit.setOnClickListener {
-                    addressInterface.updateAddress(data)
+                addressInterface.updateAddress(data)
             }
         }
     }

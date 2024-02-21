@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
+    android:id="@+id/cardView"
     android:layout_marginStart="17dp"
     android:layout_marginEnd="15dp"
     android:layout_marginTop="18dp"
@@ -24,11 +24,12 @@
                 android:orientation="vertical"
                 android:gravity="center">
 
-
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:padding="10dp"
+                    app:civ_border_color="@color/grey_300"
+                    app:civ_border_width="8dp"
                     android:background="@color/white"
                     android:src="@drawable/location2"/>
 
@@ -108,14 +109,8 @@
                     android:src="@drawable/pencil"
                     app:tint="@color/black" />
 
+
             </LinearLayout>
 
-
-
-
         </LinearLayout>
-
-
-
-
 </androidx.cardview.widget.CardView>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,8 @@ import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.FieldPosition
+import java.text.NumberFormat
+import java.util.Currency
 
 @AndroidEntryPoint
 class MyCartFragment : Fragment(), CartAdapter.CartInterface {
@@ -53,7 +56,7 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
     private fun clickListeners() {
         binding.apply {
             checkoutBtn.setOnClickListener {
-                val action = MyCartFragmentDirections.actionMyCartFragmentToCheckoutFragment(cartList.toTypedArray())
+                val action = MyCartFragmentDirections.actionMyCartFragmentToCheckoutFragment()
                 findNavController().navigate(action)
             }
         }
@@ -98,6 +101,9 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
                         noDraft.visibility = View.GONE
                         cartRecyclerView.visibility = View.GONE
                         totalPrice.text = Constants.RUPEES_SYMBOL+ "0.0"
+//                          totalPrice.text = NumberFormat.getCurrencyInstance().format(0)
+//
+
                     }
                     is Response.Success -> {
                         it.data?.let { list ->
@@ -157,6 +163,7 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
             tp += it.quantity*it.price
         }
         binding.totalPrice.text = Constants.RUPEES_SYMBOL+ tp
+//        binding.totalPrice.text = NumberFormat.getCurrencyInstance().format(tp)
     }
 
     override fun onStop() {
