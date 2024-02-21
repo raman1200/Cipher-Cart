@@ -171,9 +171,29 @@
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.CheckoutFragment"
         android:label="fragment_checkout"
         tools:layout="@layout/fragment_checkout" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_shippingFragment"
+            app:destination="@id/shippingFragment" />
         <argument
-            android:name="cartList"
-            app:argType="com.ecommerce.project.ciphercart.model.CartData[]" />
+            android:name="address_index"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/shippingFragment"
+        android:name="com.ecommerce.project.ciphercart.fragments.settings.ShippingFragment"
+        android:label="fragment_shipping"
+        tools:layout="@layout/fragment_shipping" >
+        <argument
+            android:name="addressData"
+            app:argType="com.ecommerce.project.ciphercart.model.AddressData[]" />
+        <action
+            android:id="@+id/action_shippingFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+        <argument
+            android:name="address_index"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 
 </navigation>

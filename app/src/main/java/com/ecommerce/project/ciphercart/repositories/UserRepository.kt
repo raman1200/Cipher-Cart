@@ -38,8 +38,10 @@ class UserRepository (private val firebaseDb: FirebaseDb, private val userDataMa
 
         uid?.let {
             uploadAddress.postValue(Response.Loading())
-            val id = UUID.randomUUID().toString()
-            data.id = id
+            if(data.id.isEmpty()){
+                val id = UUID.randomUUID().toString()
+                data.id = id
+            }
             if(data.defaultAddress){
                 firebaseDb.findDefaultAddress(uid).addOnCompleteListener {
                     if(it.isSuccessful){

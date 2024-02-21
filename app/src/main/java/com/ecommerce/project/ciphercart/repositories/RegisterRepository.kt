@@ -8,6 +8,8 @@ import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.getCurrentDateInLong
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
@@ -54,6 +56,7 @@ class RegisterRepository @Inject constructor(val context: Context, val firebaseD
     }
 
     private fun saveData(userData: UserData){
+        
         firebaseDb.saveUserInformation(userData).addOnCompleteListener {
             if(it.isSuccessful){
                 register.postValue(Response.Success(userData))
