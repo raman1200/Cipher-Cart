@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CheckoutFragment : Fragment() {
 
-    private lateinit var binding:FragmentCheckoutBinding
+    private lateinit var binding: FragmentCheckoutBinding
     private lateinit var adapter: CheckoutAdapter
     private lateinit var addressList:List<AddressData>
     private val userViewModel:UserViewModel by viewModels()

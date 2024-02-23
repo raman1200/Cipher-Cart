@@ -467,7 +467,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/continue_btn"
                     style="@style/ElevatedButton"
-                    android:text="Continue to Payment"
+                    android:text="Place Order"
                     app:icon="@drawable/right_fill_arrow"
                     app:iconTint="@color/white"
                     app:iconGravity="textEnd"
