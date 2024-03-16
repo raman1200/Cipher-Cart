@@ -6,6 +6,7 @@
     android:layout_margin="8dp"
     android:background="@color/white"
     app:cardCornerRadius="20dp"
+    android:id="@+id/prod"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -15,27 +16,29 @@
         android:background="@color/white"
         android:padding="10dp"
         android:orientation="horizontal">
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_weight="0"
             app:cardCornerRadius="24dp"
-            android:background="@color/grey_700"
+            android:background="@color/grey_400"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
+            android:layout_marginEnd="5dp"
             android:layout_height="wrap_content" >
 
             <ImageView
                 android:id="@+id/prod_image"
                 android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:scaleType="centerCrop"
+                android:layout_height="130dp"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
                 android:src="@drawable/pic"/>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_weight="2"
             android:layout_width="0dp"
-            android:layout_margin="10dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
             android:orientation="vertical">
 
 
@@ -43,6 +46,9 @@
                 android:id="@+id/prod_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="Leather Bag"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -51,104 +57,127 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <TextView
-                android:id="@+id/color"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/circle"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/prod_name" />
+                app:layout_constraintTop_toBottomOf="@id/prod_name">
+
+                <TextView
+                    android:id="@+id/color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Color"
+                    android:textColor="@color/grey_700"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/color"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/grey_700"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Size = M"
+                    android:textColor="@color/grey_700"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="1dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/grey_700"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/size"
+                    app:layout_constraintStart_toEndOf="@+id/size"
+                    app:layout_constraintTop_toTopOf="@+id/size" />
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="QTY = 1"
+                    android:textColor="@color/grey_700"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/view2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="Color"
-                android:textColor="@color/grey_700"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/color"
-                app:layout_constraintStart_toEndOf="@+id/color"
-                app:layout_constraintTop_toTopOf="@+id/color" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="1dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="5dp"
-                android:background="@color/grey_700"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
-
-            <TextView
-                android:id="@+id/size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="Size = M"
-                android:textColor="@color/grey_700"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/view" />
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="1dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="5dp"
-                android:background="@color/grey_700"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/size"
-                app:layout_constraintStart_toEndOf="@+id/size"
-                app:layout_constraintTop_toTopOf="@+id/size" />
-
-            <TextView
-                android:id="@+id/quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="QTY = 1"
-                android:visibility="visible"
-                android:textColor="@color/grey_700"
-               app:layout_constraintStart_toEndOf="@id/view2"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2" />
-
+                android:layout_marginTop="2dp"
+                android:background="@drawable/status_bg"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:text="In Delivery"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint" />
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="₹ 500"
+                android:layout_marginTop="2dp"
+                android:text="₹ 500252"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/track"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/color" />
+                app:layout_constraintTop_toBottomOf="@+id/status" />
 
 
             <Button
                 android:id="@+id/track"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/black"
                 android:text="Track Order"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/price"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/price" />
-
-
+                app:layout_constraintTop_toBottomOf="@+id/status" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

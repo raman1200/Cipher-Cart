@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecommerce.project.ciphercart.adapters.recyclerview.ProductAdapter
@@ -25,11 +26,10 @@ class SavedFragment : Fragment(), ProductAdapter.OnClick {
 
     lateinit var binding:FragmentSavedBinding
     lateinit var productAdapter: ProductAdapter
-    //userdatamanager
+
     @Inject
     lateinit var userDataManager: UserDataManager
 
-    //prodviewmodel
     private val productViewModel:ProductViewModel by viewModels ()
 
 
@@ -53,7 +53,6 @@ class SavedFragment : Fragment(), ProductAdapter.OnClick {
 
     private fun initailize() {
         productAdapter = ProductAdapter(requireContext(), this)
-        //recyclerview mai adapter diya hai
         binding.displayList.adapter = productAdapter
         binding.displayList.layoutManager = GridLayoutManager(requireContext(),2)
     }
@@ -64,15 +63,20 @@ class SavedFragment : Fragment(), ProductAdapter.OnClick {
                 is Response.Loading -> {
 //                    toast(requireContext(), "uploading cart data...")
                       binding.WishLoader.visibility = View.VISIBLE
+                      binding.noDraft.visibility = View.GONE
+
                 }
                 is Response.Success -> {
-                    toast(requireContext(),it.data?.size.toString())
+//                    toast(requireContext(),it.data?.size.toString())
                     it.data?.let {data ->
+                        binding.WishLoader.visibility = View.GONE
+
                         val wishList = data.toMutableList()
                         if (wishList.isEmpty()) {
-                            toast(requireContext(),"No Items Added In Wish list")
+                            binding.noDraft.visibility = View.VISIBLE
+//                            toast(requireContext(),"No Items Added In Wish list")
                         }else{
-                            binding.WishLoader.visibility = View.GONE
+                            binding.noDraft.visibility = View.GONE
                             productAdapter.submitList(data)
                         }
                     }
@@ -90,11 +94,15 @@ class SavedFragment : Fragment(), ProductAdapter.OnClick {
     private fun displayWishList() {
         val list = userDataManager.getProdIds().toMutableList()
         productViewModel.getProductByList(list)
-//        toast(requireContext(),list.size.toString())
     }
 
     override fun onItemClick(data: ProductData) {
-
+        val action = SavedFragmentDirections.actionSavedFragmentToProductDetailFragment(productData = data)
+        findNavController().navigate(action)
     }
 
+    override fun onDestroy() {
+        productViewModel.getWishList.postValue(null)
+        super.onDestroy()
+    }
 }

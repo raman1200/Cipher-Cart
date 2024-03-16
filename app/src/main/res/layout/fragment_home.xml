@@ -76,9 +76,12 @@
 
     </LinearLayout>
 
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,6 +156,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/slider_shimmer"
+                    app:shimmer_base_color="@color/grey_200"
+                    app:shimmer_highlight_color="@color/grey_300"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp">
+                    <ImageView
+                        android:background="@color/grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <org.imaginativeworld.whynotimagecarousel.ImageCarousel
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
@@ -215,21 +230,261 @@
                 android:id="@+id/cat_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <ProgressBar
+            <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/cat_pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:shimmer_highlight_color="@color/grey_900">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/grey"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:background="@color/grey"
+                                android:gravity="center"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:background="@color/grey"
+                                android:gravity="center"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/grey"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/grey"
+                                android:gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/grey"
+                                android:gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/grey"
+                                android:gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@drawable/circular_bg"
+                                android:backgroundTint="@color/grey"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/grey"
+                                android:gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
 
             <TextView
                 android:id="@+id/textView5"
@@ -338,19 +593,258 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/horizontal" />
 
-            <ProgressBar
+            <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/prod_pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                app:shimmer_base_color="@color/grey_200"
+                app:shimmer_highlight_color="@color/grey_300"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintBottom_toBottomOf="@+id/product_recycler_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="50dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/horizontal" />
+                app:layout_constraintTop_toBottomOf="@+id/horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="2">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_weight="1"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            app:cardCornerRadius="20dp"
+                            android:elevation="50dp"
+                            android:background="@color/grey_700"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/prod_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:background="@color/grey"
+                                android:scaleType="fitCenter"
+                                android:padding="5dp"
+                                />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <TextView
+                            android:id="@+id/prod_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/grey"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:textColor="@color/grey_800"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardView1" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/prod_title" >
+
+
+                            <ImageView
+                                android:id="@+id/rating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/half_star"
+                                android:layout_gravity="center_vertical"
+                                />
+
+                            <TextView
+                                android:id="@+id/rating_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:text="2.5"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:gravity="center_vertical"
+                                />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/grey_400"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginStart="10dp"/>
+
+                            <TextView
+                                android:id="@+id/sold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_800"
+                                android:padding="5dp"
+                                android:textSize="12sp"
+                                android:backgroundTint="@color/grey_400"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/round_bg"
+                                android:text="7325 sold"/>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/prod_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/grey_800"
+                            android:text="Rs.500/-"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            app:cardCornerRadius="20dp"
+                            android:elevation="50dp"
+                            android:background="@color/grey_700"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/prod_image1"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:background="@color/grey"
+                                android:scaleType="fitCenter"
+                                android:padding="5dp"
+                                />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <TextView
+                            android:id="@+id/prod_title1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:background="@color/grey"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:textColor="@color/grey_800"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/prod_title1" >
+
+
+                            <ImageView
+                                android:id="@+id/rating1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/half_star"
+                                android:layout_gravity="center_vertical"
+                                />
+
+                            <TextView
+                                android:id="@+id/rating_txt1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:text="2.5"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:gravity="center_vertical"
+                                />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/grey_400"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginStart="10dp"/>
+
+                            <TextView
+                                android:id="@+id/sold1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_800"
+                                android:padding="5dp"
+                                android:textSize="12sp"
+                                android:backgroundTint="@color/grey_400"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/round_bg"
+                                android:text="7325 sold"/>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/prod_price1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/grey_800"
+                            android:text="Rs.500/-"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

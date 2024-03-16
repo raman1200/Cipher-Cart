@@ -1,18 +1,13 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide.init
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.databinding.FragmentProductDetailBinding
 import com.ecommerce.project.ciphercart.model.CartData
@@ -32,7 +27,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
 
-    lateinit var binding:FragmentProductDetailBinding
+    lateinit var binding: FragmentProductDetailBinding
     private val productViewModel: ProductViewModel by viewModels()
     var prodData : ProductData? = null
     var cart:CartData? = null
@@ -100,11 +95,10 @@ class ProductDetailFragment : Fragment() {
         productViewModel.uploaded.observe(requireActivity()){
             when(it){
                 is Response.Loading -> {
-//                    toast(requireContext(), "uploading cart data...")
+//                    toast(requireContext(), "loading")
                 }
                 is Response.Success -> {
-
-
+//                    toast(requireContext(), "Success")
                 }
                 is Response.Error -> {
                     toast(requireContext(), it.message!!)
@@ -266,9 +260,9 @@ class ProductDetailFragment : Fragment() {
         b.hQ.textAnimationStyle = AnimationStyle.FALL_IN
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
         productViewModel.prodData.value = null
+        super.onDestroyView()
     }
 }
 

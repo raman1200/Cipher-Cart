@@ -79,7 +79,7 @@ class ResetPasswordFragment : Fragment() {
     }
     private fun initialize() {
 
-        dialog = getDialog(requireContext())
+        dialog = getDialog(requireContext(), R.layout.pop_up)
         resetLayout = dialog.findViewById<LinearLayout>(R.id.Resetpassword)
         verifyLayout = dialog.findViewById(R.id.verify)
         congratulationLayout = dialog.findViewById<LinearLayout>(R.id.congratulations)

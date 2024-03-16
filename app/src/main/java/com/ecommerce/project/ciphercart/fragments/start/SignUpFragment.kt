@@ -103,7 +103,7 @@ class SignUpFragment : Fragment() {
 //        editor = sharedPreferences.edit()
 
         userData = UserData()
-        dialog = getDialog(requireContext())
+        dialog = getDialog(requireContext(), R.layout.pop_up)
         verifyLayout = dialog.findViewById<LinearLayout>(R.id.verify)
         congratulationLayout = dialog.findViewById<LinearLayout>(R.id.congratulations)
     }

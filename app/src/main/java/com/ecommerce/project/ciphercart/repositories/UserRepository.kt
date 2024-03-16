@@ -18,67 +18,59 @@ class UserRepository (private val firebaseDb: FirebaseDb, private val userDataMa
     private val uid = userDataManager.getUid()
 
 
-    fun getAllAddress() {
+    suspend fun getAllAddress() {
         addresses.postValue(Response.Loading())
         uid?.let {
-            firebaseDb.getAllAddress(uid).addOnCompleteListener {
-                if(it.isSuccessful){
-                    val data = it.result.toObjects<AddressData>()
+            val document = firebaseDb.getAllAddress(uid)
+                try{
+                    val data = document.toObjects<AddressData>()
                     addresses.postValue(Response.Success(data))
                 }
-                else{
-                    addresses.postValue(Response.Error(it.exception!!.message))
+                catch (e:Exception){
+                    addresses.postValue(Response.Error(e.localizedMessage))
                 }
             }
-        }
+
 
     }
 
-    fun addUserAddress(data: AddressData) {
-
+    suspend fun addUserAddress(data: AddressData) {
         uid?.let {
             uploadAddress.postValue(Response.Loading())
-            if(data.id.isEmpty()){
+            if (data.id.isEmpty()) {
                 val id = UUID.randomUUID().toString()
                 data.id = id
             }
-            if(data.defaultAddress){
-                firebaseDb.findDefaultAddress(uid).addOnCompleteListener {
-                    if(it.isSuccessful){
-                        val result = it.result.toObjects<AddressData>()
-                        if(result.isNotEmpty()) {
-                            result.forEach {
-                                firebaseDb.removeDefaultAddress(uid, it.id).addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        addAddress(data, uid)
-                                    }
-                                }
-                            }
-                        }
-                        else{
+            if (data.defaultAddress) {
+                val document = firebaseDb.findDefaultAddress(uid)
+                try {
+                    val result = document.toObjects<AddressData>()
+                    if (result.isNotEmpty()) {
+                        result.forEach {
+                            firebaseDb.removeDefaultAddress(uid, it.id)
                             addAddress(data, uid)
                         }
-
                     }
+                } catch (e: Exception) {
+                    addAddress(data, uid)
                 }
             }
             else{
                 addAddress(data, uid)
             }
-
         }
-
     }
-    private fun addAddress(data: AddressData, uid:String){
-        firebaseDb.addUserAddress(data, uid).addOnCompleteListener {
-            if(it.isSuccessful){
+    private suspend fun addAddress(data: AddressData, uid:String){
+        firebaseDb.addUserAddress(data, uid)
+            try{
                 uploadAddress.postValue(Response.Success("Success"))
             }
-            else{
-                Log.e("ADDRESS", it.exception?.localizedMessage.toString())
-                uploadAddress.postValue(Response.Error(it.exception?.localizedMessage))
+            catch (e:Exception){
+                e.printStackTrace()
+                Log.e("ADDRESS", e.localizedMessage.toString())
+                uploadAddress.postValue(Response.Error(e.localizedMessage))
             }
-        }
+
     }
     
 

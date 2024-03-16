@@ -100,5 +100,10 @@ class ProductsViewFragment : Fragment(),ProductAdapter.OnClick {
         findNavController().navigate(action)
     }
 
+    override fun onStop() {
+        productViewModel.getProdCatData.postValue(null)
+        super.onStop()
+    }
+
 
 }

@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -70,13 +72,11 @@ class LogInFragment : Fragment() {
             when (it) {
                 is Response.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    toast(requireContext(), "loading")
                 }
 
                 is Response.Success -> {
                     binding.progressBar.visibility = View.GONE
                     userDataManager.saveUserData(it.data)
-                    toast(requireContext(), "Success ")
                     goToMainActivity(requireActivity())
                 }
 
@@ -94,7 +94,6 @@ class LogInFragment : Fragment() {
                 is Response.Success -> {
                     userDataManager.saveUserData(it.data)
                     binding.progressBar.visibility = View.GONE
-                    toast(requireContext(), "Success")
                     goToMainActivity(requireActivity())
                 }
                 is Response.Error -> {
@@ -106,7 +105,6 @@ class LogInFragment : Fragment() {
     }
 
     private fun initialize() {
-
         googleSignInClient = logInViewModel.getGoogleSignInClient(requireActivity())
     }
 
@@ -126,18 +124,21 @@ class LogInFragment : Fragment() {
                 findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
             }
             signIn.setOnClickListener {
-                val email = emailEditText.text.toString()
-                val password = passwordEditText.text.toString()
-                if(email.isEmpty()){
-                    emailTextInputLayout.error = "Please enter your email"
-                }
-                else if(password.isEmpty()){
-                    passwordTextInputLayout.error = "Please enter your password"
-                }
-                else{
-                    logInViewModel.logInbyUser(email, password)
-                }
-            }
+                    val email = emailEditText.text.toString()
+                    val password = passwordEditText.text.toString()
+                    if(email.isEmpty()){
+                        emailTextInputLayout.error = "Please enter your email"
+
+                    }
+                    else if(password.isEmpty()){
+                        passwordTextInputLayout.error = "Please enter your password"
+                    }
+                    else{
+                        clearFocus()
+                        logInViewModel.logInbyUser(email, password)
+                    }
+        }
+
             google1.setOnClickListener {
                 progressBar.visibility = View.VISIBLE
                 signInWithGoogle()
@@ -154,11 +155,18 @@ class LogInFragment : Fragment() {
 
             layout1.setOnClickListener {
                 if(it != emailTextInputLayout || it!=passwordTextInputLayout){
-                    emailTextInputLayout.clearFocus()
-                    passwordTextInputLayout.clearFocus()
+                    clearFocus()
                 }
             }
         }
+    }
+    private fun clearFocus() {
+        binding.apply {
+            emailTextInputLayout.clearFocus()
+            passwordTextInputLayout.clearFocus()
+
+        }
+        hideKeyboard(requireActivity(), view)
     }
 
     private fun signInWithGoogle() {

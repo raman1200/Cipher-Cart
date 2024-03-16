@@ -3,6 +3,7 @@ package com.ecommerce.project.ciphercart.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.ecommerce.project.ciphercart.firebaseDatabase.FirebaseDb
+import com.ecommerce.project.ciphercart.repositories.OrderRepository
 import com.ecommerce.project.ciphercart.repositories.ProductRepository
 import com.ecommerce.project.ciphercart.repositories.UserRepository
 import com.ecommerce.project.ciphercart.utils.Constants
@@ -47,13 +48,18 @@ object BasicModule {
         return ProductRepository(firebaseDb, userDataManager)
     }
 
+
     @Singleton
     @Provides
     fun provideUserRepository(firebaseDb:FirebaseDb , userDataManager: UserDataManager): UserRepository {
         return UserRepository(firebaseDb, userDataManager)
     }
 
-
+    @Singleton
+    @Provides
+    fun provideOrderRepository(firebaseDb:FirebaseDb , userDataManager: UserDataManager): OrderRepository {
+        return OrderRepository(firebaseDb, userDataManager)
+    }
 
 
     @Singleton

@@ -14,6 +14,8 @@ import com.ecommerce.project.ciphercart.databinding.FragmentMyCartBinding
 import com.ecommerce.project.ciphercart.model.CartData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.Constants
+import com.ecommerce.project.ciphercart.utils.disableButton
+import com.ecommerce.project.ciphercart.utils.enableButton
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
 import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.ProductViewModel
@@ -41,7 +43,7 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
 
 
 
-        setUpActionBar(binding.toolbar, requireActivity())
+
         initialize()
         observer()
         clickListeners()
@@ -77,6 +79,23 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
 
     private fun observer() {
         binding.apply {
+            productViewModel.uploaded.observe(requireActivity()){
+                when(it) {
+                    is Response.Loading -> {
+//                        toast(requireContext(),"loading")
+                        pbLoader.visibility = View.VISIBLE
+                    }
+                    is Response.Success -> {
+//                        toast(requireContext(),"Uploaded")
+                        pbLoader.visibility = View.GONE
+                    }
+                    is Response.Error -> {
+                        pbLoader.visibility = View.GONE
+                        toast(requireContext(),it.message.toString())
+                    }
+
+                }
+            }
 
             productViewModel.deleted.observe(requireActivity()) {
 
@@ -112,8 +131,10 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
                                 pbLoader.visibility = View.GONE
                                 noDraft.visibility = View.VISIBLE
                                 cartRecyclerView.visibility = View.GONE
+                                checkoutBtn.isEnabled = false
                             }
                             else{
+                                checkoutBtn.isEnabled = true
                                 cartRecyclerView.visibility = View.VISIBLE
                                 pbLoader.visibility = View.GONE
                                 noDraft.visibility = View.GONE
@@ -157,6 +178,9 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
 
     override fun hQValue(value:Int, position: Int) {
         cartList[position].quantity = value
+
+        productViewModel.uploadCartData(cartList[position])
+
         val list = cartAdapter.currentList
         var tp =0.0
         list.forEach{
@@ -164,13 +188,14 @@ class MyCartFragment : Fragment(), CartAdapter.CartInterface {
         }
         binding.totalPrice.text = Constants.RUPEES_SYMBOL+ tp
 //        binding.totalPrice.text = NumberFormat.getCurrencyInstance().format(tp)
+//        toast(requireContext(), binding.totalPrice.text.toString())
     }
 
     override fun onStop() {
-        productViewModel.updateCartData(cartAdapter.currentList)
+        productViewModel.getCartData.postValue(null)
+        productViewModel.getProductData.postValue(null)
         super.onStop()
     }
-
 }
 
 

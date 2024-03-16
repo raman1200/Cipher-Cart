@@ -24,7 +24,8 @@
             app:destination="@id/notificationFragment" />
         <action
             android:id="@+id/action_homeFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
+            app:destination="@id/productDetailFragment"
+             />
         <action
             android:id="@+id/action_homeFragment_to_productsViewFragment"
             app:destination="@id/productsViewFragment" />
@@ -39,13 +40,21 @@
             app:destination="@id/productDetailFragment" />
         <action
             android:id="@+id/action_myCartFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/myOrdersFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.MyOrdersFragment"
         android:label="fragment_my_orders"
-        tools:layout="@layout/fragment_my_orders" />
+        tools:layout="@layout/fragment_my_orders" >
+        <action
+            android:id="@+id/action_myOrdersFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.ProfileFragment"
@@ -53,19 +62,39 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileFragment_to_addressViewFragment"
-            app:destination="@id/addressViewFragment" />
+            app:destination="@id/addressViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileFragment_to_languageFragment"
-            app:destination="@id/languageFragment" />
+            app:destination="@id/languageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileFragment_to_securityFragment"
-            app:destination="@id/securityFragment" />
+            app:destination="@id/securityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_profileFragment_to_notificationSettingFragment"
-            app:destination="@id/notificationSettingFragment" />
+            app:destination="@id/notificationSettingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <activity
         android:id="@+id/searchActivity"
@@ -84,7 +113,12 @@
         tools:layout="@layout/fragment_address_view" >
         <action
             android:id="@+id/action_addressViewFragment_to_addressAddFragment"
-            app:destination="@id/addressAddFragment" />
+            app:destination="@id/addressAddFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom"
+            />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
@@ -154,7 +188,11 @@
     <fragment android:id="@+id/savedFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.shopping.SavedFragment"
         android:label="fragment_saved"
-        tools:layout="@layout/fragment_saved"/>
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_savedFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addressAddFragment"
         android:name="com.ecommerce.project.ciphercart.fragments.settings.AddressAddFragment"
@@ -173,11 +211,25 @@
         tools:layout="@layout/fragment_checkout" >
         <action
             android:id="@+id/action_checkoutFragment_to_shippingFragment"
-            app:destination="@id/shippingFragment" />
+            app:destination="@id/shippingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="address_index"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/shippingFragment"
@@ -189,7 +241,13 @@
             app:argType="com.ecommerce.project.ciphercart.model.AddressData[]" />
         <action
             android:id="@+id/action_shippingFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/checkoutFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="address_index"
             app:argType="integer"

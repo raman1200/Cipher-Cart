@@ -25,7 +25,7 @@ class CategoryAdapter(val context: Context, val onCLick:CategoryItemClick): List
         val bd = holder.binding
 
         bd.name.text = data.catName
-        Glide.with(context).load(data.catImage).placeholder(R.drawable.person).into(bd.image)
+        Glide.with(context).load(data.catImage).into(bd.image)
 
         bd.catItem.setOnClickListener {
             onCLick.onCategoryItemClick(data)

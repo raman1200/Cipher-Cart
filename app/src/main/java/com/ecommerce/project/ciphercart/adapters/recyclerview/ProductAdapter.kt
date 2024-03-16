@@ -5,6 +5,7 @@ import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -23,29 +24,28 @@ class ProductAdapter(val context: Context, val onClick: OnClick): ListAdapter<Pr
         val binding = ProductItemViewBinding.bind(itemView)
     }
 
-
-    //create view-->dabba
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item_view, parent, false)
         return ProductViewHolder(view)
     }
 
-
-    //view mai data dena (set)
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
         val data = getItem(position)
         val bind = holder.binding
-        Glide.with(context).load(data.images[0]).placeholder(R.drawable.pic).into(bind.prodImage)
+        Glide.with(context).load(data.images[0]).into(bind.prodImage)
         bind.prodTitle.text = data.prodName
         bind.prodPrice.text = data.price.toString()
         bind.ratingTxt.text = data.rating.toString()
+
+
         bind.prodItem.setOnClickListener {
+           
             onClick.onItemClick(data) }
+
 
     }
 
-    //only in listAdapter
     class DiffUtilCallBack : DiffUtil.ItemCallback<ProductData>() {
         override fun areItemsTheSame(oldItem: ProductData, newItem: ProductData): Boolean {
             return oldItem.prodId == newItem.prodId

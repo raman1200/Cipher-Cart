@@ -257,7 +257,8 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
 //            }
     }
 
-    private fun   initialize() {
+    private fun initialize() {
+
         geocoder = Geocoder(requireContext(), Locale.getDefault())
 
         addressData = AddressData()
@@ -384,7 +385,6 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
-            onMapReady(googleMap)
 
         }
     }
@@ -435,6 +435,5 @@ class AddressAddFragment : Fragment(),OnMapReadyCallback {
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
-
 
 }

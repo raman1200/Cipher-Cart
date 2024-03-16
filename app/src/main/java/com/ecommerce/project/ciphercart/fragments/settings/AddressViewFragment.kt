@@ -1,10 +1,14 @@
 package com.ecommerce.project.ciphercart.fragments.settings
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +19,7 @@ import com.ecommerce.project.ciphercart.fragments.shopping.MyCartFragmentDirecti
 import com.ecommerce.project.ciphercart.model.AddressData
 import com.ecommerce.project.ciphercart.resource.Response
 import com.ecommerce.project.ciphercart.utils.setUpActionBar
+import com.ecommerce.project.ciphercart.utils.toast
 import com.ecommerce.project.ciphercart.viewmodels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -86,10 +91,20 @@ class AddressViewFragment : Fragment(),AddressAdapter.AddressInterface {
         }
     }
 
+    private fun askPermission() {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+    }
+
     private fun clickListeners() {
         binding.apply {
             btn.setOnClickListener {
+
                 findNavController().navigate(R.id.action_addressViewFragment_to_addressAddFragment)
+
             }
         }
     }

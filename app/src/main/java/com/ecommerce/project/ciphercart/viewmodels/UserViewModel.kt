@@ -1,12 +1,12 @@
 package com.ecommerce.project.ciphercart.viewmodels
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ecommerce.project.ciphercart.model.AddressData
-import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.repositories.UserRepository
-import com.ecommerce.project.ciphercart.resource.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,11 +16,16 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
     val uploadedAddress = userRepository.uploadAddress
 
     fun addUserAddress(address: AddressData) {
-        userRepository.addUserAddress(address)
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.addUserAddress(address)
+        }
+
     }
 
     fun getAllAddress() {
-        userRepository.getAllAddress()
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.getAllAddress()
+        }
     }
 
 

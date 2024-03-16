@@ -19,6 +19,8 @@ import com.ecommerce.project.ciphercart.activities.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 
@@ -64,13 +66,21 @@ fun enableButton(context: Context, btn:Button){
 fun toast(context: Context, message:String){
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-fun getDialog(context: Context):Dialog {
+fun getDialog(context: Context, layout:Int):Dialog {
     val dialog = Dialog(context)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setCancelable(true)
-    dialog.setContentView(R.layout.pop_up)
+    dialog.setContentView(layout)
     dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     return dialog
+}
+
+@SuppressLint("SimpleDateFormat")
+fun generateOrderId(): String {
+    val currentDateTime = Calendar.getInstance().time
+    val formatter = SimpleDateFormat("ddMMyyyyHHmmssSSS")
+    val formattedDateTime = formatter.format(currentDateTime)
+    return "OD${formattedDateTime}"
 }
 
 fun getCurrentDateInLong():Long {

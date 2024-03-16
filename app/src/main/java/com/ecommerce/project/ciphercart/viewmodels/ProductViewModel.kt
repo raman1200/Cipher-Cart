@@ -24,33 +24,53 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     val prodData = productRepository.prodData
 
     fun getAllCategory(){
-        productRepository.getAllCategory()
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.getAllCategory()
+        }
+
     }
     fun getAllProduct() {
-        productRepository.getAllProduct()
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.getAllProduct()
+        }
+
     }
     fun getAllSplOffers() {
-        productRepository.getAllOffers()
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.getAllOffers()
+        }
+
     }
     fun getProductsByCategory(id:Int) {
-        productRepository.getProductsByCategory(id)
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.getProductsByCategory(id)
+        }
+
     }
     fun uploadCartData(data:CartData) {
-        productRepository.uploadCartData(data)
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.uploadCartData(data)
+        }
+
     }
     fun getCartData() {
-        productRepository.getCartData()
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.getCartData()
+        }
+
     }
     fun getProductById(prodId:String) {
-        productRepository.getProductById(prodId)
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.getProductById(prodId)
+        }
+
     }
 
     fun deleteCartData(id:String) {
-        productRepository.deleteCartData(id)
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.deleteCartData(id)
+        }
 
-    fun isAddedOnCart(id:String):Boolean {
-        return productRepository.isAddedOnCart(id)
     }
 
     fun updateCartData(list: List<CartData>) {
@@ -59,10 +79,13 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
         }
     }
 
-    fun getProductByList(list: List<String>){
-        viewModelScope.launch(Dispatchers.IO){
+    fun getProductByList(list: List<String>) {
+        viewModelScope.launch(Dispatchers.IO) {
             productRepository.getProductByIds(list)
         }
     }
 
 }
+
+
+

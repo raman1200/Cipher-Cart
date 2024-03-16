@@ -1,13 +1,16 @@
 package com.ecommerce.project.ciphercart.fragments.shopping
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ecommerce.project.ciphercart.R
 import com.ecommerce.project.ciphercart.adapters.recyclerview.CategoryAdapter
@@ -23,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.CategoryItemClick {
 
@@ -32,6 +36,8 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
     @Inject
     lateinit var userDataManager: UserDataManager
     private val productViewModel:ProductViewModel by viewModels()
+
+    var overallXScroll = 0;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,13 +70,17 @@ class HomeFragment : Fragment(), ProductAdapter.OnClick, CategoryAdapter.Categor
     }
 
     private fun setSlider() {
-
+        binding.slider.imagePlaceholder = null
     }
 
     private fun setProdAdapter() {
         prodAdapter = ProductAdapter(requireContext(), this)
-        binding.productRecyclerView.adapter = prodAdapter
-        binding.productRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        binding.apply {
+            productRecyclerView.adapter = prodAdapter
+            productRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        }
     }
 
     private fun setCatAdapter() {

@@ -103,6 +103,10 @@ dependencies {
     // places
     implementation ("com.google.android.libraries.places:places:3.3.0")
 
+    // shimmer effect
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+
 }
 kapt {
     correctErrorTypes = true

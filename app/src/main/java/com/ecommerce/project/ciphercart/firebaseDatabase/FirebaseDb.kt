@@ -2,16 +2,19 @@ package com.ecommerce.project.ciphercart.firebaseDatabase
 
 import com.ecommerce.project.ciphercart.model.AddressData
 import com.ecommerce.project.ciphercart.model.CartData
+import com.ecommerce.project.ciphercart.model.OrderData
 import com.ecommerce.project.ciphercart.model.UserData
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.ADDRESS_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.CART_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.CATEGORIES_COLLECTION
+import com.ecommerce.project.ciphercart.utils.Constants.Companion.ORDER_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.PRODUCTS_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.SPL_OFFERS_COLLECTION
 import com.ecommerce.project.ciphercart.utils.Constants.Companion.USERS_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FirebaseDb @Inject constructor(
@@ -22,6 +25,7 @@ class FirebaseDb @Inject constructor(
     private val categoryCollectionRef = firestore.collection(CATEGORIES_COLLECTION)
     private val productCollectionRef = firestore.collection(PRODUCTS_COLLECTION)
     private val splOfferCollectionRef = firestore.collection(SPL_OFFERS_COLLECTION)
+    private val orderCollectionRef = firestore.collection(ORDER_COLLECTION)
 
 
     // login / register / user info
@@ -44,39 +48,47 @@ class FirebaseDb @Inject constructor(
     fun isUserLoggedIn() = auth.currentUser
 
     // category / product
-    fun getAllCategory() = categoryCollectionRef.get()
-    fun getAllProduct() = productCollectionRef.get()
-    fun getAllSplOffers() = splOfferCollectionRef.get()
+    suspend fun getAllCategory() = categoryCollectionRef.get().await()
+    suspend fun getAllProduct() = productCollectionRef.get().await()
+    suspend fun getAllSplOffers() = splOfferCollectionRef.get().await()
 
-    fun getProductsByCategory(id:Int) = productCollectionRef.whereEqualTo("catId", id).get()
+    suspend fun getProductsByCategory(id:Int) = productCollectionRef.whereEqualTo("catId", id).get().await()
 
-    fun getProductById(prodId:String) = productCollectionRef.document(prodId).get()
+    suspend fun getProductById(prodId:String) = productCollectionRef.document(prodId).get().await()
 
 
 
     // cart
-    fun uploadCartData(data:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(data.prodId).set(data)
+    suspend fun uploadCartData(data:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(data.prodId).set(data).await()
 
-    fun getCartData(uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).get()
+    suspend fun getCartData(uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).get().await()
 
-    fun deleteCartData(id:String, uid: String) = usersCollectionRef.document(uid).collection(
-        CART_COLLECTION).document(id).delete()
+    suspend fun deleteCartData(id:String, uid: String) = usersCollectionRef.document(uid).collection(
+        CART_COLLECTION).document(id).delete().await()
 
-    fun isAddedOnCart(id:String, uid: String) = usersCollectionRef.document(uid).collection(
-        CART_COLLECTION).whereEqualTo("prodId",id).get()
+    suspend fun isAddedOnCart(id:String, uid: String) = usersCollectionRef.document(uid).collection(
+        CART_COLLECTION).whereEqualTo("prodId",id).get().await()
 
-    fun updateCartData(cartData:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(cartData.prodId).set(cartData)
+    suspend fun updateCartData(cartData:CartData, uid:String) = usersCollectionRef.document(uid).collection(CART_COLLECTION).document(cartData.prodId).set(cartData).await()
 
     // address
-    fun addUserAddress(data:AddressData, uid:String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).document(data.id).set(data)
+    suspend fun addUserAddress(data:AddressData, uid:String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).document(data.id).set(data).await()
 
-    fun getAllAddress(uid: String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).get()
+    suspend fun getAllAddress(uid: String) = usersCollectionRef.document(uid).collection(ADDRESS_COLLECTION).get().await()
 
-    fun findDefaultAddress(uid:String) = usersCollectionRef.document(uid)
-        .collection(ADDRESS_COLLECTION).whereEqualTo("defaultAddress",true).get()
+    suspend fun findDefaultAddress(uid:String) = usersCollectionRef.document(uid)
+        .collection(ADDRESS_COLLECTION).whereEqualTo("defaultAddress",true).get().await()
 
-    fun removeDefaultAddress(uid: String, id: String) = usersCollectionRef.document(uid).collection(
-        ADDRESS_COLLECTION).document(id).update("defaultAddress",false)
+    suspend fun removeDefaultAddress(uid: String, id: String) = usersCollectionRef.document(uid).collection(
+        ADDRESS_COLLECTION).document(id).update("defaultAddress",false).await()
+
+
+    // order
+    suspend fun placeOrder(data:OrderData) = orderCollectionRef.document(data.oid).set(data).await()
+
+    suspend fun getOngoingOrders(uid: String) = orderCollectionRef.whereEqualTo("uid", uid).whereEqualTo("status", "ongoing").get().await()
+
+    suspend fun getCompletedOrders(uid: String) = orderCollectionRef.whereEqualTo("uid", uid).whereEqualTo("status", "completed").get().await()
 
 
     // logout
