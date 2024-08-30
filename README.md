@@ -71,6 +71,6 @@ CipherCart is an e-commerce application designed to deliver a seamless and secur
 
 ## 📞 Contact
 
-For any inquiries or issues, please contact me at [ramanverma1905@gmail.com](mailto:ramanverma1905@gmail.com).
+For any inquiries or feedback, please reach out : [ramanverma1905@gmail.com](mailto:ramanverma1905@gmail.com)
 
 ---
